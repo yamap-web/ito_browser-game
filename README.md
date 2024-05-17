@@ -10,9 +10,9 @@
 4. 話し合って小さい順に並び替えられていればクリア
 
 ## 使用技術
-front: TypeScript + React
-back: Express (Socket.io)
-db: Supabase
+- front: TypeScript + React
+- back: Express (Socket.io)
+- db: Supabase
 
 ## 機能
 
