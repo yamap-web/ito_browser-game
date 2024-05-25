@@ -1,9 +1,16 @@
-import { useEffect } from "react";
 import "./css/style.css";
-
+import { useEffect } from "react";
 import { io } from "socket.io-client";
+import { config } from "dotenv";
+config();
 
-export const socket = io("http://localhost:3000", {
+const serverUrl = process.env.SERVER_URL;
+
+if (!serverUrl) {
+  throw new Error("SERVER_URL is not defined in the environment variables.");
+}
+
+export const socket = io(serverUrl, {
   autoConnect: false,
 });
 
