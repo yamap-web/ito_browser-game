@@ -1,8 +1,6 @@
 import "./css/style.css";
 import { useEffect } from "react";
 import { io } from "socket.io-client";
-import { config } from "dotenv";
-config();
 
 const serverUrl = process.env.SERVER_URL;
 
