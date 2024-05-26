@@ -40,23 +40,26 @@
 
 <h2 id="environment-setup">環境構築の手順</h2>
 
-### 1. 環境変数ファイルの作成（`frontend`, `backend`とも）
-
-- .env の中の値は管理者に確認
+### 1. 環境変数ファイルを作成（`frontend`, `backend`とも）
+```
+cp .env.example .env
+```
+- リポジトリに設置してある`.env.example`ファイルを複製した`.env`ファイルとして作成
+- `.env`の中の値は管理者に確認し記述
 
 ### 2. パッケージのインストール（`frontend`, `backend`とも）
 
 ```
-$ npm install
+npm install
 ```
 
 ### 3. ローカル環境の立ち上げ（`frontend`）
 
 ```
-$ npm run dev
+npm run dev
 ```
 
-- http://localhost:3000/ にアクセスできれば問題なし
+- http://localhost:8080/ にアクセスできれば問題なし
 
 ### 4. ローカル環境の立ち上げ（`backend`）
 
