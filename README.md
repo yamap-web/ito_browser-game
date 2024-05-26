@@ -14,7 +14,7 @@
 1. お題を決定（ex. 面積の広い国）
 2. 各プレイヤーは数字(1~100)を決定する
 3. 数字が 100 に近いほどお題に適するもの（ex. ロシア）を、1 に近いほど適さないもの（ex. バチカン市国）をあげる
-4. 話し合って小さい順に並び替えられていればクリア
+4. 協力して話し合って小さい順に並び替えられていればクリア
 
 <h2 id="technology-used">使用技術</h2>
 
@@ -29,10 +29,6 @@
 ### Backend
 
 <img src="https://img.shields.io/badge/-TypeScript-333333.svg?logo=typescript&style=for-the-badge&logoColor"> <img src="https://img.shields.io/badge/-Express-333333.svg?logo=express&style=for-the-badge&logoColor"> <img src="https://img.shields.io/badge/-Socket.IO-333333.svg?logo=socketdotio&style=for-the-badge&logoColor">
-
-### Database
-
-<img src="https://img.shields.io/badge/-Supabase-333333.svg?logo=supabase&style=for-the-badge&logoColor">
 
 ### Style
 
