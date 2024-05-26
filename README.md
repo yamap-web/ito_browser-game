@@ -20,19 +20,15 @@
 
 ### Node Version
 
-<img src="https://img.shields.io/badge/-Node.js v20.11.1-000000.svg?logo=node.js&style=for-the-badge&logoColor">
-<img src="https://img.shields.io/badge/-npm v10.2.4-000000.svg?logo=npm&style=for-the-badge&logoColor">
+<img src="https://img.shields.io/badge/-Node.js v20.11.1-000000.svg?logo=node.js&style=for-the-badge&logoColor"><img src="https://img.shields.io/badge/-npm v10.2.4-000000.svg?logo=npm&style=for-the-badge&logoColor">
 
 ### Frontend
 
-<img src="https://img.shields.io/badge/-TypeScript-000000.svg?logo=typescript&style=for-the-badge&logoColor">
-<img src="https://img.shields.io/badge/-React-000000.svg?logo=react&style=for-the-badge&logoColor">
+<img src="https://img.shields.io/badge/-TypeScript-000000.svg?logo=typescript&style=for-the-badge&logoColor"><img src="https://img.shields.io/badge/-React-000000.svg?logo=react&style=for-the-badge&logoColor">
 
 ### Backend
 
-<img src="https://img.shields.io/badge/-TypeScript-000000.svg?logo=typescript&style=for-the-badge&logoColor">
-<img src="https://img.shields.io/badge/-Express-000000.svg?logo=express&style=for-the-badge&logoColor">
-<img src="https://img.shields.io/badge/-Socket.IO-000000.svg?logo=socketdotio&style=for-the-badge&logoColor">
+<img src="https://img.shields.io/badge/-TypeScript-000000.svg?logo=typescript&style=for-the-badge&logoColor"><img src="https://img.shields.io/badge/-Express-000000.svg?logo=express&style=for-the-badge&logoColor"><img src="https://img.shields.io/badge/-Socket.IO-000000.svg?logo=socketdotio&style=for-the-badge&logoColor">
 
 ### Database
 
@@ -40,13 +36,11 @@
 
 ### Style
 
-<img src="https://img.shields.io/badge/-Tailwind CSS-000000.svg?logo=TailwindCSS&style=for-the-badge&logoColor">
-<img src="https://img.shields.io/badge/-daisyUI-000000.svg?logo=daisyUI&style=for-the-badge&logoColor=00ccb7">
+<img src="https://img.shields.io/badge/-Tailwind CSS-000000.svg?logo=TailwindCSS&style=for-the-badge&logoColor"><img src="https://img.shields.io/badge/-daisyUI-000000.svg?logo=daisyUI&style=for-the-badge&logoColor=00ccb7">
 
 ### Hosting
 
-<img src="https://img.shields.io/badge/-Vercel-000000.svg?logo=vercel&style=for-the-badge&logoColor">
-<img src="https://img.shields.io/badge/-Render-000000.svg?logo=render&style=for-the-badge&logoColor">
+<img src="https://img.shields.io/badge/-Vercel-000000.svg?logo=vercel&style=for-the-badge&logoColor"><img src="https://img.shields.io/badge/-Render-000000.svg?logo=render&style=for-the-badge&logoColor">
 
 <h2 id="environment-setup">環境構築の手順</h2>
 
