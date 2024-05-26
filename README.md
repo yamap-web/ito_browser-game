@@ -64,7 +64,7 @@ npm run dev
 ### 4. ローカル環境の立ち上げ（`backend`）
 
 ```
-$ npm run server
+npm run server
 ```
 
 - http://localhost:3000/ にアクセスできれば問題なし
