@@ -20,27 +20,27 @@
 
 ### Node Version
 
-<img src="https://img.shields.io/badge/-Node.js v20.11.1-000000.svg?logo=node.js&style=for-the-badge&logoColor"><img src="https://img.shields.io/badge/-npm v10.2.4-000000.svg?logo=npm&style=for-the-badge&logoColor">
+<img src="https://img.shields.io/badge/-Node.js v20.11.1-333333.svg?logo=node.js&style=for-the-badge&logoColor"> <img src="https://img.shields.io/badge/-npm v10.2.4-333333.svg?logo=npm&style=for-the-badge&logoColor">
 
 ### Frontend
 
-<img src="https://img.shields.io/badge/-TypeScript-000000.svg?logo=typescript&style=for-the-badge&logoColor"><img src="https://img.shields.io/badge/-React-000000.svg?logo=react&style=for-the-badge&logoColor">
+<img src="https://img.shields.io/badge/-TypeScript-333333.svg?logo=typescript&style=for-the-badge&logoColor"> <img src="https://img.shields.io/badge/-React-333333.svg?logo=react&style=for-the-badge&logoColor">
 
 ### Backend
 
-<img src="https://img.shields.io/badge/-TypeScript-000000.svg?logo=typescript&style=for-the-badge&logoColor"><img src="https://img.shields.io/badge/-Express-000000.svg?logo=express&style=for-the-badge&logoColor"><img src="https://img.shields.io/badge/-Socket.IO-000000.svg?logo=socketdotio&style=for-the-badge&logoColor">
+<img src="https://img.shields.io/badge/-TypeScript-333333.svg?logo=typescript&style=for-the-badge&logoColor"> <img src="https://img.shields.io/badge/-Express-333333.svg?logo=express&style=for-the-badge&logoColor"> <img src="https://img.shields.io/badge/-Socket.IO-333333.svg?logo=socketdotio&style=for-the-badge&logoColor">
 
 ### Database
 
-<img src="https://img.shields.io/badge/-Supabase-000000.svg?logo=supabase&style=for-the-badge&logoColor">
+<img src="https://img.shields.io/badge/-Supabase-333333.svg?logo=supabase&style=for-the-badge&logoColor">
 
 ### Style
 
-<img src="https://img.shields.io/badge/-Tailwind CSS-000000.svg?logo=TailwindCSS&style=for-the-badge&logoColor"><img src="https://img.shields.io/badge/-daisyUI-000000.svg?logo=daisyUI&style=for-the-badge&logoColor=00ccb7">
+<img src="https://img.shields.io/badge/-Tailwind CSS-333333.svg?logo=TailwindCSS&style=for-the-badge&logoColor"> <img src="https://img.shields.io/badge/-daisyUI-333333.svg?logo=daisyUI&style=for-the-badge&logoColor=00ccb7">
 
 ### Hosting
 
-<img src="https://img.shields.io/badge/-Vercel-000000.svg?logo=vercel&style=for-the-badge&logoColor"><img src="https://img.shields.io/badge/-Render-000000.svg?logo=render&style=for-the-badge&logoColor">
+<img src="https://img.shields.io/badge/-Vercel-333333.svg?logo=vercel&style=for-the-badge&logoColor"> <img src="https://img.shields.io/badge/-Render-333333.svg?logo=render&style=for-the-badge&logoColor">
 
 <h2 id="environment-setup">環境構築の手順</h2>
 
@@ -72,9 +72,8 @@ $ npm run server
 
 <h2 id="url">各種URL</h2>
 <a href="https://highfalutin-donkey-f65.notion.site/44ba5ee9986b4df08238a1a7b6ea1ea0?v=4c31651e7ed346b99a0cc2a498f77226&pvs=4">
-    <img src="https://img.shields.io/badge/-開発ノート(Notion)-000000.svg?logo=notion&style=for-the-badge&logoColor">
-</a>
-
+    <img src="https://img.shields.io/badge/-開発ノート(Notion)-333333.svg?logo=notion&style=for-the-badge&logoColor">
+</a> 
 <a href="https://www.figma.com/design/8XqKZzhNdyxHU1Yp2VsgfT/ito(%E3%82%A4%E3%83%88)?node-id=0%3A1&t=OnbI2n5kZIpOPnRJ-1">
-    <img src="https://img.shields.io/badge/-ワイヤーフレーム(Figma)-000000.svg?logo=figma&style=for-the-badge&logoColor">
+    <img src="https://img.shields.io/badge/-ワイヤーフレーム(Figma)-333333.svg?logo=figma&style=for-the-badge&logoColor">
 </a>
