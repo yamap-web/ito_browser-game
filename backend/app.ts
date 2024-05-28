@@ -1,5 +1,6 @@
 import type { Socket } from "socket.io";
 import { io } from "./socket";
+import getNumbers from "./controllers/eventController";
 
 const port = 3000;
 
@@ -11,3 +12,5 @@ io.on("connection", (socket: Socket) => {
 });
 
 io.listen(port);
+
+console.log(getNumbers(10));
