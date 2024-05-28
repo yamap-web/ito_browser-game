@@ -1,4 +1,4 @@
-const getNumbers = (num: number) => {
+export const getNumbers = (num: number) => {
   let numbers: number[] = [];
   for (let i = 1; i <= 100; i++) {
     numbers.push(i);
@@ -18,5 +18,3 @@ const getNumbers = (num: number) => {
 
   return shuffledNumbers.slice(0, num);
 };
-
-export default getNumbers;
