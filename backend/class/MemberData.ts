@@ -1,47 +1,74 @@
+import { GameData } from "../interface/interface";
+
 class MemberData {
   //#region データカラム
   /** SocketId */
-  private socketId: String = "";
+  private socketId: string = "";
   /** UserName */
-  private userName: String = "";
+  private userName: string = "";
   /** IsHost(host: true, guest: false) */
-  private isHost: Boolean = false;
+  private isHost: boolean = false;
   /** Number */
-  private number: Number = 0;
+  private number: number = 0;
+  /** Answer */
+  private answer: string = "";
+  /** Index */
+  private index: number = 0;
   //#endregion
 
   /**
    * コンストラクタ
    */
-  constructor(socketId: String, userName: String, host: Boolean) {
+  constructor(socketId: string, userName: string, host: boolean) {
     this.socketId = socketId;
     this.userName = userName;
     this.isHost = host;
   }
 
   /** SocketId取得 */
-  public getSocketId(): String {
+  public getSocketId(): string {
     return this.socketId;
   }
 
   /** UserName取得 */
-  public getUserName(): String {
+  public getUserName(): string {
     return this.userName;
   }
 
   /** ホスト判定 */
-  public getIsHost(): Boolean {
+  public getIsHost(): boolean {
     return this.isHost;
   }
 
   /** 数字取得 */
-  public getNumber(): Number {
+  public getNumber(): number {
     return this.number;
   }
 
   /** 数字設定 */
-  public setNumber(number: Number): void {
+  public setNumber(number: number): void {
     this.number = number;
+  }
+
+  /** 解答設定 */
+  public setAnswer(answer: string): void {
+    this.answer = answer;
+  }
+
+  /** インデックス設定 */
+  public setIndex(index: number): void {
+    this.index = index;
+  }
+
+  /** GameData取得 */
+  public getGameData(): GameData {
+    const gameData: GameData = {
+      userName: this.userName,
+      answer: this.answer,
+      index: this.index,
+    };
+
+    return gameData;
   }
 }
 
