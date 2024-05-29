@@ -1,10 +1,10 @@
 import MemberData from "../class/MemberData";
 import { rooms } from "../data/data";
-import { Room } from "../interface/interface";
+import { GameData, Room } from "../interface/interface";
 
 class DataAccessModel {
   /** ルーム作成 */
-  public createRoom(roomId: String): void {
+  public createRoom(roomId: string): void {
     const room: Room = {
       roomId,
       gameData: [],
@@ -13,14 +13,21 @@ class DataAccessModel {
     rooms.push(room);
   }
 
-  /** ルームIDに一致するルームを取得 */
-  public getRoom(roomId: String): Room | null {
+  /** ゲームで使用するパラメータの取得 */
+  public getGameParam(roomId: string): GameData[] {
+    const gameData: GameData[] = [];
     const room = rooms.find((room) => room.roomId === roomId);
-    return room || null;
+    if (room) {
+      room.gameData.forEach((member) => {
+        gameData.push(member.getGameData());
+      });
+    }
+
+    return gameData;
   }
 
   /** 参加者数取得 */
-  public getNumberOfMember(roomId: String): Number {
+  public getNumberOfMember(roomId: string): number {
     const room = rooms.find((room) => room.roomId === roomId);
 
     if (room) {
@@ -31,7 +38,7 @@ class DataAccessModel {
   }
 
   /** メンバーに数字を設定 */
-  public setNumber(roomId: String, numbers: Number[]): void {
+  public setNumber(roomId: string, numbers: number[]): void {
     const room = rooms.find((room) => room.roomId === roomId);
     numbers.forEach((number, index) => {
       if (room) {
@@ -40,12 +47,38 @@ class DataAccessModel {
     });
   }
 
+  /** メンバーにIndexの設定 */
+  public setIndex(roomId: string, socketId: string, index: number): void {
+    const room = rooms.find((room) => room.roomId === roomId);
+    if (room) {
+      const member = room.gameData.find(
+        (member) => member.getSocketId() === socketId
+      );
+      if (member) {
+        member.setIndex(index);
+      }
+    }
+  }
+
+  /** メンバーにAnswerの設定 */
+  public setAnswer(roomId: string, socketId: string, answer: string): void {
+    const room = rooms.find((room) => room.roomId === roomId);
+    if (room) {
+      const member = room.gameData.find(
+        (member) => member.getSocketId() === socketId
+      );
+      if (member) {
+        member.setAnswer(answer);
+      }
+    }
+  }
+
   /** メンバーの追加 */
   public setMember(
-    roomId: String,
-    socketId: String,
-    userName: String,
-    isHost: Boolean
+    roomId: string,
+    socketId: string,
+    userName: string,
+    isHost: boolean
   ): void {
     const room = rooms.find((room) => room.roomId === roomId);
 
