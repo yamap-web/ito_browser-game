@@ -72,7 +72,25 @@ class DataAccessModel {
   ): void {
     const room = this.findRoom(roomId);
     if (room) {
-      room.gameData.push(new MemberData(socketId, userName, isHost));
+      // 参加者数を取得
+      const numberOfMembers = room.gameData.length;
+      room.gameData.push(
+        new MemberData(socketId, userName, isHost, numberOfMembers - 1)
+      );
+    }
+  }
+
+  /** ゲームデータの更新（並び替え時）※ホスト用 */
+  public updateGameData(roomId: string, gameData: GameData[]) {
+    const room = this.findRoom(roomId);
+    if (room) {
+      room.gameData.forEach((currentData) => {
+        gameData.forEach((updateData) => {
+          if (updateData.userName === currentData.getUserName()) {
+            currentData.setIndex(updateData.index);
+          }
+        });
+      });
     }
   }
 }
