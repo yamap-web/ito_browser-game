@@ -16,12 +16,16 @@ class DataAccessModel {
     }
   }
 
-  /** ルームの作成 */
-  public createRoom(roomId: string): void {
+  /** ルームの作成 & ホストの追加 */
+  public createRoom(roomId: string, socketId: string, userName: string): void {
+    // ルームの追加
     const room: Room = {
       roomId,
       gameData: [],
     };
+
+    // ホストの追加
+    room.gameData.push(new MemberData(socketId, userName, true, 0));
     rooms.push(room);
   }
 
@@ -75,7 +79,7 @@ class DataAccessModel {
       // 参加者数を取得
       const numberOfMembers = room.gameData.length;
       room.gameData.push(
-        new MemberData(socketId, userName, isHost, numberOfMembers - 1)
+        new MemberData(socketId, userName, isHost, numberOfMembers)
       );
     }
   }
