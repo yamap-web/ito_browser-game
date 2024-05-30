@@ -16,12 +16,16 @@ class DataAccessModel {
     }
   }
 
-  /** ルームの作成 */
-  public createRoom(roomId: string): void {
+  /** ルームの作成 & ホストの追加 */
+  public createRoom(roomId: string, socketId: string, userName: string): void {
+    // ルームの追加
     const room: Room = {
       roomId,
       gameData: [],
     };
+
+    // ホストの追加
+    room.gameData.push(new MemberData(socketId, userName, true, 0));
     rooms.push(room);
   }
 
@@ -72,7 +76,25 @@ class DataAccessModel {
   ): void {
     const room = this.findRoom(roomId);
     if (room) {
-      room.gameData.push(new MemberData(socketId, userName, isHost));
+      // 参加者数を取得
+      const numberOfMembers = room.gameData.length;
+      room.gameData.push(
+        new MemberData(socketId, userName, isHost, numberOfMembers)
+      );
+    }
+  }
+
+  /** ゲームデータの更新（並び替え時）※ホスト用 */
+  public updateGameData(roomId: string, gameData: GameData[]) {
+    const room = this.findRoom(roomId);
+    if (room) {
+      room.gameData.forEach((currentData) => {
+        gameData.forEach((updateData) => {
+          if (updateData.userName === currentData.getUserName()) {
+            currentData.setIndex(updateData.index);
+          }
+        });
+      });
     }
   }
 }

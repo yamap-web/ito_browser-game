@@ -19,10 +19,16 @@ class MemberData {
   /**
    * コンストラクタ
    */
-  constructor(socketId: string, userName: string, isHost: boolean) {
+  constructor(
+    socketId: string,
+    userName: string,
+    isHost: boolean,
+    index: number
+  ) {
     this.socketId = socketId;
     this.userName = userName;
     this.isHost = isHost;
+    this.index = index;
   }
 
   /** SocketId取得 */
