@@ -1,6 +1,7 @@
 import "./css/style.css";
 import { useEffect } from "react";
 import { io } from "socket.io-client";
+import Home from "./components/Home";
 
 const serverUrl = process.env.SERVER_URL;
 
@@ -19,8 +20,7 @@ const App = () => {
 
   return (
     <>
-      <h1 className="text-4xl mt-4 mx-4">Hello, World!</h1>
-      <button className="btn btn-primary mt-4 mx-4">Button</button>
+      <Home />
     </>
   );
 };
