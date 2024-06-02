@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import { socket } from "./utils/socket";
 import Header from "./components/Header";
 import Home from "./components/Home";
+import Standby from "./components/Standby";
 import Game from "./components/Game";
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/standby" element={<Standby />} />
         <Route path="/play" element={<Game />} />
       </Routes>
     </div>

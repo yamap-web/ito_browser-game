@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 const Home = () => {
   return (
     <>
@@ -45,6 +47,11 @@ const EntryRoomForm = () => {
 };
 
 const InputNameModal = () => {
+  const navigate = useNavigate()
+    const handleStandby = () => {
+        navigate('/standby')
+    }
+
   return (
     <>
       <dialog id="input-name-modal" className="modal">
@@ -61,7 +68,7 @@ const InputNameModal = () => {
             placeholder="User Name"
           />
           <div className="modal-action mt-4">
-              <button className="btn">登録する</button>
+              <button className="btn" onClick={handleStandby}>登録する</button>
           </div>
         </div>
       </dialog>
