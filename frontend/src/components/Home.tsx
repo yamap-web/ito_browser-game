@@ -1,6 +1,6 @@
 const Home = () => {
   return (
-    <div className="flex flex-col h-screen">
+    <>
       <div className="flex flex-col flex-grow items-center justify-center">
         <h1 className="text-9xl font-bold tracking-wide">ito</h1>
         <p className="py-3 text-sm">言葉で当てる 1~100！価値観共有ゲーム - イト -</p>
@@ -10,7 +10,7 @@ const Home = () => {
       <footer className="py-3 text-center">
         <small>Ⓒ Browser Game -ito- Development Team 2024</small>
       </footer>
-    </div>
+    </>
   );
 };
 
