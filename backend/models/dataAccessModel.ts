@@ -4,16 +4,16 @@ import { GameData, Room } from "../interface/interface";
 
 class DataAccessModel {
   /** ルームIDに一致するルームを取得 */
-  private findRoom(roomId: string): Room | undefined {
+  public findRoom(roomId: string): Room | undefined {
     return rooms.find((room) => room.roomId === roomId);
   }
 
   /** ルームIDとSocketIDに一致するメンバーを取得 */
   private findMember(roomId: string, socketId: string): MemberData | undefined {
     const room = this.findRoom(roomId);
-    if (room) {
-      return room.gameData.find((member) => member.getSocketId() === socketId);
-    }
+    return room
+      ? room.gameData.find((member) => member.getSocketId() === socketId)
+      : undefined;
   }
 
   /** ルームの作成 & ホストの追加 */
@@ -85,7 +85,7 @@ class DataAccessModel {
   }
 
   /** ゲームデータの更新（並び替え時）※ホスト用 */
-  public updateGameData(roomId: string, gameData: GameData[]) {
+  public updateGameData(roomId: string, gameData: GameData[]): void {
     const room = this.findRoom(roomId);
     if (room) {
       room.gameData.forEach((currentData) => {
