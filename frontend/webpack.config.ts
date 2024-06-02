@@ -53,6 +53,7 @@ const configuration: Configuration = {
     static: {
       directory: "./dist",
     },
+    historyApiFallback: true,
     port: 8080,
   },
   module: { rules },
