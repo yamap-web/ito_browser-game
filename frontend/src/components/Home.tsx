@@ -2,13 +2,14 @@ const Home = () => {
   return (
     <div className="flex flex-col h-screen">
       <div className="flex flex-col flex-grow items-center justify-center">
-        <h1 className="text-9xl">ito</h1>
+        <h1 className="text-9xl font-bold tracking-wide">ito</h1>
+        <p className="py-3 text-sm">言葉で当てる 1~100！価値観共有ゲーム - イト -</p>
         <EntryRoomForm />
         <InputNameModal />
       </div>
-      <div className="pb-3 w-full text-center">
-        <p>ⒸBrowser Game -ito- Development Team</p>
-      </div>
+      <footer className="py-3 text-center">
+        <small>Ⓒ Browser Game -ito- Development Team 2024</small>
+      </footer>
     </div>
   );
 };
@@ -16,7 +17,7 @@ const Home = () => {
 const EntryRoomForm = () => {
   const openModal = () => {
     const modalElement = document.getElementById(
-      "inputNameModal"
+      "input-name-modal"
     ) as HTMLDialogElement;
     if (modalElement) {
       modalElement.showModal();
@@ -25,9 +26,9 @@ const EntryRoomForm = () => {
 
   return (
     <div className="mt-10">
-      <div className="grid place-items-center">
+      <div className="grid">
         <form>
-          <input type="text" className="input" placeholder="Enter Room ID" />
+          <input type="text" className="input" placeholder="Room ID (ex. 1234)" />
           <button className="btn btn-primary ml-4" onClick={() => openModal()}>
             Join Room!
           </button>
@@ -36,7 +37,7 @@ const EntryRoomForm = () => {
       <div className="divider">OR</div>
       <div className="grid">
         <button className="btn btn-primary" onClick={() => openModal()}>
-          Create New Room
+          Create New Room!
         </button>
       </div>
     </div>
@@ -46,7 +47,7 @@ const EntryRoomForm = () => {
 const InputNameModal = () => {
   return (
     <>
-      <dialog id="inputNameModal" className="modal">
+      <dialog id="input-name-modal" className="modal">
         <div className="modal-box">
           <form method="dialog">
             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
@@ -56,13 +57,11 @@ const InputNameModal = () => {
           <h2 className="font-bold text-lg">ユーザーネームを登録</h2>
           <input
             type="text"
-            className="input  input-bordered mt-4 w-full"
-            placeholder="Enter Your Name"
+            className="input input-bordered mt-4 w-full"
+            placeholder="User Name"
           />
           <div className="modal-action mt-4">
-            <form>
               <button className="btn">登録する</button>
-            </form>
           </div>
         </div>
       </dialog>
