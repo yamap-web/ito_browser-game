@@ -1,8 +1,4 @@
-interface MemberProps {
-  userName: string;
-  answer: string;
-  index: number;
-}
+import type { GameData } from "../interfaces/interface";
 
 const Game = () => {
   return (
@@ -60,7 +56,7 @@ const AnswerForm = () => {
 
 const DisplayAnswersSection = () => {
   //#region デバッグ用パラメータ
-  const members: MemberProps[] = [
+  const members: GameData[] = [
     { userName: "AAA", answer: "まぐろの赤身", index: 0 },
     { userName: "BBB", answer: "かんぴょう巻き", index: 1 },
     { userName: "CCC", answer: "いくら", index: 2 },
@@ -81,7 +77,7 @@ const DisplayAnswersSection = () => {
   );
 };
 
-const AnswerCard = (props: { member: MemberProps }) => {
+const AnswerCard = (props: { member: GameData }) => {
   return (
     <div className="card bg-base-200 flex items-center rounded-2xl border border-slate-100 shadow-md w-full lg:w-fit mt-2 lg:mt-0 lg:ml-2">
       <div className="card-body px-5 py-1 lg:py-4">

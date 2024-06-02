@@ -1,14 +1,9 @@
 import { useNavigate } from "react-router-dom";
-
-interface MemberProps {
-  userName: string;
-  answer: string;
-  index: number;
-}
+import type { GameData } from "../interfaces/interface";
 
 const Standby = () => {
   //#region デバッグ用パラメータ
-  const members: MemberProps[] = [
+  const members: GameData[] = [
     {
       userName: "AAA",
       answer: "",
@@ -36,7 +31,7 @@ const Standby = () => {
   );
 };
 
-const PlayersStat = (props: { members: MemberProps[] }) => {
+const PlayersStat = (props: { members: GameData[] }) => {
   return (
     <div className="stat text-center">
       <div className="stat-title">Player</div>
@@ -45,7 +40,7 @@ const PlayersStat = (props: { members: MemberProps[] }) => {
   );
 };
 
-const PlayersList = (props: { members: MemberProps[] }) => {
+const PlayersList = (props: { members: GameData[] }) => {
   return (
     <>
       <div className="overflow-x-auto border-2 border-zinc-100 rounded-3xl shadow-md">
