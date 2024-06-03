@@ -1,7 +1,7 @@
 import type { Socket } from "socket.io";
-import { io } from "../socket";
 import dataAccess from "../models/dataAccessModel";
-import { getNumbers } from "../controllers/eventController";
+import { getNumbers, judgement } from "../controllers/eventController";
+import { sendEvent, broadcast } from "../utils/eventSend";
 
 /**
  * Todo
@@ -22,7 +22,6 @@ const eventRcv = (socket: Socket) => {
   socket.on("REQ_CREATEROOM", (msg) => {
     // userName取得
     const userName = msg;
-
     // ルームID取得
     const roomId = "00001";
 
@@ -30,10 +29,7 @@ const eventRcv = (socket: Socket) => {
     access.createRoom(roomId, socket.id, userName);
 
     // イベント[RES_CREATEROOM]送信
-    io.to(socket.id).emit("RES_CREATEROOM");
-
-    console.log("イベント[REQ_CREATEROOM]受信");
-    console.log(access.findRoom(roomId));
+    sendEvent(socket.id, "RES_CREATEROOM", roomId);
   });
   //#endregion
 
@@ -50,22 +46,14 @@ const eventRcv = (socket: Socket) => {
     // 参加者の登録
     access.setMember(roomId, socket.id, userName, false);
 
-    const room = access.findRoom(roomId);
-    if (room) {
-      room.gameData.forEach((data) => {
-        // socketId取得
-        const socketId = data.getSocketId();
+    // ゲームデータ取得
+    const gameData = access.getAllGameData(roomId);
 
-        // ゲームデータ取得
-        const gameData = access.getAllGameData(roomId);
-
-        // イベント[NOTIFY_GAMEDATA]送信
-        io.to(socketId).emit("NOTIFY_GAMEDATA", JSON.stringify(gameData));
-      });
-    }
+    // 参加者全員へ参加者の通知
+    broadcast(roomId, "NOTIFY_GAMEDATA", JSON.stringify(gameData));
 
     // イベント[RES_JOIN]送信
-    io.to(socket.id).emit("RES_JOIN");
+    sendEvent(socket.id, "RES_JOIN");
 
     console.log(access.findRoom(roomId));
   });
@@ -97,22 +85,29 @@ const eventRcv = (socket: Socket) => {
       room.gameData.forEach((data) => {
         // socketId取得
         const socketId = data.getSocketId();
-
         // number取得
         const number = data.getNumber();
-
-        // イベント[NOTIFY_NUMBER]送信
-        io.to(socketId).emit("NOTIFY_NUMBER", String(number));
-
-        // イベント[NOTIFY_THEME]送信
-        io.to(socketId).emit("NOTIFY_THEME", theme);
-
         // ゲームデータ取得
         const gameData = access.getAllGameData(roomId);
 
+        // イベント[NOTIFY_NUMBER]送信
+        sendEvent(socketId, "NOTIFY_NUMBER", String(number));
+        // イベント[NOTIFY_THEME]送信
+        sendEvent(socketId, "NOTIFY_THEME", theme);
         // イベント[NOTIFY_GAMEDATA]送信
-        io.to(socketId).emit("NOTIFY_GAMEDATA", JSON.stringify(gameData));
+        sendEvent(socketId, "NOTIFY_GAMEDATA", JSON.stringify(gameData));
       });
+    }
+  });
+  //#endregion
+
+  //#region イベント[REQ_RESULT]受信
+  socket.on("REQ_RESULT", (msg) => {
+    const gameData = JSON.parse(msg);
+    if (judgement(gameData)) {
+      sendEvent(socket.id, "RES_RESULT", "TRUE");
+    } else {
+      sendEvent(socket.id, "RES_RESULT", "FALSE");
     }
   });
   //#endregion
