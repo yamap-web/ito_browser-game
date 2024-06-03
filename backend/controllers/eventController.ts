@@ -1,3 +1,5 @@
+import { GameData } from "../interface/interface";
+
 export const getNumbers = (num: number) => {
   let numbers: number[] = [];
   for (let i = 1; i <= 100; i++) {
@@ -17,4 +19,17 @@ export const getNumbers = (num: number) => {
   let shuffledNumbers = shuffle(numbers);
 
   return shuffledNumbers.slice(0, num);
+};
+
+export const judgement = (gameData: GameData[]): boolean => {
+  const result = [...gameData];
+  result.sort((a, b) => a.index - b.index);
+
+  for (let i = 0; i < gameData.length; i++) {
+    if (gameData[i].index !== result[i].index) {
+      return false;
+    }
+  }
+
+  return true;
 };
