@@ -1,13 +1,18 @@
-import { useNavigate } from "react-router-dom";
+import { useState, Dispatch, SetStateAction } from "react";
+import { socket } from "../utils/socket";
 
 const Home = () => {
+  const [isHost, setIsHost] = useState<boolean>(true);
+
   return (
     <>
       <div className="flex flex-col flex-grow items-center justify-center">
         <h1 className="text-9xl font-bold tracking-wide">ito</h1>
-        <p className="py-3 text-sm">言葉で当てる 1~100！価値観共有ゲーム - イト -</p>
-        <EntryRoomForm />
-        <InputNameModal />
+        <p className="py-3 text-sm">
+          言葉で当てる 1~100！価値観共有ゲーム - イト -
+        </p>
+        <EntryRoomForm setIsHost={setIsHost} />
+        <InputNameModal isHost={isHost} />
       </div>
       <footer className="py-3 text-center">
         <small>Ⓒ Browser Game -ito- Development Team 2024</small>
@@ -16,7 +21,12 @@ const Home = () => {
   );
 };
 
-const EntryRoomForm = () => {
+const EntryRoomForm = (props: {
+  setIsHost: Dispatch<SetStateAction<boolean>>;
+}) => {
+  // modalを開いたのがホストなのか判定、それによって送信する内容を変更
+  // 初期値はtrueでホストの送信、falseでゲストの送信(id)
+
   const openModal = () => {
     const modalElement = document.getElementById(
       "input-name-modal"
@@ -26,15 +36,27 @@ const EntryRoomForm = () => {
     }
   };
 
+  const onClickJoin = () => {
+    props.setIsHost(false);
+    openModal();
+  };
+
   return (
     <div className="mt-10">
       <div className="grid">
-        <form>
-          <input type="text" className="input" placeholder="Room ID (ex. 1234)" />
-          <button className="btn btn-primary ml-4" onClick={() => openModal()}>
+        <div>
+          <input
+            type="text"
+            className="input"
+            placeholder="Room ID (ex. 1234)"
+          />
+          <button
+            className="btn btn-primary ml-4"
+            onClick={() => onClickJoin()}
+          >
             Join Room!
           </button>
-        </form>
+        </div>
       </div>
       <div className="divider">OR</div>
       <div className="grid">
@@ -46,11 +68,18 @@ const EntryRoomForm = () => {
   );
 };
 
-const InputNameModal = () => {
-  const navigate = useNavigate()
-    const handleStandby = () => {
-        navigate('/standby')
+const InputNameModal = (props: { isHost: boolean }) => {
+  const onClickAdd = () => {
+    if (props.isHost) {
+      socket.emit("REQ_CREATEROOM", "いなじ");
+    } else {
+      const parameter = {
+        userName: "やまP",
+        roomId: "00001",
+      };
+      socket.emit("REQ_JOIN", JSON.stringify(parameter));
     }
+  };
 
   return (
     <>
@@ -68,7 +97,9 @@ const InputNameModal = () => {
             placeholder="User Name"
           />
           <div className="modal-action mt-4">
-              <button className="btn" onClick={handleStandby}>登録する</button>
+            <button className="btn" onClick={onClickAdd}>
+              登録する
+            </button>
           </div>
         </div>
       </dialog>

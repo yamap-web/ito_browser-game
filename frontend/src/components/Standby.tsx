@@ -1,21 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import type { GameData } from "../interfaces/interface";
 
-const Standby = () => {
-  //#region デバッグ用パラメータ
-  const members: GameData[] = [
-    {
-      userName: "AAA",
-      answer: "",
-      index: 0,
-    },
-    {
-      userName: "BBB",
-      answer: "",
-      index: 1,
-    },
-  ];
-  //#endregion
+const Standby = (props: { gameData: GameData[] }) => {
+  const members: GameData[] = props.gameData;
 
   return (
     <div className="flex flex-col lg:flex-row flex-grow items-center justify-center container mx-auto px-4">
@@ -131,7 +118,6 @@ const InputThemeForm = () => {
   const handlePlayGame = () => {
     navigate("/play");
   };
-
   return (
     <div className="flex flex-col lg:flex-row max-w-3xl w-full my-4">
       <input

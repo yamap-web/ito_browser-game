@@ -19,9 +19,9 @@ const eventRcv = (socket: Socket) => {
   //#endregion
 
   //#region イベント[REQ_CREATEROOM]受信
-  socket.on("REQ_CREATEROOM", (msg) => {
+  socket.on("REQ_CREATEROOM", (data) => {
     // userName取得
-    const userName = msg;
+    const userName = data;
     // ルームID取得
     const roomId = "00001";
 
@@ -34,9 +34,9 @@ const eventRcv = (socket: Socket) => {
   //#endregion
 
   //#region イベント[REQ_JOIN]受信
-  socket.on("REQ_JOIN", (msg) => {
+  socket.on("REQ_JOIN", (data) => {
     // 受信パラメータ解析
-    const parameter = JSON.parse(msg);
+    const parameter = JSON.parse(data);
 
     // ルームID取得
     const roomId = parameter.roomId;
@@ -60,9 +60,9 @@ const eventRcv = (socket: Socket) => {
   //#endregion
 
   //#region イベント[REQ_START]受信
-  socket.on("REQ_START", (msg) => {
+  socket.on("REQ_START", (data) => {
     // roomId取得
-    const parameter = JSON.parse(msg);
+    const parameter = JSON.parse(data);
 
     // roomId取得
     const roomId = parameter.roomId;
@@ -102,8 +102,8 @@ const eventRcv = (socket: Socket) => {
   //#endregion
 
   //#region イベント[REQ_RESULT]受信
-  socket.on("REQ_RESULT", (msg) => {
-    const gameData = JSON.parse(msg);
+  socket.on("REQ_RESULT", (data) => {
+    const gameData = JSON.parse(data);
     if (judgement(gameData)) {
       sendEvent(socket.id, "RES_RESULT", "TRUE");
     } else {
