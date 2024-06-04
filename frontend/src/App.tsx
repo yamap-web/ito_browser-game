@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import Home from "./components/Home";
 import Standby from "./components/Standby";
 import Game from "./components/Game";
+import NotFound from "./components/NotFound";
 
 const App = () => {
   useEffect(() => {
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/standby" element={<Standby gameData={gameData} />} />
         <Route path="/play" element={<Game />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );
