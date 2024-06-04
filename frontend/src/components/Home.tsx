@@ -1,5 +1,6 @@
 import { useState, Dispatch, SetStateAction } from "react";
 import { socket } from "../utils/socket";
+import Footer from "./Footer";
 
 const Home = () => {
   const [isHost, setIsHost] = useState<boolean>(true);
@@ -14,9 +15,7 @@ const Home = () => {
         <EntryRoomForm setIsHost={setIsHost} />
         <InputNameModal isHost={isHost} />
       </div>
-      <footer className="py-3 text-center">
-        <small>Ⓒ Browser Game -ito- Development Team 2024</small>
-      </footer>
+      <Footer />
     </>
   );
 };

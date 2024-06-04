@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Footer from "./Footer";
 
 const NotFound = () => {
   return (
@@ -26,9 +27,7 @@ const NotFound = () => {
           </button>
         </Link>
       </div>
-      <footer className="py-3 text-center">
-        <small>Ⓒ Browser Game -ito- Development Team 2024</small>
-      </footer>
+      <Footer />
     </>
   );
 };
