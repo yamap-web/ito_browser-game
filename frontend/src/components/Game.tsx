@@ -1,13 +1,14 @@
+import { GameData } from "../interfaces/interface";
 import DisplayAnswersSection from "./DisplayAnswersSection";
 
-const Game = () => {
+const Game = (props: {gameData: GameData[]}) => {
   return (
     <>
       <div className="flex flex-col flex-grow items-center justify-center container mx-auto px-4">
         <DisplayThemeCard />
         <DisplayNumberCard />
         <AnswerForm />
-        <DisplayAnswersSection />
+        <DisplayAnswersSection gameData={props.gameData} />
       </div>
     </>
   );
