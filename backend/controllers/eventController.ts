@@ -1,8 +1,11 @@
+import DataAccessModel from "../models/dataAccessModel";
 import { GameData } from "../interface/interface";
 
-export const getNumbers = (num: number) => {
+const access = new DataAccessModel();
+
+export const getNumbers = (num: number, min: number = 1, max: number = 100) => {
   let numbers: number[] = [];
-  for (let i = 1; i <= 100; i++) {
+  for (let i = min; i <= max; i++) {
     numbers.push(i);
   }
 
@@ -32,4 +35,33 @@ export const judgement = (gameData: GameData[]): boolean => {
   }
 
   return true;
+};
+
+export const createRoomId = (): string => {
+  const strList = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+  let aryRoomId: string[] = [];
+  let randomIndex: number[] = [];
+
+  randomIndex = getNumbers(4, 0, strList.length - 1);
+
+  aryRoomId = randomIndex.map((index) => {
+    return strList[index];
+  });
+
+  // 重複した場合、再度生成。
+  while (checkRoomId(aryRoomId.join(""))) {
+    randomIndex = getNumbers(6, 0, strList.length);
+    aryRoomId = randomIndex.map((index) => {
+      return strList[index];
+    });
+  }
+
+  return aryRoomId.join("");
+};
+
+// ルームIDの重複チェック
+const checkRoomId = (roomId: string): boolean => {
+  const roomIdList = access.getRoomIdList();
+
+  return roomIdList.includes(roomId);
 };
