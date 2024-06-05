@@ -1,4 +1,5 @@
-import { Dispatch, SetStateAction } from "react";
+import type { Dispatch, SetStateAction, ChangeEvent } from "react";
+import { useState } from "react";
 import { socket } from "../utils/socket";
 import Footer from "./Footer";
 
@@ -6,6 +7,8 @@ const Home = (props: {
   isHost: boolean;
   setIsHost: Dispatch<SetStateAction<boolean>>;
 }) => {
+  const [roomId, setRoomId] = useState("");
+
   return (
     <>
       <div className="flex flex-col flex-grow items-center justify-center">
@@ -13,8 +16,8 @@ const Home = (props: {
         <p className="py-3 text-sm">
           言葉で当てる 1~100！価値観共有ゲーム - イト -
         </p>
-        <EntryRoomForm setIsHost={props.setIsHost} />
-        <InputNameModal isHost={props.isHost} />
+        <EntryRoomForm setIsHost={props.setIsHost} setRoomId={setRoomId} />
+        <InputNameModal isHost={props.isHost} roomId={roomId} />
       </div>
       <Footer />
     </>
@@ -23,6 +26,7 @@ const Home = (props: {
 
 const EntryRoomForm = (props: {
   setIsHost: Dispatch<SetStateAction<boolean>>;
+  setRoomId: Dispatch<SetStateAction<string>>;
 }) => {
   // modalを開いたのがホストなのか判定、それによって送信する内容を変更
   // 初期値はtrueでホストの送信、falseでゲストの送信(id)
@@ -41,6 +45,11 @@ const EntryRoomForm = (props: {
     openModal();
   };
 
+  const onChangeRoomIdForm = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    props.setRoomId(value);
+  };
+
   return (
     <div className="mt-10">
       <div className="grid">
@@ -49,6 +58,7 @@ const EntryRoomForm = (props: {
             type="text"
             className="input"
             placeholder="Room ID (ex. 1234)"
+            onChange={onChangeRoomIdForm}
           />
           <button
             className="btn btn-primary ml-4"
@@ -68,17 +78,24 @@ const EntryRoomForm = (props: {
   );
 };
 
-const InputNameModal = (props: { isHost: boolean }) => {
+const InputNameModal = (props: { isHost: boolean; roomId: string }) => {
+  const [userName, setUserName] = useState("");
+
   const onClickAdd = () => {
     if (props.isHost) {
-      socket.emit("REQ_CREATEROOM", "いなじ");
+      socket.emit("REQ_CREATEROOM", userName);
     } else {
       const parameter = {
-        userName: "やまP",
-        roomId: "00001",
+        userName,
+        roomId: props.roomId,
       };
       socket.emit("REQ_JOIN", JSON.stringify(parameter));
     }
+  };
+
+  const onChangeUserName = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setUserName(value);
   };
 
   return (
@@ -95,6 +112,8 @@ const InputNameModal = (props: { isHost: boolean }) => {
             type="text"
             className="input input-bordered mt-4 w-full"
             placeholder="User Name"
+            onChange={onChangeUserName}
+            name="userName"
           />
           <div className="modal-action mt-4">
             <button className="btn" onClick={onClickAdd}>

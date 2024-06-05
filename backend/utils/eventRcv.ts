@@ -1,13 +1,11 @@
 import type { Socket } from "socket.io";
 import dataAccess from "../models/dataAccessModel";
-import { getNumbers, judgement } from "../controllers/eventController";
+import {
+  createRoomId,
+  getNumbers,
+  judgement,
+} from "../controllers/eventController";
 import { sendEvent, broadcast } from "../utils/eventSend";
-
-/**
- * Todo
- * ・ルームID生成処理の追加
- * ・未実装イベント受信処理の追加
- */
 
 const eventRcv = (socket: Socket) => {
   const access = new dataAccess();
@@ -23,7 +21,7 @@ const eventRcv = (socket: Socket) => {
     // userName取得
     const userName = data;
     // ルームID取得
-    const roomId = "00001";
+    const roomId = createRoomId();
 
     // ルーム作成
     access.createRoom(roomId, socket.id, userName);
