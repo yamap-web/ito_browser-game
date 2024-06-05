@@ -5,11 +5,12 @@ import { GameData } from "../interfaces/interface";
 
 export const useSocketEvents = () => {
   const [gameData, setGameData] = useState<GameData[]>([]);
+  const [roomId, setRoomId] = useState<string>("");
 
   const navigate = useNavigate();
 
   socket.on("RES_CREATEROOM", (data) => {
-    console.log(data);
+    setRoomId(data);
 
     navigate("/standby");
   });
@@ -24,5 +25,5 @@ export const useSocketEvents = () => {
     navigate("/standby");
   });
 
-  return { gameData };
+  return { gameData, roomId };
 };

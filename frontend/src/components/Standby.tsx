@@ -1,16 +1,16 @@
 import { useNavigate } from "react-router-dom";
-import type { GameData } from "../interfaces/interface";
+import type { GameData, StandbyProps } from "../interfaces/interface";
 
-const Standby = (props: { gameData: GameData[]; isHost: boolean }) => {
-  const members: GameData[] = props.gameData;
+const Standby = (props: StandbyProps) => {
+  const { isHost, gameData, roomId } = props;
 
   return (
     <div className="flex flex-col justify-center flex-grow container mx-auto mt-10 lg:mt-0 px-4">
-      <DisplayIdCard isHost={props.isHost} />
+      <DisplayIdCard isHost={isHost} roomId={roomId} />
       <div className="flex flex-col lg:flex-row items-center justify-center mb-10">
         <div className="max-w-sm w-full">
-          <PlayersStat members={members} />
-          <PlayersList members={members} />
+          <PlayersStat gameData={gameData} />
+          <PlayersList gameData={gameData} />
         </div>
         <div className="max-w-2xl w-full mt-4 lg:mt-0 lg:ml-6">
           <DisplayRuleAccordion />
@@ -21,10 +21,10 @@ const Standby = (props: { gameData: GameData[]; isHost: boolean }) => {
   );
 };
 
-const DisplayIdCard = (props: { isHost: boolean }) => {
-  const idNumber: number = 1234;
+const DisplayIdCard = (props: { isHost: boolean; roomId: string }) => {
+  const { isHost, roomId } = props;
 
-  if (props.isHost) {
+  if (isHost) {
     return (
       <div className="flex justify-center mb-4">
         <div className="card bg-base-200 flex items-center w-full max-w-sm lg:max-w-md rounded-2xl border border-slate-100 shadow-md mt-2">
@@ -32,7 +32,7 @@ const DisplayIdCard = (props: { isHost: boolean }) => {
             <p className="lg:text-xl">
               ルームID：
               <span className="ml-2 text-3xl lg:text-5xl font-bold">
-                {idNumber}
+                {roomId}
               </span>
             </p>
             <p className="text-center text-sm lg:text-md">参加者に伝えよう！</p>
@@ -45,16 +45,20 @@ const DisplayIdCard = (props: { isHost: boolean }) => {
   }
 };
 
-const PlayersStat = (props: { members: GameData[] }) => {
+const PlayersStat = (props: { gameData: GameData[] }) => {
+  const { gameData } = props;
+
   return (
     <div className="stat text-center">
       <div className="stat-title">Player</div>
-      <div className="stat-value">{props.members.length + " / 10"}</div>
+      <div className="stat-value">{gameData.length + " / 10"}</div>
     </div>
   );
 };
 
-const PlayersList = (props: { members: GameData[] }) => {
+const PlayersList = (props: { gameData: GameData[] }) => {
+  const { gameData } = props;
+
   return (
     <>
       <div className="overflow-x-auto border-2 border-zinc-100 rounded-3xl shadow-md">
@@ -67,11 +71,11 @@ const PlayersList = (props: { members: GameData[] }) => {
           </thead>
           <tbody>
             {[...Array(10)].map((_, index) => {
-              if (props.members.length > index) {
+              if (gameData.length > index) {
                 return (
                   <tr key={"record_" + index}>
                     <th>{index + 1}</th>
-                    <td>{props.members[index].userName}</td>
+                    <td>{gameData[index].userName}</td>
                   </tr>
                 );
               } else {
@@ -141,12 +145,13 @@ const DisplayRuleAccordion = () => {
 };
 
 const InputThemeForm = (props: { isHost: boolean }) => {
+  const { isHost } = props;
   const navigate = useNavigate();
   const handlePlayGame = () => {
     navigate("/play");
   };
 
-  if (props.isHost) {
+  if (isHost) {
     return (
       <div className="flex flex-col lg:flex-row max-w-3xl w-full my-4">
         <input
