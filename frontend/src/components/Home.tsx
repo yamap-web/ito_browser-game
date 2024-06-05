@@ -3,7 +3,10 @@ import { useState } from "react";
 import { socket } from "../utils/socket";
 import Footer from "./Footer";
 
-const Home = (props: {
+const Home = ({
+  isHost,
+  setIsHost,
+}: {
   isHost: boolean;
   setIsHost: Dispatch<SetStateAction<boolean>>;
 }) => {
@@ -16,21 +19,21 @@ const Home = (props: {
         <p className="py-3 text-sm">
           言葉で当てる 1~100！価値観共有ゲーム - イト -
         </p>
-        <EntryRoomForm setIsHost={props.setIsHost} setRoomId={setRoomId} />
-        <InputNameModal isHost={props.isHost} roomId={roomId} />
+        <EntryRoomForm setIsHost={setIsHost} setRoomId={setRoomId} />
+        <InputNameModal isHost={isHost} roomId={roomId} />
       </div>
       <Footer />
     </>
   );
 };
 
-const EntryRoomForm = (props: {
+const EntryRoomForm = ({
+  setIsHost,
+  setRoomId,
+}: {
   setIsHost: Dispatch<SetStateAction<boolean>>;
   setRoomId: Dispatch<SetStateAction<string>>;
 }) => {
-  // modalを開いたのがホストなのか判定、それによって送信する内容を変更
-  // 初期値はtrueでホストの送信、falseでゲストの送信(id)
-
   const openModal = () => {
     const modalElement = document.getElementById(
       "input-name-modal"
@@ -41,13 +44,13 @@ const EntryRoomForm = (props: {
   };
 
   const onClickJoin = () => {
-    props.setIsHost(false);
+    setIsHost(false);
     openModal();
   };
 
   const onChangeRoomIdForm = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    props.setRoomId(value);
+    setRoomId(value);
   };
 
   return (
@@ -78,17 +81,20 @@ const EntryRoomForm = (props: {
   );
 };
 
-const InputNameModal = (props: { isHost: boolean; roomId: string }) => {
+const InputNameModal = ({
+  isHost,
+  roomId,
+}: {
+  isHost: boolean;
+  roomId: string;
+}) => {
   const [userName, setUserName] = useState("");
 
   const onClickAdd = () => {
-    if (props.isHost) {
+    if (isHost) {
       socket.emit("REQ_CREATEROOM", userName);
     } else {
-      const parameter = {
-        userName,
-        roomId: props.roomId,
-      };
+      const parameter = { userName, roomId };
       socket.emit("REQ_JOIN", JSON.stringify(parameter));
     }
   };

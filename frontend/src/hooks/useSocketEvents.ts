@@ -11,7 +11,6 @@ export const useSocketEvents = () => {
 
   socket.on("RES_CREATEROOM", (data) => {
     setRoomId(data);
-
     navigate("/standby");
   });
 
@@ -21,7 +20,6 @@ export const useSocketEvents = () => {
 
   socket.on("RES_JOIN", (data) => {
     console.log(data);
-
     navigate("/standby");
   });
 

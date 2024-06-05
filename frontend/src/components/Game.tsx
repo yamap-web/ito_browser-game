@@ -1,8 +1,13 @@
 import { GameData } from "../interfaces/interface";
 import DisplayAnswersSection from "./DisplayAnswersSection";
 
-const Game = (props: { gameData: GameData[]; roomId: string }) => {
-  const { gameData, roomId } = props;
+const Game = ({
+  gameData,
+  roomId,
+}: {
+  gameData: GameData[];
+  roomId: string;
+}) => {
   console.log(roomId);
 
   return (
