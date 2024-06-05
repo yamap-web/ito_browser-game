@@ -5,37 +5,14 @@ const Standby = (props: { gameData: GameData[] }) => {
   const members: GameData[] = props.gameData;
 
   return (
-    <div className="flex flex-col justify-center flex-grow container mx-auto mt-10 lg:mt-0 px-4">
-      <DisplayIdCard />
-      <div className="flex flex-col lg:flex-row items-center justify-center">
-        <div className="max-w-sm w-full">
-          <PlayersStat members={members} />
-          <PlayersList members={members} />
-        </div>
-        <div className="max-w-2xl w-full mt-4 lg:mt-0 lg:ml-6">
-          <DisplayRuleAccordion />
-          <InputThemeForm />
-        </div>
+    <div className="flex flex-col lg:flex-row flex-grow items-center justify-center container mx-auto px-4">
+      <div className="max-w-sm w-full">
+        <PlayersStat members={members} />
+        <PlayersList members={members} />
       </div>
-    </div>
-  );
-};
-
-const DisplayIdCard = () => {
-  const idNumber: number = 1234;
-
-  return (
-    <div className="flex justify-center mb-4">
-      <div className="card bg-base-200 flex items-center w-full max-w-sm lg:max-w-md rounded-2xl border border-slate-100 shadow-md mt-2">
-        <div className="card-body p-4">
-          <p className="lg:text-xl">
-            ルームID：
-            <span className="ml-2 text-3xl lg:text-5xl font-bold">
-              {idNumber}
-            </span>
-          </p>
-          <p className="text-center text-sm lg:text-md">参加者に伝えよう！</p>
-        </div>
+      <div className="max-w-2xl w-full mt-4 lg:mt-0 lg:ml-6">
+        <DisplayRuleAccordion />
+        <InputThemeForm />
       </div>
     </div>
   );
