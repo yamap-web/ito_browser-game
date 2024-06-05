@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 @import url("https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Kiwi+Maru:wght@400;500&display=swap");
-
 body {
-  font-family: "Comic Neue", "Kiwi Maru", cursive;
+  font-family: "Comic Neue", "Kiwi Maru", sans-serif;
 }
