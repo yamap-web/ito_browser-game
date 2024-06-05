@@ -1,44 +1,48 @@
 import { useNavigate } from "react-router-dom";
 import type { GameData } from "../interfaces/interface";
 
-const Standby = (props: { gameData: GameData[] }) => {
+const Standby = (props: { gameData: GameData[]; isHost: boolean }) => {
   const members: GameData[] = props.gameData;
 
   return (
     <div className="flex flex-col justify-center flex-grow container mx-auto mt-10 lg:mt-0 px-4">
-      <DisplayIdCard />
-      <div className="flex flex-col lg:flex-row items-center justify-center">
+      <DisplayIdCard isHost={props.isHost} />
+      <div className="flex flex-col lg:flex-row items-center justify-center mb-10">
         <div className="max-w-sm w-full">
           <PlayersStat members={members} />
           <PlayersList members={members} />
         </div>
         <div className="max-w-2xl w-full mt-4 lg:mt-0 lg:ml-6">
           <DisplayRuleAccordion />
-          <InputThemeForm />
+          <InputThemeForm isHost={props.isHost} />
         </div>
       </div>
     </div>
   );
 };
 
-const DisplayIdCard = () => {
+const DisplayIdCard = (props: { isHost: boolean }) => {
   const idNumber: number = 1234;
 
-  return (
-    <div className="flex justify-center mb-4">
-      <div className="card bg-base-200 flex items-center w-full max-w-sm lg:max-w-md rounded-2xl border border-slate-100 shadow-md mt-2">
-        <div className="card-body p-4">
-          <p className="lg:text-xl">
-            ルームID：
-            <span className="ml-2 text-3xl lg:text-5xl font-bold">
-              {idNumber}
-            </span>
-          </p>
-          <p className="text-center text-sm lg:text-md">参加者に伝えよう！</p>
+  if (props.isHost) {
+    return (
+      <div className="flex justify-center mb-4">
+        <div className="card bg-base-200 flex items-center w-full max-w-sm lg:max-w-md rounded-2xl border border-slate-100 shadow-md mt-2">
+          <div className="card-body p-4">
+            <p className="lg:text-xl">
+              ルームID：
+              <span className="ml-2 text-3xl lg:text-5xl font-bold">
+                {idNumber}
+              </span>
+            </p>
+            <p className="text-center text-sm lg:text-md">参加者に伝えよう！</p>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return null;
+  }
 };
 
 const PlayersStat = (props: { members: GameData[] }) => {
@@ -136,26 +140,31 @@ const DisplayRuleAccordion = () => {
   );
 };
 
-const InputThemeForm = () => {
+const InputThemeForm = (props: { isHost: boolean }) => {
   const navigate = useNavigate();
   const handlePlayGame = () => {
     navigate("/play");
   };
-  return (
-    <div className="flex flex-col lg:flex-row max-w-3xl w-full my-4">
-      <input
-        type="text"
-        className="input input-bordered w-full"
-        placeholder="お題を入力"
-      />
-      <button
-        className="btn btn-primary mt-2 lg:mt-0 lg:ml-4"
-        onClick={handlePlayGame}
-      >
-        Game Start!
-      </button>
-    </div>
-  );
+
+  if (props.isHost) {
+    return (
+      <div className="flex flex-col lg:flex-row max-w-3xl w-full my-4">
+        <input
+          type="text"
+          className="input input-bordered w-full"
+          placeholder="お題を入力"
+        />
+        <button
+          className="btn btn-primary mt-2 lg:mt-0 lg:ml-4"
+          onClick={handlePlayGame}
+        >
+          Game Start!
+        </button>
+      </div>
+    );
+  } else {
+    return null;
+  }
 };
 
 export default Standby;
