@@ -50,7 +50,7 @@ export const createRoomId = (): string => {
 
   // 重複した場合、再度生成。
   while (checkRoomId(aryRoomId.join(""))) {
-    randomIndex = getNumbers(6, 0, strList.length);
+    randomIndex = getNumbers(4, 0, strList.length);
     aryRoomId = randomIndex.map((index) => {
       return strList[index];
     });
