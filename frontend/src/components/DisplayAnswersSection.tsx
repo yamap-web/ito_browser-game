@@ -3,19 +3,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import type { GameData } from "../interfaces/interface";
 
 const DisplayAnswersSection = (props: { gameData: GameData[] }) => {
-  //#region デバッグ用パラメータ
-  // const members: GameData[] = [
-  //   { userName: "AAA", answer: "まぐろの赤身", index: 7 },
-  //   { userName: "BBB", answer: "かんぴょう巻き", index: 1 },
-  //   { userName: "CCC", answer: "いくら", index: 5 },
-  //   { userName: "DDD", answer: "サーモン", index: 0 },
-  //   { userName: "EEE", answer: "納豆巻き", index: 4 },
-  //   { userName: "FFF", answer: "ネギトロ", index: 3 },
-  //   { userName: "GGG", answer: "カリフォルニアロール", index: 6 },
-  //   { userName: "HHH", answer: "エビ", index: 2 },
-  // ];
-  //#endregion
-  const members = props.gameData;
+  const gameData = props.gameData;
 
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 1024);
 
@@ -37,7 +25,7 @@ const DisplayAnswersSection = (props: { gameData: GameData[] }) => {
 
   const onDragEnd = (result: any) => {
     if (!result.destination) return;
-    reorder(members, result.source.index, result.destination.index);
+    reorder(gameData, result.source.index, result.destination.index);
   };
 
   return (
@@ -53,7 +41,7 @@ const DisplayAnswersSection = (props: { gameData: GameData[] }) => {
               ref={provided.innerRef}
               className="flex flex-col lg:flex-row items-center justify-center w-full my-6"
             >
-              {members.map((member, index) => (
+              {gameData.map((member, index) => (
                 <Draggable
                   key={member.userName}
                   draggableId={member.userName}

@@ -1,14 +1,17 @@
 import { GameData } from "../interfaces/interface";
 import DisplayAnswersSection from "./DisplayAnswersSection";
 
-const Game = (props: {gameData: GameData[]}) => {
+const Game = (props: { gameData: GameData[]; roomId: string }) => {
+  const { gameData, roomId } = props;
+  console.log(roomId);
+
   return (
     <>
       <div className="flex flex-col flex-grow items-center justify-center container mx-auto px-4">
         <DisplayThemeCard />
         <DisplayNumberCard />
         <AnswerForm />
-        <DisplayAnswersSection gameData={props.gameData} />
+        <DisplayAnswersSection gameData={gameData} />
       </div>
     </>
   );
