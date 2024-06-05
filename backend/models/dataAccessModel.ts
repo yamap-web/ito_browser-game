@@ -97,6 +97,11 @@ class DataAccessModel {
       });
     }
   }
+
+  // ルームID一覧の取得
+  public getRoomIdList(): string[] {
+    return rooms.map((room) => room.roomId);
+  }
 }
 
 export default DataAccessModel;
