@@ -28,6 +28,12 @@ const eventRcv = (socket: Socket) => {
     // ルーム作成
     access.createRoom(roomId, socket.id, userName);
 
+    // ゲームデータ取得
+    const gameData = access.getAllGameData(roomId);
+
+    // イベント[NOTIFY_GAMEDATA]送信
+    sendEvent(socket.id, "NOTIFY_GAMEDATA", JSON.stringify(gameData));
+
     // イベント[RES_CREATEROOM]送信
     sendEvent(socket.id, "RES_CREATEROOM", roomId);
   });
