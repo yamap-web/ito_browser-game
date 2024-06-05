@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import type { GameData, StandbyProps } from "../interfaces/interface";
+import { GameData, StandbyProps } from "../interfaces/interface";
 
 const Standby = ({ isHost, gameData, roomId }: StandbyProps) => {
   return (

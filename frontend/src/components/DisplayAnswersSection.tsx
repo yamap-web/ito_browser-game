@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import type { GameData } from "../interfaces/interface";
+import { GameData } from "../interfaces/interface";
 
 const DisplayAnswersSection = ({ gameData }: { gameData: GameData[] }) => {
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 1024);

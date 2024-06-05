@@ -1,4 +1,4 @@
-import { GameData } from "../interface/interface";
+import { GameData } from "../interfaces/interface";
 
 class MemberData {
   //#region データカラム

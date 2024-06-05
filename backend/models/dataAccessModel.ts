@@ -1,6 +1,6 @@
 import MemberData from "../class/MemberData";
 import { rooms } from "../data/data";
-import { GameData, Room } from "../interface/interface";
+import { GameData, Room } from "../interfaces/interface";
 
 class DataAccessModel {
   /** ルームIDに一致するルームを取得 */
