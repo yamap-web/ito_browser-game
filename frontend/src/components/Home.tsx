@@ -1,10 +1,11 @@
-import { useState, Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { socket } from "../utils/socket";
 import Footer from "./Footer";
 
-const Home = () => {
-  const [isHost, setIsHost] = useState<boolean>(true);
-
+const Home = (props: {
+  isHost: boolean;
+  setIsHost: Dispatch<SetStateAction<boolean>>;
+}) => {
   return (
     <>
       <div className="flex flex-col flex-grow items-center justify-center">
@@ -12,8 +13,8 @@ const Home = () => {
         <p className="py-3 text-sm">
           言葉で当てる 1~100！価値観共有ゲーム - イト -
         </p>
-        <EntryRoomForm setIsHost={setIsHost} />
-        <InputNameModal isHost={isHost} />
+        <EntryRoomForm setIsHost={props.setIsHost} />
+        <InputNameModal isHost={props.isHost} />
       </div>
       <Footer />
     </>
