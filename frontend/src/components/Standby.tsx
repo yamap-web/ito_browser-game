@@ -165,7 +165,15 @@ const InputThemeForm = ({ isHost }: { isHost: boolean }) => {
       </div>
     );
   } else {
-    return null;
+    return (
+      <div
+        className="flex items-center justify-center my-6"
+        aria-label="待機中"
+      >
+        <div className="animate-spin h-10 w-10 border-4 border-secondary rounded-full border-t-transparent"></div>
+        <p className="text-secondary pl-4">ゲームの開始を待っています</p>
+      </div>
+    );
   }
 };
 
