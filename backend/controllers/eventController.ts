@@ -1,5 +1,5 @@
 import DataAccessModel from "../models/dataAccessModel";
-import { GameData } from "../interface/interface";
+import { GameData } from "../interfaces/interface";
 
 const access = new DataAccessModel();
 

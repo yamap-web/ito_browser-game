@@ -1,9 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import type { GameData, StandbyProps } from "../interfaces/interface";
+import { GameData, StandbyProps } from "../interfaces/interface";
 
-const Standby = (props: StandbyProps) => {
-  const { isHost, gameData, roomId } = props;
-
+const Standby = ({ isHost, gameData, roomId }: StandbyProps) => {
   return (
     <div className="flex flex-col justify-center flex-grow container mx-auto mt-10 lg:mt-0 px-4">
       <DisplayIdCard isHost={isHost} roomId={roomId} />
@@ -14,16 +12,20 @@ const Standby = (props: StandbyProps) => {
         </div>
         <div className="max-w-2xl w-full mt-4 lg:mt-0 lg:ml-6">
           <DisplayRuleAccordion />
-          <InputThemeForm isHost={props.isHost} />
+          <InputThemeForm isHost={isHost} />
         </div>
       </div>
     </div>
   );
 };
 
-const DisplayIdCard = (props: { isHost: boolean; roomId: string }) => {
-  const { isHost, roomId } = props;
-
+const DisplayIdCard = ({
+  isHost,
+  roomId,
+}: {
+  isHost: boolean;
+  roomId: string;
+}) => {
   if (isHost) {
     return (
       <div className="flex justify-center mb-4">
@@ -45,9 +47,7 @@ const DisplayIdCard = (props: { isHost: boolean; roomId: string }) => {
   }
 };
 
-const PlayersStat = (props: { gameData: GameData[] }) => {
-  const { gameData } = props;
-
+const PlayersStat = ({ gameData }: { gameData: GameData[] }) => {
   return (
     <div className="stat text-center">
       <div className="stat-title">Player</div>
@@ -56,9 +56,7 @@ const PlayersStat = (props: { gameData: GameData[] }) => {
   );
 };
 
-const PlayersList = (props: { gameData: GameData[] }) => {
-  const { gameData } = props;
-
+const PlayersList = ({ gameData }: { gameData: GameData[] }) => {
   return (
     <>
       <div className="overflow-x-auto border-2 border-zinc-100 rounded-3xl shadow-md">
@@ -144,8 +142,7 @@ const DisplayRuleAccordion = () => {
   );
 };
 
-const InputThemeForm = (props: { isHost: boolean }) => {
-  const { isHost } = props;
+const InputThemeForm = ({ isHost }: { isHost: boolean }) => {
   const navigate = useNavigate();
   const handlePlayGame = () => {
     navigate("/play");

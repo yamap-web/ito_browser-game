@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import type { GameData } from "../interfaces/interface";
+import { GameData } from "../interfaces/interface";
 
-const DisplayAnswersSection = (props: { gameData: GameData[] }) => {
-  const gameData = props.gameData;
-
+const DisplayAnswersSection = ({ gameData }: { gameData: GameData[] }) => {
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 1024);
 
   useEffect(() => {
@@ -68,11 +66,11 @@ const DisplayAnswersSection = (props: { gameData: GameData[] }) => {
   );
 };
 
-const AnswerCard = (props: { member: GameData }) => {
+const AnswerCard = ({ member }: { member: GameData }) => {
   return (
     <div className="card-body px-5 py-1 lg:py-4">
-      <span className="">{props.member.userName}</span>
-      <h2 className="card-title text-xl lg:text-2xl">{props.member.answer}</h2>
+      <span className="">{member.userName}</span>
+      <h2 className="card-title text-xl lg:text-2xl">{member.answer}</h2>
     </div>
   );
 };
