@@ -94,10 +94,10 @@ const eventRcv = (socket: Socket) => {
         // ゲームデータ取得
         const gameData = access.getAllGameData(roomId);
 
-        // イベント[NOTIFY_NUMBER]送信
-        sendEvent(socketId, "NOTIFY_NUMBER", String(number));
         // イベント[NOTIFY_THEME]送信
         sendEvent(socketId, "NOTIFY_THEME", theme);
+        // イベント[NOTIFY_NUMBER]送信
+        sendEvent(socketId, "NOTIFY_NUMBER", String(number));
         // イベント[NOTIFY_GAMEDATA]送信
         sendEvent(socketId, "NOTIFY_GAMEDATA", JSON.stringify(gameData));
       });

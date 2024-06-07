@@ -1,5 +1,7 @@
-import { useNavigate } from "react-router-dom";
+import type { ChangeEvent } from "react";
+import { useState } from "react";
 import { GameData, StandbyProps } from "../interfaces/interface";
+import { socket } from "../utils/socket";
 
 const Standby = ({ isHost, gameData, roomId }: StandbyProps) => {
   return (
@@ -12,7 +14,7 @@ const Standby = ({ isHost, gameData, roomId }: StandbyProps) => {
         </div>
         <div className="max-w-2xl w-full mt-4 lg:mt-0 lg:ml-6">
           <DisplayRuleAccordion />
-          <InputThemeForm isHost={isHost} />
+          <InputThemeForm isHost={isHost} roomId={roomId} />
         </div>
       </div>
     </div>
@@ -142,10 +144,23 @@ const DisplayRuleAccordion = () => {
   );
 };
 
-const InputThemeForm = ({ isHost }: { isHost: boolean }) => {
-  const navigate = useNavigate();
-  const handlePlayGame = () => {
-    navigate("/play");
+const InputThemeForm = ({
+  isHost,
+  roomId,
+}: {
+  isHost: boolean;
+  roomId: string;
+}) => {
+  const [theme, setTheme] = useState("");
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setTheme(value);
+  };
+
+  const handleStartBtnClick = () => {
+    const parameter = { roomId, theme };
+    socket.emit("REQ_START", JSON.stringify(parameter));
   };
 
   if (isHost) {
@@ -155,10 +170,12 @@ const InputThemeForm = ({ isHost }: { isHost: boolean }) => {
           type="text"
           className="input input-bordered w-full"
           placeholder="お題を入力"
+          onChange={handleInputChange}
+          name="theme"
         />
         <button
           className="btn btn-primary mt-2 lg:mt-0 lg:ml-4"
-          onClick={handlePlayGame}
+          onClick={handleStartBtnClick}
         >
           Game Start!
         </button>
