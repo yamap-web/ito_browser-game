@@ -34,7 +34,7 @@ const EntryRoomForm = ({
   setIsHost: Dispatch<SetStateAction<boolean>>;
   setRoomId: Dispatch<SetStateAction<string>>;
 }) => {
-  const openModal = () => {
+  const onModalOpen = () => {
     const modalElement = document.getElementById(
       "input-name-modal"
     ) as HTMLDialogElement;
@@ -43,12 +43,12 @@ const EntryRoomForm = ({
     }
   };
 
-  const onClickJoin = () => {
+  const handleJoinBtnClick = () => {
     setIsHost(false);
-    openModal();
+    onModalOpen();
   };
 
-  const onChangeRoomIdForm = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setRoomId(value);
   };
@@ -61,11 +61,11 @@ const EntryRoomForm = ({
             type="text"
             className="input"
             placeholder="Room ID (ex. 1234)"
-            onChange={onChangeRoomIdForm}
+            onChange={handleInputChange}
           />
           <button
             className="btn btn-primary ml-4"
-            onClick={() => onClickJoin()}
+            onClick={() => handleJoinBtnClick()}
           >
             Join Room!
           </button>
@@ -73,7 +73,7 @@ const EntryRoomForm = ({
       </div>
       <div className="divider">OR</div>
       <div className="grid">
-        <button className="btn btn-primary" onClick={() => openModal()}>
+        <button className="btn btn-primary" onClick={() => onModalOpen()}>
           Create New Room!
         </button>
       </div>
@@ -90,7 +90,7 @@ const InputNameModal = ({
 }) => {
   const [userName, setUserName] = useState("");
 
-  const onClickAdd = () => {
+  const handleEntryBtnClick = () => {
     if (isHost) {
       socket.emit("REQ_CREATEROOM", userName);
     } else {
@@ -99,7 +99,7 @@ const InputNameModal = ({
     }
   };
 
-  const onChangeUserName = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setUserName(value);
   };
@@ -118,11 +118,11 @@ const InputNameModal = ({
             type="text"
             className="input input-bordered mt-4 w-full"
             placeholder="User Name"
-            onChange={onChangeUserName}
+            onChange={handleInputChange}
             name="userName"
           />
           <div className="modal-action mt-4">
-            <button className="btn" onClick={onClickAdd}>
+            <button className="btn" onClick={handleEntryBtnClick}>
               登録する
             </button>
           </div>

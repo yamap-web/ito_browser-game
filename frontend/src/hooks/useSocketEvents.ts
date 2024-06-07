@@ -6,6 +6,8 @@ import { GameData } from "../interfaces/interface";
 export const useSocketEvents = () => {
   const [gameData, setGameData] = useState<GameData[]>([]);
   const [roomId, setRoomId] = useState<string>("");
+  const [theme, setTheme] = useState<string>("");
+  const [number, setNumber] = useState<number>(0);
 
   const navigate = useNavigate();
 
@@ -18,10 +20,18 @@ export const useSocketEvents = () => {
     setGameData(JSON.parse(data));
   });
 
-  socket.on("RES_JOIN", (data) => {
-    console.log(data);
+  socket.on("RES_JOIN", () => {
     navigate("/standby");
   });
 
-  return { gameData, roomId };
+  socket.on("NOTIFY_THEME", (data) => {
+    setTheme(data);
+    navigate("/play");
+  });
+
+  socket.on("NOTIFY_NUMBER", (data) => {
+    setNumber(Number(data));
+  });
+
+  return { gameData, roomId, number, theme };
 };

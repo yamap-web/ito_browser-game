@@ -16,7 +16,7 @@ const App = () => {
     socket.connect();
   }, []);
 
-  const { gameData, roomId } = useSocketEvents();
+  const { gameData, roomId, theme, number } = useSocketEvents();
 
   return (
     <div className="flex flex-col h-screen">
@@ -34,7 +34,14 @@ const App = () => {
         />
         <Route
           path="/play"
-          element={<Game gameData={gameData} roomId={roomId} />}
+          element={
+            <Game
+              gameData={gameData}
+              roomId={roomId}
+              theme={theme}
+              number={number}
+            />
+          }
         />
         <Route path="*" element={<NotFound />} />
       </Routes>

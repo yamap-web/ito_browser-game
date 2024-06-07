@@ -1,20 +1,21 @@
 import { GameData } from "../interfaces/interface";
 import DisplayAnswersSection from "./DisplayAnswersSection";
 
-const Game = ({
-  gameData,
-  roomId,
-}: {
+interface GameProps {
   gameData: GameData[];
   roomId: string;
-}) => {
+  theme: string;
+  number: number;
+}
+
+const Game = ({ gameData, roomId, theme, number }: GameProps) => {
   console.log(roomId);
 
   return (
     <>
       <div className="flex flex-col flex-grow items-center justify-center container mx-auto px-4">
-        <DisplayThemeCard />
-        <DisplayNumberCard />
+        <DisplayThemeCard theme={theme} />
+        <DisplayNumberCard number={number} />
         <AnswerForm />
         <DisplayAnswersSection gameData={gameData} />
       </div>
@@ -22,9 +23,7 @@ const Game = ({
   );
 };
 
-const DisplayThemeCard = () => {
-  const theme = "好きなお寿司のネタ";
-
+const DisplayThemeCard = ({ theme }: { theme: string }) => {
   return (
     <div className="card bg-base-100 flex items-center w-full max-w-3xl rounded-2xl border border-slate-100 shadow-md">
       <div className="card-body">
@@ -35,9 +34,7 @@ const DisplayThemeCard = () => {
   );
 };
 
-const DisplayNumberCard = () => {
-  const number = 100;
-
+const DisplayNumberCard = ({number}: {number: number}) => {
   return (
     <div className="card bg-base-100 flex items-center w-full max-w-3xl rounded-2xl border border-slate-100 shadow-md mt-2">
       <div className="card-body">
