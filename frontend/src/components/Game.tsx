@@ -67,7 +67,7 @@ const AnswerForm = ({ roomId }: { roomId: string }) => {
     <div className="flex flex-col lg:flex-row max-w-3xl w-full mt-4">
       <input
         type="text"
-        className="input input-bordered w-full"
+        className="input input-bordered input-primary border-4 border-primary w-full"
         placeholder="回答のテキストを入力"
         onChange={onChangeAnswer}
       />

@@ -12,7 +12,7 @@ const ErrorAlert = ({
   } else {
     return (
       <div className="fixed z-50 left-1/2 -translate-x-1/2 w-full max-w-max p-4">
-        <div role="alert" className="alert alert-warning">
+        <div role="alert" className="alert alert-warning shadow-md">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="stroke-current shrink-0 h-6 w-6"
