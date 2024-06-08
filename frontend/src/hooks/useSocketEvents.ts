@@ -8,6 +8,7 @@ export const useSocketEvents = () => {
   const [roomId, setRoomId] = useState<string>("");
   const [theme, setTheme] = useState<string>("");
   const [number, setNumber] = useState<number>(0);
+  const [errorMsg, setErrorMsg] = useState<string>("");
 
   const navigate = useNavigate();
 
@@ -27,8 +28,9 @@ export const useSocketEvents = () => {
       // エラーメッセージがない場合、待機画面へ
       if (errorMsg == "") {
         navigate("/standby");
+        setErrorMsg("");
       } else {
-        console.log(errorMsg);
+        setErrorMsg(errorMsg);
       }
     });
 
@@ -46,11 +48,12 @@ export const useSocketEvents = () => {
       // エラーメッセージがない場合、ゲーム画面へ
       if (errorMsg == "") {
         navigate("/play");
+        setErrorMsg("");
       } else {
-        console.log(errorMsg);
+        setErrorMsg(errorMsg);
       }
     });
   }, []);
 
-  return { gameData, roomId, setRoomId, number, theme };
+  return { gameData, roomId, setRoomId, number, theme, errorMsg, setErrorMsg };
 };

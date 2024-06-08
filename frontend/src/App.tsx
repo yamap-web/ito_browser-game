@@ -4,6 +4,7 @@ import { useSocketEvents } from "./hooks/useSocketEvents";
 import { Routes, Route } from "react-router-dom";
 import { socket } from "./utils/socket";
 import Header from "./components/Header";
+import ErrorAlert from "./components/ErrorAlert";
 import Home from "./components/Home";
 import Standby from "./components/Standby";
 import Game from "./components/Game";
@@ -16,11 +17,12 @@ const App = () => {
     socket.connect();
   }, []);
 
-  const { gameData, roomId, setRoomId, theme, number } = useSocketEvents();
+  const { gameData, roomId, setRoomId, theme, number, errorMsg, setErrorMsg } = useSocketEvents();
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen static">
       <Header />
+      <ErrorAlert errorMsg={errorMsg} setErrorMsg={setErrorMsg} />
       <Routes>
         <Route
           path="/"
