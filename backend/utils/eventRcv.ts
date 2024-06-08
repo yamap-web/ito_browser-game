@@ -47,6 +47,16 @@ const eventRcv = (socket: Socket) => {
     // ユーザーネーム取得
     const userName = parameter.userName;
 
+    // 参加者数取得
+    const numberOfMembers = access.getNumberOfMembers(roomId);
+    if (numberOfMembers == 10) {
+      const errorMsg = "参加上限に達しているため、参加できません。";
+      // イベント[RES_JOIN]送信
+      sendEvent(socket.id, "RES_JOIN", errorMsg);
+
+      return;
+    }
+
     // 参加者の登録
     access.setMember(roomId, socket.id, userName, false);
 
@@ -58,8 +68,6 @@ const eventRcv = (socket: Socket) => {
 
     // イベント[RES_JOIN]送信
     sendEvent(socket.id, "RES_JOIN");
-
-    console.log(access.findRoom(roomId));
   });
   //#endregion
 
