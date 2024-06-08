@@ -31,7 +31,7 @@ const DisplayIdCard = ({
   if (isHost) {
     return (
       <div className="flex justify-center mb-4">
-        <div className="card bg-base-200 flex items-center w-full max-w-sm lg:max-w-md rounded-2xl border border-slate-100 shadow-md mt-2">
+        <div className="card bg-primary/30 flex items-center w-full max-w-sm lg:max-w-md rounded-2xl shadow-md mt-2">
           <div className="card-body p-4">
             <p className="lg:text-xl">
               ルームID：
@@ -168,7 +168,7 @@ const InputThemeForm = ({
       <div className="flex flex-col lg:flex-row max-w-3xl w-full my-4">
         <input
           type="text"
-          className="input input-bordered w-full"
+          className="input input-bordered input-primary border-4 border-primary w-full"
           placeholder="お題を入力"
           onChange={handleInputChange}
           name="theme"

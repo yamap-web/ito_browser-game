@@ -124,7 +124,7 @@ const InputNameModal = ({
             name="userName"
           />
           <div className="modal-action mt-4">
-            <button className="btn" onClick={handleEntryBtnClick}>
+            <button className="btn btn-primary" onClick={handleEntryBtnClick}>
               登録する
             </button>
           </div>
