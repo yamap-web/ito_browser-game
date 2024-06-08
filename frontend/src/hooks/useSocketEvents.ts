@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { socket } from "../utils/socket";
 import { GameData } from "../interfaces/interface";
@@ -11,27 +11,39 @@ export const useSocketEvents = () => {
 
   const navigate = useNavigate();
 
-  socket.on("RES_CREATEROOM", (data) => {
-    setRoomId(data);
-    navigate("/standby");
-  });
+  useEffect(() => {
+    socket.on("RES_CREATEROOM", (data) => {
+      setRoomId(data);
+      navigate("/standby");
+    });
 
-  socket.on("NOTIFY_GAMEDATA", (data) => {
-    setGameData(JSON.parse(data));
-  });
+    socket.on("NOTIFY_GAMEDATA", (data) => {
+      setGameData(JSON.parse(data));
+    });
 
-  socket.on("RES_JOIN", () => {
-    navigate("/standby");
-  });
+    socket.on("RES_JOIN", () => {
+      navigate("/standby");
+    });
 
-  socket.on("NOTIFY_THEME", (data) => {
-    setTheme(data);
-    navigate("/play");
-  });
+    socket.on("NOTIFY_THEME", (data) => {
+      setTheme(data);
+    });
 
-  socket.on("NOTIFY_NUMBER", (data) => {
-    setNumber(Number(data));
-  });
+    socket.on("NOTIFY_NUMBER", (data) => {
+      setNumber(Number(data));
+    });
+
+    socket.on("RES_START", (data) => {
+      const errorMsg = data;
+
+      // エラーメッセージがない場合、ゲーム画面へ
+      if (errorMsg == "") {
+        navigate("/play");
+      } else {
+        console.log(errorMsg);
+      }
+    });
+  }, []);
 
   return { gameData, roomId, number, theme };
 };

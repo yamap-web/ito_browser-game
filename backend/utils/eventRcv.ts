@@ -65,42 +65,48 @@ const eventRcv = (socket: Socket) => {
 
   //#region イベント[REQ_START]受信
   socket.on("REQ_START", (data) => {
-    // roomId取得
+    // 受信パラメータ解析
     const parameter = JSON.parse(data);
-
     // roomId取得
     const roomId = parameter.roomId;
-
     // お題取得
     const theme = parameter.theme;
 
     // 参加者数取得
     const numberOfMembers = access.getNumberOfMembers(roomId);
+    // 参加者数チェック（3人以上の場合、ゲーム開始）
+    if (numberOfMembers >= 3) {
+      // ランダムな数字生成
+      const numbers = getNumbers(numberOfMembers);
 
-    // ランダムな数字生成
-    const numbers = getNumbers(numberOfMembers);
+      // 参加者にランダムな数字設定
+      access.setNumber(roomId, numbers);
 
-    // 参加者にランダムな数字設定
-    access.setNumber(roomId, numbers);
+      // 参加者に必要なデータの通知
+      const room = access.findRoom(roomId);
+      if (room) {
+        room.gameData.forEach((data) => {
+          // socketId取得
+          const socketId = data.getSocketId();
+          // number取得
+          const number = data.getNumber();
 
-    // 参加者にランダムな数字通知
-    const room = access.findRoom(roomId);
-    if (room) {
-      room.gameData.forEach((data) => {
-        // socketId取得
-        const socketId = data.getSocketId();
-        // number取得
-        const number = data.getNumber();
-        // ゲームデータ取得
-        const gameData = access.getAllGameData(roomId);
+          // イベント[NOTIFY_NUMBER]送信
+          sendEvent(socketId, "NOTIFY_NUMBER", String(number));
+        });
+      }
 
-        // イベント[NOTIFY_THEME]送信
-        sendEvent(socketId, "NOTIFY_THEME", theme);
-        // イベント[NOTIFY_NUMBER]送信
-        sendEvent(socketId, "NOTIFY_NUMBER", String(number));
-        // イベント[NOTIFY_GAMEDATA]送信
-        sendEvent(socketId, "NOTIFY_GAMEDATA", JSON.stringify(gameData));
-      });
+      // ゲームデータ取得
+      const gameData = access.getAllGameData(roomId);
+
+      // お題とゲームデータのブロードキャスト
+      broadcast(roomId, "NOTIFY_THEME", theme);
+      broadcast(roomId, "NOTIFY_GAMEDATA", JSON.stringify(gameData));
+      broadcast(roomId, "RES_START");
+    } else {
+      // イベント[RES_START]送信（エラーメッセージあり）
+      const errorMsg = "参加者数が不足しており、ゲームを開始できません。";
+      sendEvent(socket.id, "RES_START", errorMsg);
     }
   });
   //#endregion
