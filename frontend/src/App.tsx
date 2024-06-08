@@ -17,7 +17,16 @@ const App = () => {
     socket.connect();
   }, []);
 
-  const { gameData, roomId, setRoomId, theme, number, errorMsg, setErrorMsg } = useSocketEvents();
+  const {
+    gameData,
+    setGameData,
+    roomId,
+    setRoomId,
+    theme,
+    number,
+    errorMsg,
+    setErrorMsg,
+  } = useSocketEvents();
 
   return (
     <div className="flex flex-col h-screen static">
@@ -46,6 +55,7 @@ const App = () => {
           element={
             <Game
               gameData={gameData}
+              setGameData={setGameData}
               roomId={roomId}
               theme={theme}
               number={number}

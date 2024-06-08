@@ -10,5 +10,5 @@ export interface Room {
 export interface GameData {
   userName: string;
   answer: string;
-  index: number;
+  orderIndex: number;
 }
