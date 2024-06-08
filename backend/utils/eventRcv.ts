@@ -129,6 +129,29 @@ const eventRcv = (socket: Socket) => {
     }
   });
   //#endregion
+
+  //#region イベント[UPDATE_GAMEDATA]受信
+  socket.on("UPDATE_GAMEDATA", (data) => {
+    console.log(socket.id);
+    console.log("受信しました。");
+
+    // 受信パラメータ解析
+    const parameter = JSON.parse(data);
+    // ルームID取得
+    const roomId = parameter.roomId;
+    // 解答取得
+    const answer = parameter.answer;
+
+    // 解答の設定
+    access.setAnswer(roomId, socket.id, answer);
+
+    // ゲームデータ取得
+    const gameData = access.getAllGameData(roomId);
+
+    // イベント[NOTIFY_GAMEDATA]送信
+    broadcast(roomId, "NOTIFY_GAMEDATA", JSON.stringify(gameData));
+  });
+  //#endregion
 };
 
 export default eventRcv;

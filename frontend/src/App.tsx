@@ -16,7 +16,7 @@ const App = () => {
     socket.connect();
   }, []);
 
-  const { gameData, roomId, theme, number } = useSocketEvents();
+  const { gameData, roomId, setRoomId, theme, number } = useSocketEvents();
 
   return (
     <div className="flex flex-col h-screen">
@@ -24,7 +24,14 @@ const App = () => {
       <Routes>
         <Route
           path="/"
-          element={<Home isHost={isHost} setIsHost={setIsHost} />}
+          element={
+            <Home
+              isHost={isHost}
+              setIsHost={setIsHost}
+              roomId={roomId}
+              setRoomId={setRoomId}
+            />
+          }
         />
         <Route
           path="/standby"

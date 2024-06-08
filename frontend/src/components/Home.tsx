@@ -6,12 +6,14 @@ import Footer from "./Footer";
 const Home = ({
   isHost,
   setIsHost,
+  roomId,
+  setRoomId,
 }: {
   isHost: boolean;
   setIsHost: Dispatch<SetStateAction<boolean>>;
+  roomId: string;
+  setRoomId: Dispatch<SetStateAction<string>>;
 }) => {
-  const [roomId, setRoomId] = useState("");
-
   return (
     <>
       <div className="flex flex-col flex-grow items-center justify-center">

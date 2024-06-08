@@ -1,5 +1,7 @@
+import { ChangeEvent, useState } from "react";
 import { GameData } from "../interfaces/interface";
 import DisplayAnswersSection from "./DisplayAnswersSection";
+import { socket } from "../utils/socket";
 
 interface GameProps {
   gameData: GameData[];
@@ -9,14 +11,12 @@ interface GameProps {
 }
 
 const Game = ({ gameData, roomId, theme, number }: GameProps) => {
-  console.log(roomId);
-
   return (
     <>
       <div className="flex flex-col flex-grow items-center justify-center container mx-auto px-4">
         <DisplayThemeCard theme={theme} />
         <DisplayNumberCard number={number} />
-        <AnswerForm />
+        <AnswerForm roomId={roomId} />
         <DisplayAnswersSection gameData={gameData} />
       </div>
     </>
@@ -34,7 +34,7 @@ const DisplayThemeCard = ({ theme }: { theme: string }) => {
   );
 };
 
-const DisplayNumberCard = ({number}: {number: number}) => {
+const DisplayNumberCard = ({ number }: { number: number }) => {
   return (
     <div className="card bg-base-100 flex items-center w-full max-w-3xl rounded-2xl border border-slate-100 shadow-md mt-2">
       <div className="card-body">
@@ -47,15 +47,36 @@ const DisplayNumberCard = ({number}: {number: number}) => {
   );
 };
 
-const AnswerForm = () => {
+const AnswerForm = ({ roomId }: { roomId: string }) => {
+  const [answer, setAnswer] = useState("");
+  const onChangeAnswer = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setAnswer(value);
+  };
+
+  const onClickSendAnswer = () => {
+    const data = {
+      roomId,
+      answer,
+    };
+
+    socket.emit("UPDATE_GAMEDATA", JSON.stringify(data));
+  };
+
   return (
     <div className="flex flex-col lg:flex-row max-w-3xl w-full mt-4">
       <input
         type="text"
         className="input input-bordered w-full"
         placeholder="回答のテキストを入力"
+        onChange={onChangeAnswer}
       />
-      <button className="btn btn-primary mt-2 lg:mt-0 lg:ml-4">Answer!</button>
+      <button
+        className="btn btn-primary mt-2 lg:mt-0 lg:ml-4"
+        onClick={onClickSendAnswer}
+      >
+        Answer!
+      </button>
     </div>
   );
 };

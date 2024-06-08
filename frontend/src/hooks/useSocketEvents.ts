@@ -52,5 +52,5 @@ export const useSocketEvents = () => {
     });
   }, []);
 
-  return { gameData, roomId, number, theme };
+  return { gameData, roomId, setRoomId, number, theme };
 };
