@@ -6,7 +6,7 @@ const access = new dataAccessModel();
 export const broadcast = (
   roomId: string,
   eventName: string,
-  parameter: string
+  parameter: string = ""
 ): void => {
   const room = access.findRoom(roomId);
 
