@@ -21,8 +21,15 @@ export const useSocketEvents = () => {
       setGameData(JSON.parse(data));
     });
 
-    socket.on("RES_JOIN", () => {
-      navigate("/standby");
+    socket.on("RES_JOIN", (data) => {
+      const errorMsg = data;
+
+      // エラーメッセージがない場合、待機画面へ
+      if (errorMsg == "") {
+        navigate("/standby");
+      } else {
+        console.log(errorMsg);
+      }
     });
 
     socket.on("NOTIFY_THEME", (data) => {
