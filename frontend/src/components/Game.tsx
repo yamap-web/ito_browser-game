@@ -1,23 +1,25 @@
-import { ChangeEvent, useState } from "react";
+import type { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { useState } from "react";
 import { GameData } from "../interfaces/interface";
 import DisplayAnswersSection from "./DisplayAnswersSection";
 import { socket } from "../utils/socket";
 
 interface GameProps {
   gameData: GameData[];
+  setGameData: Dispatch<SetStateAction<GameData[]>>;
   roomId: string;
   theme: string;
   number: number;
 }
 
-const Game = ({ gameData, roomId, theme, number }: GameProps) => {
+const Game = ({ gameData, setGameData, roomId, theme, number }: GameProps) => {
   return (
     <>
       <div className="flex flex-col flex-grow items-center justify-center container mx-auto px-4">
         <DisplayThemeCard theme={theme} />
         <DisplayNumberCard number={number} />
         <AnswerForm roomId={roomId} />
-        <DisplayAnswersSection gameData={gameData} />
+        <DisplayAnswersSection gameData={gameData} setGameData={setGameData} />
       </div>
     </>
   );

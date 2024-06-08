@@ -45,17 +45,17 @@ class DataAccessModel {
   public setNumber(roomId: string, numbers: number[]): void {
     const room = this.findRoom(roomId);
     if (room) {
-      numbers.forEach((number, index) => {
-        room.gameData[index].setNumber(number);
+      numbers.forEach((number, orderIndex) => {
+        room.gameData[orderIndex].setNumber(number);
       });
     }
   }
 
   /** メンバーにIndexの設定 */
-  public setIndex(roomId: string, socketId: string, index: number): void {
+  public setIndex(roomId: string, socketId: string, orderIndex: number): void {
     const member = this.findMember(roomId, socketId);
     if (member) {
-      member.setIndex(index);
+      member.setOrderIndex(orderIndex);
     }
   }
 
@@ -91,7 +91,7 @@ class DataAccessModel {
       room.gameData.forEach((currentData) => {
         gameData.forEach((updateData) => {
           if (updateData.userName === currentData.getUserName()) {
-            currentData.setIndex(updateData.index);
+            currentData.setOrderIndex(updateData.orderIndex);
           }
         });
       });

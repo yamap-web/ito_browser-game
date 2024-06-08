@@ -12,8 +12,8 @@ class MemberData {
   private number: number = 0;
   /** Answer */
   private answer: string = "";
-  /** Index */
-  private index: number = 0;
+  /** OrderIndex */
+  private orderIndex: number = 0;
   //#endregion
 
   /**
@@ -23,12 +23,12 @@ class MemberData {
     socketId: string,
     userName: string,
     isHost: boolean,
-    index: number
+    orderIndex: number
   ) {
     this.socketId = socketId;
     this.userName = userName;
     this.isHost = isHost;
-    this.index = index;
+    this.orderIndex = orderIndex;
   }
 
   /** SocketId取得 */
@@ -62,8 +62,8 @@ class MemberData {
   }
 
   /** インデックス設定 */
-  public setIndex(index: number): void {
-    this.index = index;
+  public setOrderIndex(orderIndex: number): void {
+    this.orderIndex = orderIndex;
   }
 
   /** GameData取得 */
@@ -71,7 +71,7 @@ class MemberData {
     const gameData: GameData = {
       userName: this.userName,
       answer: this.answer,
-      index: this.index,
+      orderIndex: this.orderIndex,
     };
 
     return gameData;

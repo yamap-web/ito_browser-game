@@ -26,10 +26,10 @@ export const getNumbers = (num: number, min: number = 1, max: number = 100) => {
 
 export const judgement = (gameData: GameData[]): boolean => {
   const result = [...gameData];
-  result.sort((a, b) => a.index - b.index);
+  result.sort((a, b) => a.orderIndex - b.orderIndex);
 
   for (let i = 0; i < gameData.length; i++) {
-    if (gameData[i].index !== result[i].index) {
+    if (gameData[i].orderIndex !== result[i].orderIndex) {
       return false;
     }
   }

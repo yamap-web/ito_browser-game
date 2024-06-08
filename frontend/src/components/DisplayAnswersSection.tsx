@@ -1,8 +1,15 @@
+import type { Dispatch, SetStateAction } from "react";
 import { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { GameData } from "../interfaces/interface";
 
-const DisplayAnswersSection = ({ gameData }: { gameData: GameData[] }) => {
+const DisplayAnswersSection = ({
+  gameData,
+  setGameData,
+}: {
+  gameData: GameData[];
+  setGameData: Dispatch<SetStateAction<GameData[]>>;
+}) => {
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 1024);
 
   useEffect(() => {
@@ -24,6 +31,12 @@ const DisplayAnswersSection = ({ gameData }: { gameData: GameData[] }) => {
   const onDragEnd = (result: any) => {
     if (!result.destination) return;
     reorder(gameData, result.source.index, result.destination.index);
+
+    const updatedGameData = gameData.map((data, index) => {
+      return { ...data, orderIndex: index };
+    });
+
+    setGameData(updatedGameData);
   };
 
   return (
