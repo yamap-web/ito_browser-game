@@ -104,6 +104,15 @@ class DataAccessModel {
   public getRoomIdList(): string[] {
     return rooms.map((room) => room.roomId);
   }
+
+  /** ルームの削除 */
+  public deleteRoom(roomId: string): void {
+    for (let i = 0; i < rooms.length; i++) {
+      if (rooms[i].roomId == roomId) {
+        rooms.splice(i, 1);
+      }
+    }
+  }
 }
 
 export default DataAccessModel;
