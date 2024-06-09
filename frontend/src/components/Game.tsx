@@ -115,14 +115,14 @@ const DisplayResultSection = ({
   gameData: GameData[];
   roomId: string;
 }) => {
-  // const onModalOpen = () => {
-  //   const modalElement = document.getElementById(
-  //     "result-modal"
-  //   ) as HTMLDialogElement;
-  //   if (modalElement) {
-  //     modalElement.showModal();
-  //   }
-  // };
+  const onModalOpen = () => {
+    const modalElement = document.getElementById(
+      "result-modal"
+    ) as HTMLDialogElement;
+    if (modalElement) {
+      modalElement.showModal();
+    }
+  };
 
   const onResultShow = () => {
     const data = {
@@ -130,8 +130,8 @@ const DisplayResultSection = ({
       gameData,
     };
 
+    onModalOpen();
     socket.emit("REQ_RESULT", JSON.stringify(data));
-    // onModalOpen();
   };
 
   if (!isHost) {
@@ -153,14 +153,18 @@ const ResultModal = ({
   resultFlg: boolean;
   result: boolean;
 }) => {
-
-
   if (!resultFlg) {
     return null;
   }
   return (
     <>
-      <p>{result ? "GAME CLEAR!!!" : "GAME OVER"}</p>
+      <dialog id="result-modal" className="modal">
+        <div className="modal-box">
+          <h2 className="text-center font-bold text-lg">
+            {result ? "GAME CLEAR!!!" : "GAME OVER"}
+          </h2>
+        </div>
+      </dialog>
     </>
   );
 };
