@@ -6,92 +6,89 @@ import {
   judgement,
 } from "../controllers/eventController";
 import { sendEvent, broadcast } from "../utils/eventSend";
+import SocketEvent from "../class/SocketEvent";
 
 const eventRcv = (socket: Socket) => {
   const access = new dataAccess();
 
   //#region イベント[disconnect]受信
-  socket.on("disconnect", () => {
+  socket.on(SocketEvent.DISCONNECT, () => {
     console.log("User disconnected");
   });
   //#endregion
 
   //#region イベント[REQ_CREATEROOM]受信
-  socket.on("REQ_CREATEROOM", (data) => {
-    // userName取得
-    const userName = data;
+  socket.on(SocketEvent.REQ_CREATEROOM.constructor.name, (data) => {
+    // 受信パラメータ取得(userName)
+    const REQ_CREATEROOM = SocketEvent.REQ_CREATEROOM.parseEventParameter(data);
+
     // ルームID取得
     const roomId = createRoomId();
 
     // ルーム作成
-    access.createRoom(roomId, socket.id, userName);
+    access.createRoom(roomId, socket.id, REQ_CREATEROOM.userName);
 
     // ゲームデータ取得
     const gameData = access.getAllGameData(roomId);
 
     // イベント[NOTIFY_GAMEDATA]送信
-    sendEvent(socket.id, "NOTIFY_GAMEDATA", JSON.stringify(gameData));
+    sendEvent(socket.id, SocketEvent.NOTIFY_GAMEDATA, JSON.stringify(gameData));
 
     // イベント[RES_CREATEROOM]送信
-    sendEvent(socket.id, "RES_CREATEROOM", roomId);
+    sendEvent(socket.id, SocketEvent.RES_CREATEROOM, roomId);
   });
   //#endregion
 
   //#region イベント[REQ_JOIN]受信
-  socket.on("REQ_JOIN", (data) => {
-    // 受信パラメータ解析
-    const parameter = JSON.parse(data);
-
-    // ルームID取得
-    const roomId = parameter.roomId;
-    // ユーザーネーム取得
-    const userName = parameter.userName;
+  socket.on(SocketEvent.REQ_JOIN.constructor.name, (data) => {
+    // 受信パラメータ取得(userName, roomId)
+    const REQ_JOIN = SocketEvent.REQ_JOIN.parseEventParameter(data);
 
     // 参加者数取得
-    const numberOfMembers = access.getNumberOfMembers(roomId);
+    const numberOfMembers = access.getNumberOfMembers(REQ_JOIN.roomId);
     if (numberOfMembers == 10) {
       const errorMsg = "参加上限に達しているため、参加できません。";
       // イベント[RES_JOIN]送信
-      sendEvent(socket.id, "RES_JOIN", errorMsg);
+      sendEvent(socket.id, SocketEvent.RES_JOIN, errorMsg);
 
       return;
     }
 
     // 参加者の登録
-    access.setMember(roomId, socket.id, userName, false);
+    access.setMember(REQ_JOIN.roomId, socket.id, REQ_JOIN.userName, false);
 
     // ゲームデータ取得
-    const gameData = access.getAllGameData(roomId);
+    const gameData = access.getAllGameData(REQ_JOIN.roomId);
 
     // 参加者全員へ参加者の通知
-    broadcast(roomId, "NOTIFY_GAMEDATA", JSON.stringify(gameData));
+    broadcast(
+      REQ_JOIN.roomId,
+      SocketEvent.NOTIFY_GAMEDATA,
+      JSON.stringify(gameData)
+    );
 
     // イベント[RES_JOIN]送信
-    sendEvent(socket.id, "RES_JOIN");
+    sendEvent(socket.id, SocketEvent.RES_JOIN);
   });
   //#endregion
 
   //#region イベント[REQ_START]受信
-  socket.on("REQ_START", (data) => {
-    // 受信パラメータ解析
-    const parameter = JSON.parse(data);
-    // roomId取得
-    const roomId = parameter.roomId;
-    // お題取得
-    const theme = parameter.theme;
+  socket.on(SocketEvent.REQ_START.constructor.name, (data) => {
+    // 受信パラメータ取得(roomId, theme)
+    const REQ_START = SocketEvent.REQ_START.parseEventParameter(data);
 
     // 参加者数取得
-    const numberOfMembers = access.getNumberOfMembers(roomId);
+    const numberOfMembers = access.getNumberOfMembers(REQ_START.roomId);
     // 参加者数チェック（3人以上の場合、ゲーム開始）
     if (numberOfMembers >= 3) {
       // ランダムな数字生成
       const numbers = getNumbers(numberOfMembers);
 
       // 参加者にランダムな数字設定
-      access.setNumber(roomId, numbers);
+      access.setNumber(REQ_START.roomId, numbers);
 
       // 参加者に必要なデータの通知
-      const room = access.findRoom(roomId);
+      const room = access.findRoom(REQ_START.roomId);
       if (room) {
         room.gameData.forEach((data) => {
           // socketId取得
@@ -100,74 +97,80 @@ const eventRcv = (socket: Socket) => {
           const number = data.getNumber();
 
           // イベント[NOTIFY_NUMBER]送信
-          sendEvent(socketId, "NOTIFY_NUMBER", String(number));
+          sendEvent(socketId, SocketEvent.NOTIFY_NUMBER, String(number));
         });
       }
 
       // ゲームデータ取得
-      const gameData = access.getAllGameData(roomId);
+      const gameData = access.getAllGameData(REQ_START.roomId);
 
       // お題とゲームデータのブロードキャスト
-      broadcast(roomId, "NOTIFY_THEME", theme);
-      broadcast(roomId, "NOTIFY_GAMEDATA", JSON.stringify(gameData));
-      broadcast(roomId, "RES_START");
+      broadcast(REQ_START.roomId, SocketEvent.NOTIFY_THEME, REQ_START.theme);
+      broadcast(
+        REQ_START.roomId,
+        SocketEvent.NOTIFY_GAMEDATA,
+        JSON.stringify(gameData)
+      );
+      broadcast(REQ_START.roomId, SocketEvent.RES_START);
     } else {
       // イベント[RES_START]送信（エラーメッセージあり）
       const errorMsg = "参加者数が不足しており、ゲームを開始できません。";
-      sendEvent(socket.id, "RES_START", errorMsg);
+      sendEvent(socket.id, SocketEvent.RES_START, errorMsg);
     }
   });
   //#endregion
 
   //#region イベント[REQ_RESULT]受信
-  socket.on("REQ_RESULT", (data) => {
-    const gameData = JSON.parse(data);
-    if (judgement(gameData)) {
-      sendEvent(socket.id, "RES_RESULT", "TRUE");
+  socket.on(SocketEvent.REQ_RESULT.constructor.name, (data) => {
+    // 受信パラメータ取得(gameData)
+    const REQ_RESULT = SocketEvent.REQ_RESULT.parseEventParameter(data);
+
+    // 結果判定
+    if (judgement(REQ_RESULT.gameData)) {
+      sendEvent(socket.id, SocketEvent.RES_RESULT, "TRUE");
     } else {
-      sendEvent(socket.id, "RES_RESULT", "FALSE");
+      sendEvent(socket.id, SocketEvent.RES_RESULT, "FALSE");
     }
   });
   //#endregion
 
   //#region イベント[UPDATE_ANSWER]受信
-  socket.on("UPDATE_ANSWER", (data) => {
-    // 受信パラメータ解析
-    const parameter = JSON.parse(data);
-    // ルームID取得
-    const roomId = parameter.roomId;
-    // 解答取得
-    const answer = parameter.answer;
+  socket.on(SocketEvent.UPDATE_ANSWER.constructor.name, (data) => {
+    // 受信パラメータ取得(roomId, answer)
+    const UPDATE_ANSWER = SocketEvent.UPDATE_ANSWER.parseEventParameter(data);
 
     // 解答の設定
-    access.setAnswer(roomId, socket.id, answer);
+    access.setAnswer(UPDATE_ANSWER.roomId, socket.id, UPDATE_ANSWER.answer);
 
     // ゲームデータ取得
-    const gameData = access.getAllGameData(roomId);
+    const gameData = access.getAllGameData(UPDATE_ANSWER.roomId);
 
     // イベント[NOTIFY_GAMEDATA]送信
-    broadcast(roomId, "NOTIFY_GAMEDATA", JSON.stringify(gameData));
+    broadcast(
+      UPDATE_ANSWER.roomId,
+      SocketEvent.NOTIFY_GAMEDATA,
+      JSON.stringify(gameData)
+    );
   });
   //#endregion
 
   //#region イベント[UPDATE_GAMEDATA]受信
-  socket.on("UPDATE_GAMEDATA", (data) => {
-    // 受信パラメータ解析
-    const parameter = JSON.parse(data);
-    // roomId取得
-    const roomId = parameter.roomId;
-    // gameData取得
-    const gameData = parameter.gameData;
-    console.log(gameData);
+  socket.on(SocketEvent.UPDATE_GAMEDATA.constructor.name, (data) => {
+    // 受信パラメータ取得(roomId, gameData)
+    const UPDATE_GAMEDATA =
+      SocketEvent.UPDATE_GAMEDATA.parseEventParameter(data);
 
-    access.updateGameData(roomId, gameData);
+    access.updateGameData(UPDATE_GAMEDATA.roomId, UPDATE_GAMEDATA.gameData);
 
     // 更新後のgameData取得
-    const currentGameData = access.getAllGameData(roomId);
-    console.log(currentGameData);
+    const currentGameData = access.getAllGameData(UPDATE_GAMEDATA.roomId);
 
     // イベント[NOTIFY_GAMEDATA]送信
-    broadcast(roomId, "NOTIFY_GAMEDATA", JSON.stringify(currentGameData));
+    broadcast(
+      UPDATE_GAMEDATA.roomId,
+      SocketEvent.NOTIFY_GAMEDATA,
+      JSON.stringify(currentGameData)
+    );
   });
   //#endregion
 };
