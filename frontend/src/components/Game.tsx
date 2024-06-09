@@ -5,14 +5,26 @@ import DisplayAnswersSection from "./DisplayAnswersSection";
 import { socket } from "../utils/socket";
 
 interface GameProps {
+  isHost: boolean;
   gameData: GameData[];
   setGameData: Dispatch<SetStateAction<GameData[]>>;
   roomId: string;
   theme: string;
   number: number;
+  resultFlg: boolean;
+  result: boolean;
 }
 
-const Game = ({ gameData, setGameData, roomId, theme, number }: GameProps) => {
+const Game = ({
+  isHost,
+  gameData,
+  setGameData,
+  roomId,
+  theme,
+  number,
+  resultFlg,
+  result,
+}: GameProps) => {
   return (
     <>
       <div className="flex flex-col flex-grow items-center justify-center container mx-auto px-4">
@@ -23,7 +35,14 @@ const Game = ({ gameData, setGameData, roomId, theme, number }: GameProps) => {
           gameData={gameData}
           setGameData={setGameData}
           roomId={roomId}
+          resultFlg={resultFlg}
         />
+        <DisplayResultSection
+          isHost={isHost}
+          gameData={gameData}
+          roomId={roomId}
+        />
+        <ResultModal resultFlg={resultFlg} result={result} />
       </div>
     </>
   );
@@ -84,6 +103,65 @@ const AnswerForm = ({ roomId }: { roomId: string }) => {
         Answer!
       </button>
     </div>
+  );
+};
+
+const DisplayResultSection = ({
+  isHost,
+  gameData,
+  roomId,
+}: {
+  isHost: boolean;
+  gameData: GameData[];
+  roomId: string;
+}) => {
+  // const onModalOpen = () => {
+  //   const modalElement = document.getElementById(
+  //     "result-modal"
+  //   ) as HTMLDialogElement;
+  //   if (modalElement) {
+  //     modalElement.showModal();
+  //   }
+  // };
+
+  const onResultShow = () => {
+    const data = {
+      roomId,
+      gameData,
+    };
+
+    socket.emit("REQ_RESULT", JSON.stringify(data));
+    // onModalOpen();
+  };
+
+  if (!isHost) {
+    return null;
+  }
+  return (
+    <>
+      <button className="btn btn-secondary" onClick={() => onResultShow()}>
+        Show Result!
+      </button>
+    </>
+  );
+};
+
+const ResultModal = ({
+  resultFlg,
+  result,
+}: {
+  resultFlg: boolean;
+  result: boolean;
+}) => {
+
+
+  if (!resultFlg) {
+    return null;
+  }
+  return (
+    <>
+      <p>{result ? "GAME CLEAR!!!" : "GAME OVER"}</p>
+    </>
   );
 };
 
