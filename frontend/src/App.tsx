@@ -47,7 +47,12 @@ const App = () => {
         <Route
           path="/standby"
           element={
-            <Standby isHost={isHost} gameData={gameData} roomId={roomId} />
+            <Standby
+              isHost={isHost}
+              gameData={gameData}
+              roomId={roomId}
+              setErrorMsg={setErrorMsg}
+            />
           }
         />
         <Route
