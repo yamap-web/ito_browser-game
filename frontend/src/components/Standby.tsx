@@ -1,9 +1,16 @@
-import type { ChangeEvent } from "react";
+import type { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { useState } from "react";
-import { GameData, StandbyProps } from "../interfaces/interface";
+import { GameData } from "../interfaces/interface";
 import { socket } from "../utils/socket";
 
-const Standby = ({ isHost, gameData, roomId }: StandbyProps) => {
+interface StandbyProps {
+  isHost: boolean;
+  gameData: GameData[];
+  roomId: string;
+  setErrorMsg: Dispatch<SetStateAction<string>>;
+}
+
+const Standby = ({ isHost, gameData, roomId, setErrorMsg }: StandbyProps) => {
   return (
     <div className="flex flex-col justify-center flex-grow container mx-auto mt-10 lg:mt-0 px-4">
       <DisplayIdCard isHost={isHost} roomId={roomId} />
@@ -14,7 +21,11 @@ const Standby = ({ isHost, gameData, roomId }: StandbyProps) => {
         </div>
         <div className="max-w-2xl w-full mt-4 lg:mt-0 lg:ml-6">
           <DisplayRuleAccordion />
-          <InputThemeForm isHost={isHost} roomId={roomId} />
+          <InputThemeForm
+            isHost={isHost}
+            roomId={roomId}
+            setErrorMsg={setErrorMsg}
+          />
         </div>
       </div>
     </div>
@@ -170,18 +181,25 @@ const DisplayRuleAccordion = () => {
 const InputThemeForm = ({
   isHost,
   roomId,
+  setErrorMsg,
 }: {
   isHost: boolean;
   roomId: string;
+  setErrorMsg: Dispatch<SetStateAction<string>>;
 }) => {
   const [theme, setTheme] = useState("");
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setTheme(value);
+    // setErrorMsg("");
   };
 
   const handleStartBtnClick = () => {
+    if (theme === "") {
+      setErrorMsg("お題を入力してください。");
+      return;
+    }
     const parameter = { roomId, theme };
     socket.emit("REQ_START", JSON.stringify(parameter));
   };
