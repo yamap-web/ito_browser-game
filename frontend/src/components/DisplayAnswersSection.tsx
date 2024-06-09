@@ -2,13 +2,16 @@ import type { Dispatch, SetStateAction } from "react";
 import { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { GameData } from "../interfaces/interface";
+import { socket } from "../utils/socket";
 
 const DisplayAnswersSection = ({
   gameData,
   setGameData,
+  roomId,
 }: {
   gameData: GameData[];
   setGameData: Dispatch<SetStateAction<GameData[]>>;
+  roomId: string;
 }) => {
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 1024);
 
@@ -37,7 +40,17 @@ const DisplayAnswersSection = ({
     });
 
     setGameData(updatedGameData);
+
+    // gameDataにroomIdを付与して送信
+    const data = {
+      roomId,
+      gameData: updatedGameData,
+    };
+    socket.emit("UPDATE_GAMEDATA", JSON.stringify(data));
   };
+
+  // orderIndex順にソート
+  gameData.sort((a, b) => a.orderIndex - b.orderIndex);
 
   return (
     <>

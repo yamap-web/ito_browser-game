@@ -130,11 +130,8 @@ const eventRcv = (socket: Socket) => {
   });
   //#endregion
 
-  //#region イベント[UPDATE_GAMEDATA]受信
-  socket.on("UPDATE_GAMEDATA", (data) => {
-    console.log(socket.id);
-    console.log("受信しました。");
-
+  //#region イベント[UPDATE_ANSWER]受信
+  socket.on("UPDATE_ANSWER", (data) => {
     // 受信パラメータ解析
     const parameter = JSON.parse(data);
     // ルームID取得
@@ -150,6 +147,27 @@ const eventRcv = (socket: Socket) => {
 
     // イベント[NOTIFY_GAMEDATA]送信
     broadcast(roomId, "NOTIFY_GAMEDATA", JSON.stringify(gameData));
+  });
+  //#endregion
+
+  //#region イベント[UPDATE_GAMEDATA]受信
+  socket.on("UPDATE_GAMEDATA", (data) => {
+    // 受信パラメータ解析
+    const parameter = JSON.parse(data);
+    // roomId取得
+    const roomId = parameter.roomId;
+    // gameData取得
+    const gameData = parameter.gameData;
+    console.log(gameData);
+
+    access.updateGameData(roomId, gameData);
+
+    // 更新後のgameData取得
+    const currentGameData = access.getAllGameData(roomId);
+    console.log(currentGameData);
+
+    // イベント[NOTIFY_GAMEDATA]送信
+    broadcast(roomId, "NOTIFY_GAMEDATA", JSON.stringify(currentGameData));
   });
   //#endregion
 };
