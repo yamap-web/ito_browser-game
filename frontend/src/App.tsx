@@ -26,6 +26,7 @@ const App = () => {
     number,
     errorMsg,
     setErrorMsg,
+    result,
   } = useSocketEvents();
 
   return (
@@ -59,11 +60,13 @@ const App = () => {
           path="/play"
           element={
             <Game
+              isHost={isHost}
               gameData={gameData}
               setGameData={setGameData}
               roomId={roomId}
               theme={theme}
               number={number}
+              result={result}
             />
           }
         />

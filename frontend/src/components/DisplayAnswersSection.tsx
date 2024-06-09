@@ -8,10 +8,12 @@ const DisplayAnswersSection = ({
   gameData,
   setGameData,
   roomId,
+  resultFlg,
 }: {
   gameData: GameData[];
   setGameData: Dispatch<SetStateAction<GameData[]>>;
   roomId: string;
+  resultFlg: boolean;
 }) => {
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 1024);
 
@@ -81,7 +83,11 @@ const DisplayAnswersSection = ({
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                     >
-                      <AnswerCard member={member} key={index} />
+                      <AnswerCard
+                        member={member}
+                        key={index}
+                        resultFlg={resultFlg}
+                      />
                     </li>
                   )}
                 </Draggable>
@@ -98,11 +104,20 @@ const DisplayAnswersSection = ({
   );
 };
 
-const AnswerCard = ({ member }: { member: GameData }) => {
+const AnswerCard = ({
+  member,
+  resultFlg,
+}: {
+  member: GameData;
+  resultFlg: boolean;
+}) => {
+  const number = 100;
   return (
     <div className="card-body px-5 py-1 lg:py-4">
       <span className="">{member.userName}</span>
-      <h2 className="card-title text-xl lg:text-2xl">{member.answer}</h2>
+      <h2 className="card-title text-xl lg:text-2xl">
+        {resultFlg ? number : member.answer}
+      </h2>
     </div>
   );
 };
