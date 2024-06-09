@@ -3,17 +3,14 @@ import { useState } from "react";
 import { socket } from "../utils/socket";
 import Footer from "./Footer";
 
-const Home = ({
-  isHost,
-  setIsHost,
-  roomId,
-  setRoomId,
-}: {
+interface HomeProps {
   isHost: boolean;
   setIsHost: Dispatch<SetStateAction<boolean>>;
   roomId: string;
   setRoomId: Dispatch<SetStateAction<string>>;
-}) => {
+}
+
+const Home = ({ isHost, setIsHost, roomId, setRoomId }: HomeProps) => {
   return (
     <>
       <div className="flex flex-col flex-grow items-center justify-center">
@@ -91,8 +88,23 @@ const InputNameModal = ({
   roomId: string;
 }) => {
   const [userName, setUserName] = useState("");
+  const [validationMsg, setValidationMsg] = useState("");
+
+  const onModalClose = () => {
+    setValidationMsg("");
+  };
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setUserName(value);
+  };
 
   const handleEntryBtnClick = () => {
+    if (userName === "") {
+      setValidationMsg("ユーザーネームを入力してください。");
+      return;
+    }
+
     if (isHost) {
       socket.emit("REQ_CREATEROOM", userName);
     } else {
@@ -101,17 +113,15 @@ const InputNameModal = ({
     }
   };
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setUserName(value);
-  };
-
   return (
     <>
       <dialog id="input-name-modal" className="modal">
         <div className="modal-box">
           <form method="dialog">
-            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+            <button
+              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+              onClick={() => onModalClose()}
+            >
               ✕
             </button>
           </form>
@@ -123,7 +133,8 @@ const InputNameModal = ({
             onChange={handleInputChange}
             name="userName"
           />
-          <div className="modal-action mt-4">
+          <div className="modal-action mt-4 flex items-center justify-between">
+            <p className="text-sm text-error">{validationMsg}</p>
             <button className="btn btn-primary" onClick={handleEntryBtnClick}>
               登録する
             </button>
