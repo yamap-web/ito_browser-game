@@ -1,5 +1,6 @@
 import type { Socket } from "socket.io";
 import dataAccess from "../models/dataAccessModel";
+import ClientDataAccessModel from "../models/clientDataAccessModel";
 import {
   createRoomId,
   getNumbers,
@@ -12,10 +13,20 @@ import { LogLevel } from "../class/LogClass";
 
 const eventRcv = (socket: Socket) => {
   const access = new dataAccess();
+  const clientAccess = new ClientDataAccessModel();
 
   //#region イベント[disconnect]受信
   socket.on(SocketEvent.DISCONNECT, () => {
     outputEventLog(LogLevel.INFO, socket.id, SocketEvent.DISCONNECT);
+
+    const roomId = clientAccess.getRoomId(socket.id);
+
+    if (roomId) {
+      access.deleteRoom(roomId);
+    }
+
+    // Clientデータから削除
+    clientAccess.deleteClient(socket.id);
   });
   //#endregion
 
@@ -35,6 +46,9 @@ const eventRcv = (socket: Socket) => {
 
     // ルーム作成
     access.createRoom(roomId, socket.id, REQ_CREATEROOM.userName);
+
+    // Clientデータ追加
+    clientAccess.addClient(socket.id, roomId, true);
 
     // ゲームデータ取得
     const gameData = access.getAllGameData(roomId);
@@ -70,6 +84,9 @@ const eventRcv = (socket: Socket) => {
 
     // 参加者の登録
     access.setMember(REQ_JOIN.roomId, socket.id, REQ_JOIN.userName, false);
+
+    // Clientデータ追加
+    clientAccess.addClient(socket.id, REQ_JOIN.roomId);
 
     // ゲームデータ取得
     const gameData = access.getAllGameData(REQ_JOIN.roomId);
