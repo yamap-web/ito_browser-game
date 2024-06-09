@@ -151,11 +151,14 @@ const eventRcv = (socket: Socket) => {
     // 受信パラメータ取得(gameData)
     const REQ_RESULT = SocketEvent.REQ_RESULT.parseEventParameter(data);
 
+    // gameData取得
+    const currentGameData = access.getAllGameData(REQ_RESULT.roomId, true);
+
     // 結果判定
-    if (judgement(REQ_RESULT.gameData)) {
-      sendEvent(socket.id, SocketEvent.RES_RESULT, "TRUE");
+    if (judgement(currentGameData)) {
+      broadcast(REQ_RESULT.roomId, SocketEvent.RES_RESULT, "TRUE");
     } else {
-      sendEvent(socket.id, SocketEvent.RES_RESULT, "FALSE");
+      broadcast(REQ_RESULT.roomId, SocketEvent.RES_RESULT, "FALSE");
     }
   });
   //#endregion

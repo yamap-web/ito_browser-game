@@ -67,12 +67,20 @@ class MemberData {
   }
 
   /** GameData取得 */
-  public getGameData(): GameData {
-    const gameData: GameData = {
-      userName: this.userName,
-      answer: this.answer,
-      orderIndex: this.orderIndex,
-    };
+  public getGameData(finFlg: boolean = false): GameData {
+    const gameData: GameData = finFlg
+      ? {
+          userName: this.userName,
+          answer: this.answer,
+          orderIndex: this.orderIndex,
+          number: this.number,
+        }
+      : {
+          userName: this.userName,
+          answer: this.answer,
+          orderIndex: this.orderIndex,
+          number: 0,
+        };
 
     return gameData;
   }
