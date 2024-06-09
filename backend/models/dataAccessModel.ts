@@ -30,9 +30,11 @@ class DataAccessModel {
   }
 
   /** ルーム内のすべてのゲームデータの取得 */
-  public getAllGameData(roomId: string): GameData[] {
+  public getAllGameData(roomId: string, finFlg: boolean = false): GameData[] {
     const room = this.findRoom(roomId);
-    return room ? room.gameData.map((member) => member.getGameData()) : [];
+    return room
+      ? room.gameData.map((member) => member.getGameData(finFlg))
+      : [];
   }
 
   /** 参加者数の取得 */
