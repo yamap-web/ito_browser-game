@@ -19,7 +19,11 @@ const Game = ({ gameData, setGameData, roomId, theme, number }: GameProps) => {
         <DisplayThemeCard theme={theme} />
         <DisplayNumberCard number={number} />
         <AnswerForm roomId={roomId} />
-        <DisplayAnswersSection gameData={gameData} setGameData={setGameData} />
+        <DisplayAnswersSection
+          gameData={gameData}
+          setGameData={setGameData}
+          roomId={roomId}
+        />
       </div>
     </>
   );
@@ -62,7 +66,7 @@ const AnswerForm = ({ roomId }: { roomId: string }) => {
       answer,
     };
 
-    socket.emit("UPDATE_GAMEDATA", JSON.stringify(data));
+    socket.emit("UPDATE_ANSWER", JSON.stringify(data));
   };
 
   return (
