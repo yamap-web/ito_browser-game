@@ -35,7 +35,7 @@ const DisplayIdCard = ({
       <div className="flex justify-center mb-4">
         <div className="card bg-primary/30 flex items-center w-full max-w-sm lg:max-w-md rounded-2xl shadow-md mt-2">
           <div className="card-body p-4">
-            <p className="lg:text-xl">
+            <div className="lg:text-xl">
               ルームID：
               <span className="mx-2 text-3xl lg:text-5xl font-bold">
                 {roomId}
@@ -61,7 +61,7 @@ const DisplayIdCard = ({
                   </svg>
                 </button>
               </div>
-            </p>
+            </div>
             <p className="text-center text-sm lg:text-md">参加者に伝えよう！</p>
           </div>
         </div>
