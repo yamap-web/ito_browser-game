@@ -7,18 +7,26 @@ import {
 } from "../controllers/eventController";
 import { sendEvent, broadcast } from "../utils/eventSend";
 import SocketEvent from "../class/SocketEvent";
+import { outputEventLog } from "../utils/outputLog";
+import { LogLevel } from "../class/LogClass";
 
 const eventRcv = (socket: Socket) => {
   const access = new dataAccess();
 
   //#region イベント[disconnect]受信
   socket.on(SocketEvent.DISCONNECT, () => {
-    console.log("User disconnected");
+    outputEventLog(LogLevel.INFO, socket.id, SocketEvent.DISCONNECT);
   });
   //#endregion
 
   //#region イベント[REQ_CREATEROOM]受信
   socket.on(SocketEvent.REQ_CREATEROOM.constructor.name, (data) => {
+    outputEventLog(
+      LogLevel.INFO,
+      socket.id,
+      SocketEvent.REQ_CREATEROOM.constructor.name
+    );
+
     // 受信パラメータ取得(userName)
     const REQ_CREATEROOM = SocketEvent.REQ_CREATEROOM.parseEventParameter(data);
 
@@ -41,6 +49,12 @@ const eventRcv = (socket: Socket) => {
 
   //#region イベント[REQ_JOIN]受信
   socket.on(SocketEvent.REQ_JOIN.constructor.name, (data) => {
+    outputEventLog(
+      LogLevel.INFO,
+      socket.id,
+      SocketEvent.REQ_JOIN.constructor.name
+    );
+
     // 受信パラメータ取得(userName, roomId)
     const REQ_JOIN = SocketEvent.REQ_JOIN.parseEventParameter(data);
 
@@ -74,6 +88,12 @@ const eventRcv = (socket: Socket) => {
 
   //#region イベント[REQ_START]受信
   socket.on(SocketEvent.REQ_START.constructor.name, (data) => {
+    outputEventLog(
+      LogLevel.INFO,
+      socket.id,
+      SocketEvent.REQ_START.constructor.name
+    );
+
     // 受信パラメータ取得(roomId, theme)
     const REQ_START = SocketEvent.REQ_START.parseEventParameter(data);
 
@@ -122,6 +142,12 @@ const eventRcv = (socket: Socket) => {
 
   //#region イベント[REQ_RESULT]受信
   socket.on(SocketEvent.REQ_RESULT.constructor.name, (data) => {
+    outputEventLog(
+      LogLevel.INFO,
+      socket.id,
+      SocketEvent.REQ_RESULT.constructor.name
+    );
+
     // 受信パラメータ取得(gameData)
     const REQ_RESULT = SocketEvent.REQ_RESULT.parseEventParameter(data);
 
@@ -136,6 +162,12 @@ const eventRcv = (socket: Socket) => {
 
   //#region イベント[UPDATE_ANSWER]受信
   socket.on(SocketEvent.UPDATE_ANSWER.constructor.name, (data) => {
+    outputEventLog(
+      LogLevel.INFO,
+      socket.id,
+      SocketEvent.UPDATE_ANSWER.constructor.name
+    );
+
     // 受信パラメータ取得(roomId, answer)
     const UPDATE_ANSWER = SocketEvent.UPDATE_ANSWER.parseEventParameter(data);
 
@@ -156,6 +188,12 @@ const eventRcv = (socket: Socket) => {
 
   //#region イベント[UPDATE_GAMEDATA]受信
   socket.on(SocketEvent.UPDATE_GAMEDATA.constructor.name, (data) => {
+    outputEventLog(
+      LogLevel.INFO,
+      socket.id,
+      SocketEvent.UPDATE_GAMEDATA.constructor.name
+    );
+
     // 受信パラメータ取得(roomId, gameData)
     const UPDATE_GAMEDATA =
       SocketEvent.UPDATE_GAMEDATA.parseEventParameter(data);
