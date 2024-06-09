@@ -171,6 +171,13 @@ const eventRcv = (socket: Socket) => {
     // gameData取得
     const currentGameData = access.getAllGameData(REQ_RESULT.roomId, true);
 
+    // 結果表示用GameDataの通知
+    broadcast(
+      REQ_RESULT.roomId,
+      SocketEvent.NOTIFY_GAMEDATA,
+      JSON.stringify(currentGameData)
+    );
+
     // 結果判定
     if (judgement(currentGameData)) {
       broadcast(REQ_RESULT.roomId, SocketEvent.RES_RESULT, "TRUE");
