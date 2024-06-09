@@ -11,6 +11,7 @@ interface GameProps {
   roomId: string;
   theme: string;
   number: number;
+  resultFlg: boolean;
   result: boolean;
 }
 
@@ -21,11 +22,9 @@ const Game = ({
   roomId,
   theme,
   number,
+  resultFlg,
   result,
 }: GameProps) => {
-  // test
-  const [resultFlg, setResultFlg] = useState<boolean>(false);
-
   return (
     <>
       <div className="flex flex-col flex-grow items-center justify-center container mx-auto px-4">
@@ -41,7 +40,7 @@ const Game = ({
         <DisplayResultSection
           isHost={isHost}
           gameData={gameData}
-          setResultFlg={setResultFlg}
+          roomId={roomId}
         />
         <ResultModal resultFlg={resultFlg} result={result} />
       </div>
@@ -110,11 +109,11 @@ const AnswerForm = ({ roomId }: { roomId: string }) => {
 const DisplayResultSection = ({
   isHost,
   gameData,
-  setResultFlg,
+  roomId,
 }: {
   isHost: boolean;
   gameData: GameData[];
-  setResultFlg: Dispatch<SetStateAction<boolean>>;
+  roomId: string;
 }) => {
   // const onModalOpen = () => {
   //   const modalElement = document.getElementById(
@@ -127,11 +126,11 @@ const DisplayResultSection = ({
 
   const onResultShow = () => {
     const data = {
+      roomId,
       gameData,
     };
 
     socket.emit("REQ_RESULT", JSON.stringify(data));
-    setResultFlg(true);
     // onModalOpen();
   };
 

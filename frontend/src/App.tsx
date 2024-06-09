@@ -26,6 +26,7 @@ const App = () => {
     number,
     errorMsg,
     setErrorMsg,
+    resultFlg,
     result,
   } = useSocketEvents();
 
@@ -66,6 +67,7 @@ const App = () => {
               roomId={roomId}
               theme={theme}
               number={number}
+              resultFlg={resultFlg}
               result={result}
             />
           }
