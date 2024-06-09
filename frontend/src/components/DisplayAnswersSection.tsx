@@ -63,8 +63,11 @@ const DisplayAnswersSection = ({
             <ul
               {...provided.droppableProps}
               ref={provided.innerRef}
-              className="flex flex-col lg:flex-row items-center justify-center w-full my-6"
+              className="flex flex-col-reverse lg:flex-row items-center justify-center w-full my-6"
             >
+              <li className="badge badge-outline border-2 font-bold mt-2 lg:mt-0">
+                1
+              </li>
               {gameData.map((member, index) => (
                 <Draggable
                   key={member.userName}
@@ -84,6 +87,9 @@ const DisplayAnswersSection = ({
                 </Draggable>
               ))}
               {provided.placeholder}
+              <li className="badge badge-outline border-2 font-bold lg:ml-2">
+                100
+              </li>
             </ul>
           )}
         </Droppable>
