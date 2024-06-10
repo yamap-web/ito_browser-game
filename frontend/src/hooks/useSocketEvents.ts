@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { socket } from "../utils/socket";
 import { GameData } from "../interfaces/interface";
+import SocketEvents from "../class/socketEvents";
 
 export const useSocketEvents = () => {
   const [gameData, setGameData] = useState<GameData[]>([]);
@@ -15,53 +16,51 @@ export const useSocketEvents = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    socket.on("RES_CREATEROOM", (data) => {
+    socket.on(SocketEvents.RES_CREATEROOM.constructor.name, (data) => {
       setRoomId(data);
       navigate("/standby");
     });
 
-    socket.on("NOTIFY_GAMEDATA", (data) => {
+    socket.on(SocketEvents.NOTIFY_GAMEDATA.constructor.name, (data) => {
       setGameData(JSON.parse(data));
     });
 
-    socket.on("RES_JOIN", (data) => {
-      const errorMsg = data;
+    socket.on(SocketEvents.RES_JOIN.constructor.name, (data) => {
+      const RES_JOIN = SocketEvents.RES_JOIN.parseEventParameter(data);
 
       // エラーメッセージがない場合、待機画面へ
       if (errorMsg == "") {
         navigate("/standby");
         setErrorMsg("");
       } else {
-        setErrorMsg(errorMsg);
+        setErrorMsg(RES_JOIN.errorMsg);
       }
     });
 
-    socket.on("NOTIFY_THEME", (data) => {
+    socket.on(SocketEvents.NOTIFY_THEME.constructor.name, (data) => {
       setTheme(data);
     });
 
-    socket.on("NOTIFY_NUMBER", (data) => {
-      setNumber(Number(data));
+    socket.on(SocketEvents.NOTIFY_NUMBER.constructor.name, (data) => {
+      setNumber(data);
     });
 
-    socket.on("RES_START", (data) => {
-      const errorMsg = data;
+    socket.on(SocketEvents.RES_START.constructor.name, (data) => {
+      const RES_START = SocketEvents.RES_JOIN.parseEventParameter(data);
 
       // エラーメッセージがない場合、ゲーム画面へ
       if (errorMsg == "") {
         navigate("/play");
         setErrorMsg("");
       } else {
-        setErrorMsg(errorMsg);
+        setErrorMsg(RES_START.errorMsg);
       }
     });
 
-    socket.on("RES_RESULT", (data) => {
+    socket.on(SocketEvents.RES_RESULT.constructor.name, (data) => {
+      const RES_RESULT = SocketEvents.RES_RESULT.parseEventParameter(data);
       setResultFlg(true);
-
-      if (data === "TRUE") {
-        setResult(true);
-      }
+      setResult(RES_RESULT.result);
     });
   }, []);
 

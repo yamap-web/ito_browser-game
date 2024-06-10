@@ -3,6 +3,7 @@ import { useState } from "react";
 import { GameData } from "../interfaces/interface";
 import DisplayAnswersSection from "./DisplayAnswersSection";
 import { socket } from "../utils/socket";
+import SocketEvent from "../class/socketEvents";
 
 interface GameProps {
   isHost: boolean;
@@ -85,7 +86,7 @@ const AnswerForm = ({ roomId }: { roomId: string }) => {
       answer,
     };
 
-    socket.emit("UPDATE_ANSWER", JSON.stringify(data));
+    socket.emit(SocketEvent.UPDATE_ANSWER, JSON.stringify(data));
   };
 
   return (
@@ -131,7 +132,7 @@ const DisplayResultSection = ({
     };
 
     onModalOpen();
-    socket.emit("REQ_RESULT", JSON.stringify(data));
+    socket.emit(SocketEvent.REQ_RESULT, JSON.stringify(data));
   };
 
   if (!isHost) {
