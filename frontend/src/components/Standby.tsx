@@ -2,6 +2,7 @@ import type { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { useState } from "react";
 import { GameData } from "../interfaces/interface";
 import { socket } from "../utils/socket";
+import SocketEvent from "../class/socketEvents";
 
 interface StandbyProps {
   isHost: boolean;
@@ -201,7 +202,7 @@ const InputThemeForm = ({
       return;
     }
     const parameter = { roomId, theme };
-    socket.emit("REQ_START", JSON.stringify(parameter));
+    socket.emit(SocketEvent.REQ_START, JSON.stringify(parameter));
   };
 
   if (isHost) {

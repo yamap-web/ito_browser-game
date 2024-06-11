@@ -2,6 +2,7 @@ import type { Dispatch, SetStateAction, ChangeEvent } from "react";
 import { useState } from "react";
 import { socket } from "../utils/socket";
 import Footer from "./Footer";
+import SocketEvent from "../class/socketEvents";
 
 interface HomeProps {
   isHost: boolean;
@@ -106,10 +107,10 @@ const InputNameModal = ({
     }
 
     if (isHost) {
-      socket.emit("REQ_CREATEROOM", userName);
+      socket.emit(SocketEvent.REQ_CREATEROOM, userName);
     } else {
       const parameter = { userName, roomId };
-      socket.emit("REQ_JOIN", JSON.stringify(parameter));
+      socket.emit(SocketEvent.REQ_JOIN, JSON.stringify(parameter));
     }
   };
 

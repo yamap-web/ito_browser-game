@@ -109,8 +109,12 @@ class RES_RESULT implements EventClass {
 // SocketEventクラス
 class SocketEvent {
   // 送信イベント
+  public static REQ_CREATEROOM = "REQ_CREATEROOM";
+  public static REQ_JOIN = "REQ_JOIN";
   public static REQ_RESULT = "REQ_RESULT";
+  public static REQ_START = "REQ_START";
   public static UPDATE_ANSWER = "UPDATE_ANSWER";
+  public static UPDATE_GAMEDATA = "UPDATE_GAMEDATA";
 
   // 受信イベントのクラスインスタンス生成
   static RES_CREATEROOM = new RES_CREATEROOM();
