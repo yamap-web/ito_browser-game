@@ -43,7 +43,7 @@ const Game = ({
           gameData={gameData}
           roomId={roomId}
         />
-        <ResultModal resultFlg={resultFlg} result={result} />
+        <ResultModal result={result} />
       </div>
     </>
   );
@@ -116,22 +116,11 @@ const DisplayResultSection = ({
   gameData: GameData[];
   roomId: string;
 }) => {
-  const onModalOpen = () => {
-    const modalElement = document.getElementById(
-      "result-modal"
-    ) as HTMLDialogElement;
-    if (modalElement) {
-      modalElement.showModal();
-    }
-  };
-
   const onResultShow = () => {
     const data = {
       roomId,
       gameData,
     };
-
-    onModalOpen();
     socket.emit(SocketEvent.REQ_RESULT, JSON.stringify(data));
   };
 
@@ -140,32 +129,28 @@ const DisplayResultSection = ({
   }
   return (
     <>
-      <button className="btn btn-secondary" onClick={() => onResultShow()}>
+      <label
+        htmlFor="result-modal"
+        className="btn btn-secondary"
+        onClick={() => onResultShow()}
+      >
         Show Result!
-      </button>
+      </label>
     </>
   );
 };
 
-const ResultModal = ({
-  resultFlg,
-  result,
-}: {
-  resultFlg: boolean;
-  result: boolean;
-}) => {
-  if (!resultFlg) {
-    return null;
-  }
+const ResultModal = ({ result }: { result: boolean }) => {
   return (
     <>
-      <dialog id="result-modal" className="modal">
-        <div className="modal-box">
-          <h2 className="text-center font-bold text-lg">
+      <input type="checkbox" id="result-modal" className="modal-toggle" />
+      <div role="dialog" className="modal">
+        <div className="modal-box bg-gradient-to-r from-primary to-secondary">
+          <h2 className="text-white text-center font-bold text-5xl">
             {result ? "GAME CLEAR!!!" : "GAME OVER"}
           </h2>
         </div>
-      </dialog>
+      </div>
     </>
   );
 };

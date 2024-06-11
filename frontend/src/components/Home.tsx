@@ -34,18 +34,8 @@ const EntryRoomForm = ({
   setIsHost: Dispatch<SetStateAction<boolean>>;
   setRoomId: Dispatch<SetStateAction<string>>;
 }) => {
-  const onModalOpen = () => {
-    const modalElement = document.getElementById(
-      "input-name-modal"
-    ) as HTMLDialogElement;
-    if (modalElement) {
-      modalElement.showModal();
-    }
-  };
-
   const handleJoinBtnClick = () => {
     setIsHost(false);
-    onModalOpen();
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -63,19 +53,20 @@ const EntryRoomForm = ({
             placeholder="Room ID (ex. 1234)"
             onChange={handleInputChange}
           />
-          <button
+          <label
+            htmlFor="input-name-modal"
             className="btn btn-primary ml-4"
             onClick={() => handleJoinBtnClick()}
           >
             Join Room!
-          </button>
+          </label>
         </div>
       </div>
       <div className="divider">OR</div>
       <div className="grid">
-        <button className="btn btn-primary" onClick={() => onModalOpen()}>
+        <label htmlFor="input-name-modal" className="btn btn-primary">
           Create New Room!
-        </button>
+        </label>
       </div>
     </div>
   );
@@ -91,7 +82,7 @@ const InputNameModal = ({
   const [userName, setUserName] = useState("");
   const [validationMsg, setValidationMsg] = useState("");
 
-  const onModalClose = () => {
+  const handleCloseBtnClick = () => {
     setValidationMsg("");
   };
 
@@ -116,16 +107,16 @@ const InputNameModal = ({
 
   return (
     <>
-      <dialog id="input-name-modal" className="modal">
+      <input type="checkbox" id="input-name-modal" className="modal-toggle" />
+      <div role="dialog" className="modal">
         <div className="modal-box">
-          <form method="dialog">
-            <button
-              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-              onClick={() => onModalClose()}
-            >
-              ✕
-            </button>
-          </form>
+          <label
+            htmlFor="input-name-modal"
+            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            onClick={() => handleCloseBtnClick()}
+          >
+            ✕
+          </label>
           <h2 className="font-bold text-lg">ユーザーネームを登録</h2>
           <input
             type="text"
@@ -141,7 +132,7 @@ const InputNameModal = ({
             </button>
           </div>
         </div>
-      </dialog>
+      </div>
     </>
   );
 };
