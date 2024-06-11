@@ -69,10 +69,13 @@ const configuration: Configuration = {
         }),
     new HtmlWebpackPlugin({
       template: __dirname + "/src/index.html",
-      favicon: "./src/images/favicon.ico",
     }),
     new CopyPlugin({
-      patterns: [{ from: "robots.txt", to: "robots.txt" }],
+      patterns: [
+        { from: "robots.txt", to: "robots.txt" },
+        { from: "./src/favicon.ico", to: "favicon.ico" },
+        { from: "./src/ogp.webp", to: "ogp.webp" },
+      ],
     }),
   ],
 };
