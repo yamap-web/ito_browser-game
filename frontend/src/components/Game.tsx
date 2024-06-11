@@ -43,7 +43,7 @@ const Game = ({
           gameData={gameData}
           roomId={roomId}
         />
-        <ResultModal result={result} />
+        <ResultModal resultFlg={resultFlg} result={result} />
       </div>
     </>
   );
@@ -140,19 +140,32 @@ const DisplayResultSection = ({
   );
 };
 
-const ResultModal = ({ result }: { result: boolean }) => {
-  return (
-    <>
-      <input type="checkbox" id="result-modal" className="modal-toggle" />
-      <div role="dialog" className="modal">
-        <div className="modal-box bg-gradient-to-r from-primary to-secondary">
-          <h2 className="text-white text-center font-bold text-5xl">
-            {result ? "GAME CLEAR!!!" : "GAME OVER"}
-          </h2>
+const ResultModal = ({
+  resultFlg,
+  result,
+}: {
+  resultFlg: boolean;
+  result: boolean;
+}) => {
+  if (resultFlg) {
+    return (
+      <>
+        <input
+          type="checkbox"
+          id="result-modal"
+          className="modal-toggle"
+          checked
+        />
+        <div role="dialog" className="modal">
+          <div className="modal-box bg-gradient-to-r from-primary to-secondary">
+            <h2 className="text-white text-center font-bold text-5xl">
+              {result ? "GAME CLEAR!!!" : "GAME OVER"}
+            </h2>
+          </div>
         </div>
-      </div>
-    </>
-  );
+      </>
+    );
+  } else return null;
 };
 
 export default Game;
