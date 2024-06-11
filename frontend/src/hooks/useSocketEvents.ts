@@ -29,7 +29,7 @@ export const useSocketEvents = () => {
       const RES_JOIN = SocketEvents.RES_JOIN.parseEventParameter(data);
 
       // エラーメッセージがない場合、待機画面へ
-      if (errorMsg == "") {
+      if (RES_JOIN.errorMsg == "") {
         navigate("/standby");
         setErrorMsg("");
       } else {
@@ -46,10 +46,10 @@ export const useSocketEvents = () => {
     });
 
     socket.on(SocketEvents.RES_START.constructor.name, (data) => {
-      const RES_START = SocketEvents.RES_JOIN.parseEventParameter(data);
+      const RES_START = SocketEvents.RES_START.parseEventParameter(data);
 
       // エラーメッセージがない場合、ゲーム画面へ
-      if (errorMsg == "") {
+      if (RES_START.errorMsg == "") {
         navigate("/play");
         setErrorMsg("");
       } else {

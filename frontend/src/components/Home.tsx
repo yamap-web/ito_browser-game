@@ -20,7 +20,7 @@ const Home = ({ isHost, setIsHost, roomId, setRoomId }: HomeProps) => {
           言葉で当てる 1~100！価値観共有ゲーム - イト -
         </p>
         <EntryRoomForm setIsHost={setIsHost} setRoomId={setRoomId} />
-        <InputNameModal isHost={isHost} roomId={roomId} />
+        <InputNameModal isHost={isHost} setIsHost={setIsHost} roomId={roomId} />
       </div>
       <Footer />
     </>
@@ -55,7 +55,7 @@ const EntryRoomForm = ({
           />
           <label
             htmlFor="input-name-modal"
-            className="btn btn-primary ml-4"
+            className="btn btn-secondary ml-4"
             onClick={() => handleJoinBtnClick()}
           >
             Join Room!
@@ -74,9 +74,11 @@ const EntryRoomForm = ({
 
 const InputNameModal = ({
   isHost,
+  setIsHost,
   roomId,
 }: {
   isHost: boolean;
+  setIsHost: Dispatch<SetStateAction<boolean>>;
   roomId: string;
 }) => {
   const [userName, setUserName] = useState("");
@@ -84,6 +86,7 @@ const InputNameModal = ({
 
   const handleCloseBtnClick = () => {
     setValidationMsg("");
+    setIsHost(true);
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -127,9 +130,18 @@ const InputNameModal = ({
           />
           <div className="modal-action mt-4 flex items-center justify-between">
             <p className="text-sm text-error">{validationMsg}</p>
-            <button className="btn btn-primary" onClick={handleEntryBtnClick}>
-              登録する
-            </button>
+            {isHost ? (
+              <button className="btn btn-primary" onClick={handleEntryBtnClick}>
+                登録する
+              </button>
+            ) : (
+              <button
+                className="btn btn-secondary"
+                onClick={handleEntryBtnClick}
+              >
+                登録する
+              </button>
+            )}
           </div>
         </div>
       </div>
