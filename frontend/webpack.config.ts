@@ -1,6 +1,7 @@
 import type { RuleSetRule, ResolveOptions, Configuration } from "webpack";
 import { DefinePlugin } from "webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
+import CopyPlugin from "copy-webpack-plugin";
 import "webpack-dev-server";
 import * as path from "path";
 import { config } from "dotenv";
@@ -68,6 +69,10 @@ const configuration: Configuration = {
         }),
     new HtmlWebpackPlugin({
       template: __dirname + "/src/index.html",
+      favicon: "./src/images/favicon.ico",
+    }),
+    new CopyPlugin({
+      patterns: [{ from: "robots.txt", to: "robots.txt" }],
     }),
   ],
 };
