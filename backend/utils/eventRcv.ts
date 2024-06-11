@@ -72,6 +72,22 @@ const eventRcv = (socket: Socket) => {
     // 受信パラメータ取得(userName, roomId)
     const REQ_JOIN = SocketEvent.REQ_JOIN.parseEventParameter(data);
 
+    if (REQ_JOIN === null) {
+      const errorMsg = "ルームIDが入力されていません。";
+      sendEvent(socket.id, SocketEvent.RES_JOIN, errorMsg);
+
+      return;
+    }
+
+    // ルームの存在確認
+    const room = access.findRoom(REQ_JOIN.roomId);
+    if (room === undefined) {
+      const errorMsg = "入力されたルームIDのルームが存在しません。";
+      sendEvent(socket.id, SocketEvent.RES_JOIN, errorMsg);
+
+      return;
+    }
+
     // 参加者数取得
     const numberOfMembers = access.getNumberOfMembers(REQ_JOIN.roomId);
     if (numberOfMembers == 10) {
