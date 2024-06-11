@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { GameData } from "../interfaces/interface";
 import { socket } from "../utils/socket";
+import SocketEvent from "../class/socketEvents";
 
 const DisplayAnswersSection = ({
   gameData,
@@ -48,7 +49,7 @@ const DisplayAnswersSection = ({
       roomId,
       gameData: updatedGameData,
     };
-    socket.emit("UPDATE_GAMEDATA", JSON.stringify(data));
+    socket.emit(SocketEvent.UPDATE_GAMEDATA, JSON.stringify(data));
   };
 
   // orderIndex順にソート
