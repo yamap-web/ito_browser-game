@@ -32,6 +32,8 @@ const eventRcv = (socket: Socket) => {
 
   //#region イベント[REQ_CREATEROOM]受信
   socket.on(SocketEvent.REQ_CREATEROOM.constructor.name, (data) => {
+    console.log("REQ_CREATEROOMが受信されました", data);
+    
     outputEventLog(
       LogLevel.INFO,
       socket.id,

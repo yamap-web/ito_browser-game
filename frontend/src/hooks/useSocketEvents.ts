@@ -17,6 +17,8 @@ export const useSocketEvents = () => {
 
   useEffect(() => {
     socket.on(SocketEvents.RES_CREATEROOM.constructor.name, (data) => {
+      console.log("RES_CREATEROOMが返ってきました", data);
+      
       setRoomId(data);
       navigate("/standby");
     });
