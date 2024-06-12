@@ -3,7 +3,10 @@ import { Helmet } from "react-helmet-async";
 const HeadBlock = ({ title }: { title: string }) => {
   return (
     <Helmet>
+      {/* title */}
       <title>{title ?? "ito(イト) | 価値観共有ゲーム"}</title>
+
+      {/* meta */}
       <meta charSet="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta
@@ -11,7 +14,11 @@ const HeadBlock = ({ title }: { title: string }) => {
         content="大人気パーティーゲームがブラウザ版アプリとして遊べるようになりました。ルールは1つ、数字を口に出したらアウト！テーマに沿ってその数字の大きさを表現し合い、配られた1~100のカードの並び順を協力して当ててクリアを目指します。"
       />
       <meta name="format-detection" content="telephone=no" />
+
+      {/* favicon */}
       <link rel="icon" href="favicon.ico" />
+
+      {/* ogp */}
       <meta property="og:site_name" content="ito(イト)" />
       <meta property="og:url" content="https://www.ito-game.com/" />
       <meta property="og:type" content="website" />
