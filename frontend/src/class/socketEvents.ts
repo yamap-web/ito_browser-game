@@ -3,10 +3,12 @@ import { GameData } from "../interfaces/interface";
 // イベントの抽象クラス
 abstract class EventClass {
   abstract parseEventParameter(parameter: string): EventClass;
+  public abstract EventName: string;
 }
 
 // RES_CREATEROOM
 class RES_CREATEROOM implements EventClass {
+  public EventName: string = "RES_CREATEROOM";
   public roomId: string = "";
 
   constructor(roomId: string = "") {
@@ -21,6 +23,7 @@ class RES_CREATEROOM implements EventClass {
 
 // NOTIFY_GAMEDATA
 class NOTIFY_GAMEDATA implements EventClass {
+  public EventName: string = "NOTIFY_GAMEDATA";
   public gameData: GameData[] = [];
 
   constructor(gameData: GameData[] = []) {
@@ -35,6 +38,7 @@ class NOTIFY_GAMEDATA implements EventClass {
 
 // RES_JOIN
 class RES_JOIN implements EventClass {
+  public EventName: string = "RES_JOIN";
   public errorMsg: string = "";
 
   constructor(errorMsg: string = "") {
@@ -49,6 +53,7 @@ class RES_JOIN implements EventClass {
 
 // NOTIFY_THEME
 class NOTIFY_THEME implements EventClass {
+  public EventName: string = "NOTIFY_THEME";
   public theme: string = "";
 
   constructor(theme: string = "") {
@@ -63,6 +68,7 @@ class NOTIFY_THEME implements EventClass {
 
 // NOTIFY_NUMBER
 class NOTIFY_NUMBER implements EventClass {
+  public EventName: string = "NOTIFY_NUMBER";
   public number: number = 0;
 
   constructor(number: number = 0) {
@@ -77,6 +83,7 @@ class NOTIFY_NUMBER implements EventClass {
 
 // RES_START
 class RES_START implements EventClass {
+  public EventName: string = "RES_START";
   public errorMsg: string = "";
 
   constructor(errorMsg: string = "") {
@@ -91,6 +98,7 @@ class RES_START implements EventClass {
 
 // RES_RESULT
 class RES_RESULT implements EventClass {
+  public EventName: string = "RES_RESULT";
   public result: boolean = false;
 
   constructor(result: boolean = false) {
