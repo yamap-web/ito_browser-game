@@ -21,13 +21,12 @@ export const sendEvent = (
   socketId: string,
   eventName: string,
   parameter: string = ""
-): boolean => {
+): void => {
   // io.to(socketId).emit(eventName, parameter);
-  try {
-    // io.to(socketId).emit(eventName, parameter);
-    return io.to(socketId).emit(eventName, parameter);
-  } catch (e) {
-    console.log(e);
-    return false;
+
+  if (io.to(socketId).emit(eventName, parameter)) {
+    console.log("送信成功");
+  } else {
+    console.log("送信失敗");
   }
 };
