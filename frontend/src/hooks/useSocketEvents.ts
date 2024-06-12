@@ -14,12 +14,17 @@ export const useSocketEvents = () => {
   const [result, setResult] = useState<boolean>(false);
 
   const navigate = useNavigate();
+  
+  socket.on(SocketEvents.RES_CREATEROOM.constructor.name, (data) => {
+    setRoomId(data);
+    navigate("/standby");
+  });
 
   useEffect(() => {
-    socket.on(SocketEvents.RES_CREATEROOM.constructor.name, (data) => {
-      setRoomId(data);
-      navigate("/standby");
-    });
+    // socket.on(SocketEvents.RES_CREATEROOM.constructor.name, (data) => {
+    //   setRoomId(data);
+    //   navigate("/standby");
+    // });
 
     socket.on(SocketEvents.NOTIFY_GAMEDATA.constructor.name, (data) => {
       setGameData(JSON.parse(data));
