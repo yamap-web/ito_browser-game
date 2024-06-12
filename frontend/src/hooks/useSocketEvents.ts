@@ -16,7 +16,7 @@ export const useSocketEvents = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    socket.on(SocketEvents.RES_CREATEROOM.constructor.name, (data) => {
+    socket.on("RES_CREATEROOM", (data) => {
       console.log("RES_CREATEROOMを受信", data);
       
       setRoomId(data);
