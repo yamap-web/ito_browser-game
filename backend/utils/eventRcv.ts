@@ -55,17 +55,9 @@ const eventRcv = (socket: Socket) => {
 
     // イベント[NOTIFY_GAMEDATA]送信
     sendEvent(socket.id, SocketEvent.NOTIFY_GAMEDATA, JSON.stringify(gameData));
-    console.log(
-      sendEvent(
-        socket.id,
-        SocketEvent.NOTIFY_GAMEDATA,
-        JSON.stringify(gameData)
-      )
-    );
 
     // イベント[RES_CREATEROOM]送信
     sendEvent(socket.id, SocketEvent.RES_CREATEROOM, roomId);
-    console.log(sendEvent(socket.id, SocketEvent.RES_CREATEROOM, roomId));
   });
   //#endregion
 
