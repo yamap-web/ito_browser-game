@@ -16,20 +16,16 @@ export const useSocketEvents = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    socket.on("RES_CREATEROOM", (data) => {
-      console.log("RES_CREATEROOMを受信", data);
-      
+    socket.on(SocketEvents.RES_CREATEROOM.EventName, (data) => {
       setRoomId(data);
       navigate("/standby");
     });
 
-    socket.on(SocketEvents.NOTIFY_GAMEDATA.constructor.name, (data) => {
-      console.log("NOTIFY_GAMEDATAを受信", data);
-      
+    socket.on(SocketEvents.NOTIFY_GAMEDATA.EventName, (data) => {
       setGameData(JSON.parse(data));
     });
 
-    socket.on(SocketEvents.RES_JOIN.constructor.name, (data) => {
+    socket.on(SocketEvents.RES_JOIN.EventName, (data) => {
       const RES_JOIN = SocketEvents.RES_JOIN.parseEventParameter(data);
 
       // エラーメッセージがない場合、待機画面へ
@@ -41,15 +37,15 @@ export const useSocketEvents = () => {
       }
     });
 
-    socket.on(SocketEvents.NOTIFY_THEME.constructor.name, (data) => {
+    socket.on(SocketEvents.NOTIFY_THEME.EventName, (data) => {
       setTheme(data);
     });
 
-    socket.on(SocketEvents.NOTIFY_NUMBER.constructor.name, (data) => {
+    socket.on(SocketEvents.NOTIFY_NUMBER.EventName, (data) => {
       setNumber(data);
     });
 
-    socket.on(SocketEvents.RES_START.constructor.name, (data) => {
+    socket.on(SocketEvents.RES_START.EventName, (data) => {
       const RES_START = SocketEvents.RES_START.parseEventParameter(data);
 
       // エラーメッセージがない場合、ゲーム画面へ
@@ -61,7 +57,7 @@ export const useSocketEvents = () => {
       }
     });
 
-    socket.on(SocketEvents.RES_RESULT.constructor.name, (data) => {
+    socket.on(SocketEvents.RES_RESULT.EventName, (data) => {
       const RES_RESULT = SocketEvents.RES_RESULT.parseEventParameter(data);
       setResultFlg(true);
       setResult(RES_RESULT.result);
