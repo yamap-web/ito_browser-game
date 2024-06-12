@@ -21,6 +21,8 @@ export const sendEvent = (
   socketId: string,
   eventName: string,
   parameter: string = ""
-): void => {
-  io.to(socketId).emit(eventName, parameter);
+): boolean => {
+  // io.to(socketId).emit(eventName, parameter);
+  const socket = io.to(socketId).emit(eventName, parameter);
+  return socket;
 };

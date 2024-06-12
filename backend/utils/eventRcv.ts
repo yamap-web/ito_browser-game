@@ -32,41 +32,40 @@ const eventRcv = (socket: Socket) => {
 
   //#region イベント[REQ_CREATEROOM]受信
   socket.on(SocketEvent.REQ_CREATEROOM.constructor.name, (data) => {
-    console.log("REQ_CREATEROOMが受信されました", data);
-    
     outputEventLog(
       LogLevel.INFO,
       socket.id,
       SocketEvent.REQ_CREATEROOM.constructor.name
     );
-    console.log(1);
-    
+
     // 受信パラメータ取得(userName)
     const REQ_CREATEROOM = SocketEvent.REQ_CREATEROOM.parseEventParameter(data);
-    console.log(2);
-    
+
     // ルームID取得
     const roomId = createRoomId();
-    console.log(3, roomId);
-    
+
     // ルーム作成
     access.createRoom(roomId, socket.id, REQ_CREATEROOM.userName);
-    console.log(4);
-    
+
     // Clientデータ追加
     clientAccess.addClient(socket.id, roomId, true);
-    console.log(5);
-    
+
     // ゲームデータ取得
     const gameData = access.getAllGameData(roomId);
-    console.log(6, gameData);
-    
+
     // イベント[NOTIFY_GAMEDATA]送信
     sendEvent(socket.id, SocketEvent.NOTIFY_GAMEDATA, JSON.stringify(gameData));
-    console.log(7);
-    
+    console.log(
+      sendEvent(
+        socket.id,
+        SocketEvent.NOTIFY_GAMEDATA,
+        JSON.stringify(gameData)
+      )
+    );
+
     // イベント[RES_CREATEROOM]送信
     sendEvent(socket.id, SocketEvent.RES_CREATEROOM, roomId);
+    console.log(sendEvent(socket.id, SocketEvent.RES_CREATEROOM, roomId));
   });
   //#endregion
 
