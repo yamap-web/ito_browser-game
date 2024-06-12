@@ -1,9 +1,11 @@
 import type { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { useState } from "react";
 import { GameData } from "../interfaces/interface";
-import DisplayAnswersSection from "./DisplayAnswersSection";
 import { socket } from "../utils/socket";
 import SocketEvent from "../class/socketEvents";
+
+import HeadBlock from "./HeadBlock";
+import DisplayAnswersSection from "./DisplayAnswersSection";
 
 interface GameProps {
   isHost: boolean;
@@ -28,6 +30,7 @@ const Game = ({
 }: GameProps) => {
   return (
     <>
+      <HeadBlock title="ito | Playing Game!" />
       <div className="flex flex-col flex-grow items-center justify-center container mx-auto px-4">
         <DisplayThemeCard theme={theme} />
         <DisplayNumberCard number={number} />

@@ -1,11 +1,16 @@
 import { Link } from "react-router-dom";
+
+import HeadBlock from "./HeadBlock";
 import Footer from "./Footer";
 
 const NotFound = () => {
   return (
     <>
+      <HeadBlock title="ito | 404 NOT FOUND" />
       <div className="flex flex-col flex-grow items-center justify-center">
-        <h1 className="text-4xl lg:text-6xl font-bold tracking-wide">404 NOT FOUND</h1>
+        <h1 className="text-4xl lg:text-6xl font-bold tracking-wide">
+          404 NOT FOUND
+        </h1>
         <p className="py-3 text-sm">お探しのページが見つかりませんでした。</p>
         <Link to="/">
           <button className="btn mt-4">

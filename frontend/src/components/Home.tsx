@@ -1,8 +1,10 @@
 import type { Dispatch, SetStateAction, ChangeEvent } from "react";
 import { useState } from "react";
 import { socket } from "../utils/socket";
-import Footer from "./Footer";
 import SocketEvent from "../class/socketEvents";
+
+import HeadBlock from "./HeadBlock";
+import Footer from "./Footer";
 
 interface HomeProps {
   isHost: boolean;
@@ -14,6 +16,7 @@ interface HomeProps {
 const Home = ({ isHost, setIsHost, roomId, setRoomId }: HomeProps) => {
   return (
     <>
+      <HeadBlock title="ito(イト) | 価値観共有ゲーム" />
       <div className="flex flex-col flex-grow items-center justify-center">
         <h1 className="text-9xl font-bold tracking-wide">ito</h1>
         <p className="py-3 text-sm">

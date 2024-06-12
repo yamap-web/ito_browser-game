@@ -4,6 +4,8 @@ import { GameData } from "../interfaces/interface";
 import { socket } from "../utils/socket";
 import SocketEvent from "../class/socketEvents";
 
+import HeadBlock from "./HeadBlock";
+
 interface StandbyProps {
   isHost: boolean;
   gameData: GameData[];
@@ -13,23 +15,26 @@ interface StandbyProps {
 
 const Standby = ({ isHost, gameData, roomId, setErrorMsg }: StandbyProps) => {
   return (
-    <div className="flex flex-col justify-center flex-grow container mx-auto mt-10 lg:mt-0 px-4">
-      <DisplayIdCard isHost={isHost} roomId={roomId} />
-      <div className="flex flex-col lg:flex-row items-center justify-center mb-10">
-        <div className="max-w-sm w-full">
-          <PlayersStat gameData={gameData} />
-          <PlayersList gameData={gameData} />
-        </div>
-        <div className="max-w-2xl w-full mt-4 lg:mt-0 lg:ml-6">
-          <DisplayRuleAccordion />
-          <InputThemeForm
-            isHost={isHost}
-            roomId={roomId}
-            setErrorMsg={setErrorMsg}
-          />
+    <>
+      <HeadBlock title="ito | On Standby Now..." />
+      <div className="flex flex-col justify-center flex-grow container mx-auto mt-10 lg:mt-0 px-4">
+        <DisplayIdCard isHost={isHost} roomId={roomId} />
+        <div className="flex flex-col lg:flex-row items-center justify-center mb-10">
+          <div className="max-w-sm w-full">
+            <PlayersStat gameData={gameData} />
+            <PlayersList gameData={gameData} />
+          </div>
+          <div className="max-w-2xl w-full mt-4 lg:mt-0 lg:ml-6">
+            <DisplayRuleAccordion />
+            <InputThemeForm
+              isHost={isHost}
+              roomId={roomId}
+              setErrorMsg={setErrorMsg}
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
