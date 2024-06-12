@@ -2,7 +2,7 @@ import { GameData } from "../interfaces/interface";
 
 //#region イベントの抽象クラス
 abstract class EventClass {
-  abstract parseEventParameter(parameter: string): EventClass;
+  abstract parseEventParameter(parameter: string): void;
 }
 //#endregion
 
@@ -46,8 +46,13 @@ class REQ_JOIN implements EventClass {
   //#endregion
 
   //#region パラメータ解析メソッド
-  parseEventParameter(parameter: string): REQ_JOIN {
+  parseEventParameter(parameter: string): REQ_JOIN | null {
     const { userName, roomId } = JSON.parse(parameter);
+
+    // roomIdチェック
+    if (roomId === "") {
+      return null;
+    }
 
     return new REQ_JOIN(userName, roomId);
   }
