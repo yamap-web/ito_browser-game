@@ -127,7 +127,7 @@ const InputNameModal = ({
   return (
     <>
       <input type="checkbox" id="input-name-modal" className="modal-toggle" />
-      <div role="dialog" className="modal" aria-labelledby="inputNameModalLabel">
+      <div role="dialog" className="modal" aria-label="ユーザーネーム登録フォーム">
         <div className="modal-box">
           <label
             htmlFor="input-name-modal"
