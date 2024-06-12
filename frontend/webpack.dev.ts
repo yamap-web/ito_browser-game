@@ -1,6 +1,6 @@
 import type { Configuration } from "webpack";
 import { merge } from "webpack-merge";
-import common from "./webpack.common.js";
+import common from "./webpack.common";
 
 const dev: Configuration = merge(common, {
   mode: "development",
