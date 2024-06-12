@@ -3,7 +3,7 @@ import { merge } from "webpack-merge";
 import common from "./webpack.common";
 
 const prod: Configuration = merge(common, {
-  mode: "development",
+  mode: "production",
   devServer: {
     static: {
       directory: "./dist",
