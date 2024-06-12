@@ -22,7 +22,7 @@ export const sendEvent = (
   eventName: string,
   parameter: string = ""
 ): boolean => {
-  io.to(socketId).emit(eventName, parameter);
+  // io.to(socketId).emit(eventName, parameter);
   try {
     io.to(socketId).emit(eventName, parameter);
     return true;
