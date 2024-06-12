@@ -43,19 +43,11 @@ const resolve: ResolveOptions = {
   extensions: [".ts", ".tsx", ".js"],
 };
 
-const configuration: Configuration = {
-  mode: "development",
+const common: Configuration = {
   entry: "/src/main.tsx",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
-  },
-  devServer: {
-    static: {
-      directory: "./dist",
-    },
-    historyApiFallback: true,
-    port: 8080,
   },
   module: { rules },
   resolve,
@@ -80,4 +72,4 @@ const configuration: Configuration = {
   ],
 };
 
-export default configuration;
+export default common;
