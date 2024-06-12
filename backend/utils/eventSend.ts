@@ -24,8 +24,8 @@ export const sendEvent = (
 ): boolean => {
   // io.to(socketId).emit(eventName, parameter);
   try {
-    io.to(socketId).emit(eventName, parameter);
-    return true;
+    // io.to(socketId).emit(eventName, parameter);
+    return io.to(socketId).emit(eventName, parameter);
   } catch (e) {
     console.log(e);
     return false;
