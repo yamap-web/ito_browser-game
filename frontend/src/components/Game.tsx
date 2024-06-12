@@ -159,7 +159,7 @@ const ResultModal = ({
           className="modal-toggle"
           checked
         />
-        <div role="dialog" className="modal" aria-labelledby="Final result">
+        <div role="dialog" className="modal" aria-labelledby="finalResultModalLabel">
           <div className="modal-box bg-gradient-to-r from-primary to-secondary">
             <h2 className="text-white text-center font-bold text-5xl">
               {result ? "GAME CLEAR!!!" : "GAME OVER"}
