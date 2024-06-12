@@ -18,7 +18,7 @@ const Home = ({ isHost, setIsHost, roomId, setRoomId }: HomeProps) => {
     <>
       <HeadBlock title="ito(イト) | 価値観共有ゲーム" />
       <div className="flex flex-col flex-grow items-center justify-center">
-        <h1 className="text-9xl font-bold tracking-wide">
+        <h1 className="text-9xl font-bold tracking-wide mb-8">
           <svg
             width="124"
             height="87"
