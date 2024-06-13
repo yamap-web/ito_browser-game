@@ -10,6 +10,7 @@ import ErrorAlert from "./components/ErrorAlert";
 import Home from "./components/Home";
 import Standby from "./components/Standby";
 import Game from "./components/Game";
+import Result from "./components/Result";
 import NotFound from "./components/NotFound";
 
 const App = () => {
@@ -33,50 +34,54 @@ const App = () => {
   } = useSocketEvents();
 
   return (
-      <div className="flex flex-col h-screen static">
-        <Header />
-        <ErrorAlert errorMsg={errorMsg} setErrorMsg={setErrorMsg} />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Home
-                isHost={isHost}
-                setIsHost={setIsHost}
-                roomId={roomId}
-                setRoomId={setRoomId}
-              />
-            }
-          />
-          <Route
-            path="/standby"
-            element={
-              <Standby
-                isHost={isHost}
-                gameData={gameData}
-                roomId={roomId}
-                setErrorMsg={setErrorMsg}
-              />
-            }
-          />
-          <Route
-            path="/play"
-            element={
-              <Game
-                isHost={isHost}
-                gameData={gameData}
-                setGameData={setGameData}
-                roomId={roomId}
-                theme={theme}
-                number={number}
-                resultFlg={resultFlg}
-                result={result}
-              />
-            }
-          />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </div>
+    <div className="flex flex-col h-screen static">
+      <Header />
+      <ErrorAlert errorMsg={errorMsg} setErrorMsg={setErrorMsg} />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Home
+              isHost={isHost}
+              setIsHost={setIsHost}
+              roomId={roomId}
+              setRoomId={setRoomId}
+            />
+          }
+        />
+        <Route
+          path="/standby"
+          element={
+            <Standby
+              isHost={isHost}
+              gameData={gameData}
+              roomId={roomId}
+              setErrorMsg={setErrorMsg}
+            />
+          }
+        />
+        <Route
+          path="/play"
+          element={
+            <Game
+              isHost={isHost}
+              gameData={gameData}
+              setGameData={setGameData}
+              roomId={roomId}
+              theme={theme}
+              number={number}
+              resultFlg={resultFlg}
+              result={result}
+            />
+          }
+        />
+        <Route
+          path="/result"
+          element={<Result gameData={gameData} result={result} />}
+        />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </div>
   );
 };
 

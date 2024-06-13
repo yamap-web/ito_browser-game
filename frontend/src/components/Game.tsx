@@ -39,7 +39,6 @@ const Game = ({
           gameData={gameData}
           setGameData={setGameData}
           roomId={roomId}
-          resultFlg={resultFlg}
         />
         <DisplayResultSection
           isHost={isHost}
