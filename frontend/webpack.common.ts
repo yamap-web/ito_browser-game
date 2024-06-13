@@ -1,3 +1,5 @@
+const workBoxWebpackPlugin = require("workbox-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 import type { RuleSetRule, ResolveOptions, Configuration } from "webpack";
 import { DefinePlugin } from "webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
@@ -68,6 +70,12 @@ const common: Configuration = {
         { from: "./src/favicon.ico", to: "favicon.ico" },
         { from: "./src/ogp.webp", to: "ogp.webp" },
       ],
+    }),
+    new workBoxWebpackPlugin.GenerateSW({
+      swDest: __dirname + "/dist/service-worker.js",
+    }),
+    new CopyWebpackPlugin({
+      patterns: [{ from: "public", to: "." }],
     }),
   ],
 };
