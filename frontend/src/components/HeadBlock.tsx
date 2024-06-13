@@ -17,6 +17,7 @@ const HeadBlock = ({ title }: { title: string }) => {
 
       {/* favicon */}
       <link rel="icon" href="favicon.ico" />
+      <link rel="apple-touch-icon" href="webclip.png" />
 
       {/* ogp */}
       <meta property="og:site_name" content="ito(イト)" />
