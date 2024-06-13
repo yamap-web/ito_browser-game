@@ -22,11 +22,5 @@ export const sendEvent = (
   eventName: string,
   parameter: string = ""
 ): void => {
-  // io.to(socketId).emit(eventName, parameter);
-
-  if (io.to(socketId).emit(eventName, parameter)) {
-    console.log("送信成功");
-  } else {
-    console.log("送信失敗");
-  }
+  io.to(socketId).emit(eventName, parameter);
 };

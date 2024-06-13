@@ -29,7 +29,7 @@ export const useSocketEvents = () => {
       const RES_JOIN = SocketEvents.RES_JOIN.parseEventParameter(data);
 
       // エラーメッセージがない場合、待機画面へ
-      if (RES_JOIN.errorMsg == "") {
+      if (RES_JOIN.errorMsg === "") {
         navigate("/standby");
         setErrorMsg("");
       } else {
