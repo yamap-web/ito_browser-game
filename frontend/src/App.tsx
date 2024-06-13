@@ -75,7 +75,10 @@ const App = () => {
             />
           }
         />
-        <Route path="/result" element={<Result />} />
+        <Route
+          path="/result"
+          element={<Result gameData={gameData} result={result} />}
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

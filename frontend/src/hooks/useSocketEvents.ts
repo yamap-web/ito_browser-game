@@ -61,6 +61,7 @@ export const useSocketEvents = () => {
       const RES_RESULT = SocketEvents.RES_RESULT.parseEventParameter(data);
       setResultFlg(true);
       setResult(RES_RESULT.result);
+      navigate("/result");
     });
   }, []);
 
