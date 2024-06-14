@@ -29,7 +29,6 @@ const App = () => {
     number,
     errorMsg,
     setErrorMsg,
-    resultFlg,
     result,
   } = useSocketEvents();
 
@@ -70,14 +69,14 @@ const App = () => {
               roomId={roomId}
               theme={theme}
               number={number}
-              resultFlg={resultFlg}
-              result={result}
             />
           }
         />
         <Route
           path="/result"
-          element={<Result gameData={gameData} result={result} />}
+          element={
+            <Result isHost={isHost} gameData={gameData} result={result} />
+          }
         />
         <Route path="*" element={<NotFound />} />
       </Routes>
