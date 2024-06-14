@@ -41,7 +41,6 @@ const App = () => {
           path="/"
           element={
             <Home
-              isHost={isHost}
               setIsHost={setIsHost}
               roomId={roomId}
               setRoomId={setRoomId}
