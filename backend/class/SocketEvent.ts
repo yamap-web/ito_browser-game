@@ -156,6 +156,26 @@ class UPDATE_GAMEDATA implements EventClass {
 }
 //#endregion
 
+//#region REQ_CLOSEROOM
+class REQ_CLOSEROOM implements EventClass {
+  //#region イベントパラメータ
+  public roomId: string = "";
+  //#endregion
+
+  //#region コンストラクタ
+  constructor(roomId: string = "") {
+    this.roomId = roomId;
+  }
+  //#endregion
+
+  //#region パラメータ解析メソッド
+  parseEventParameter(parameter: string): REQ_CLOSEROOM {
+    const { roomId } = JSON.parse(parameter);
+
+    return new REQ_CLOSEROOM(roomId);
+  }
+  //#endregion
+}
 //#endregion
 
 //#region SocketEventクラス
@@ -173,6 +193,7 @@ class SocketEvent {
   public static NOTIFY_THEME = "NOTIFY_THEME";
   public static RES_START = "RES_START";
   public static RES_RESULT = "RES_RESULT";
+  public static RES_CLOSEROOM = "RES_CLOSEROOM";
   //#endregion
 
   //#region 受信イベントクラスのインスタンス生成
@@ -182,6 +203,7 @@ class SocketEvent {
   static REQ_RESULT = new REQ_RESULT();
   static UPDATE_ANSWER = new UPDATE_ANSWER();
   static UPDATE_GAMEDATA = new UPDATE_GAMEDATA();
+  static REQ_CLOSEROOM = new REQ_CLOSEROOM();
   //#endregion
 }
 //#endregion

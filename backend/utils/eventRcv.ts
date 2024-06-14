@@ -254,6 +254,28 @@ const eventRcv = (socket: Socket) => {
     );
   });
   //#endregion
+
+  //#region イベント[REQ_CLOSEROOM]受信
+  socket.on(SocketEvent.REQ_CLOSEROOM.constructor.name, (data) => {
+    outputEventLog(
+      LogLevel.INFO,
+      socket.id,
+      SocketEvent.REQ_CLOSEROOM.constructor.name
+    );
+
+    // 受信パラメータ取得(roomId)
+    const REQ_CLOSEROOM = SocketEvent.REQ_CLOSEROOM.parseEventParameter(data);
+
+    // イベント[RES_CLOSEROOM]送信
+    broadcast(REQ_CLOSEROOM.roomId, SocketEvent.RES_CLOSEROOM);
+
+    // ルーム削除
+    access.deleteRoom(REQ_CLOSEROOM.roomId);
+
+    // Clientデータから削除
+    clientAccess.deleteClient(socket.id);
+  });
+  //#endregion
 };
 
 export default eventRcv;

@@ -123,6 +123,11 @@ class SocketEvent {
   public static REQ_START = "REQ_START";
   public static UPDATE_ANSWER = "UPDATE_ANSWER";
   public static UPDATE_GAMEDATA = "UPDATE_GAMEDATA";
+  public static REQ_CLOSEROOM = "REQ_CLOSEROOM";
+  public static REQ_NEXTGAME = "REQ_NEXTGAME";
+
+  // 受信イベント
+  public static RES_CLOSEROOM = "RES_CLOSEROOM";
 
   // 受信イベントのクラスインスタンス生成
   static RES_CREATEROOM = new RES_CREATEROOM();

@@ -1,20 +1,23 @@
 import { GameData } from "../interfaces/interface";
+import { socket } from "../utils/socket";
+import SocketEvent from "../class/socketEvents";
 
 import HeadBlock from "./HeadBlock";
 
 interface ResultProps {
   isHost: boolean;
   gameData: GameData[];
+  roomId: string;
   result: boolean;
 }
 
-const Result = ({ isHost, gameData, result }: ResultProps) => {
+const Result = ({ isHost, gameData, roomId, result }: ResultProps) => {
   return (
     <>
       <HeadBlock title={result ? "ito | CLEAR!!!" : "ito | GAME OVER"} />
       <div className="flex flex-col flex-grow items-center justify-center container mx-auto mt-10 px-4">
         <DisplayResultCard result={result} />
-        <NextGameLink isHost={isHost} />
+        <NextGameLink isHost={isHost} roomId={roomId} />
         <ResultTable gameData={gameData} />
       </div>
     </>
@@ -39,13 +42,33 @@ const DisplayResultCard = ({ result }: { result: boolean }) => {
   );
 };
 
-const NextGameLink = ({ isHost }: { isHost: boolean }) => {
+const NextGameLink = ({
+  isHost,
+  roomId,
+}: {
+  isHost: boolean;
+  roomId: string;
+}) => {
+  // 未実装
+  const handleNextClick = () => {
+    const parameter = { roomId };
+    socket.emit(SocketEvent.REQ_NEXTGAME, JSON.stringify(parameter));
+  };
+
+  const handleQuitClick = () => {
+    const parameter = { roomId };
+    socket.emit(SocketEvent.REQ_CLOSEROOM, JSON.stringify(parameter));
+  };
+
   if (!isHost) {
     return null;
   } else {
     return (
       <div className="flex gap-2 mt-4">
-        <button className="btn btn-outline btn-primary">
+        <button
+          className="btn btn-outline btn-primary"
+          onClick={handleNextClick}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -62,7 +85,10 @@ const NextGameLink = ({ isHost }: { isHost: boolean }) => {
           </svg>
           もう一戦！
         </button>
-        <button className="btn btn-outline btn-secondary">
+        <button
+          className="btn btn-outline btn-secondary"
+          onClick={handleQuitClick}
+        >
           ゲームを終了する
         </button>
       </div>

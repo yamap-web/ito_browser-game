@@ -40,11 +40,7 @@ const App = () => {
         <Route
           path="/"
           element={
-            <Home
-              setIsHost={setIsHost}
-              roomId={roomId}
-              setRoomId={setRoomId}
-            />
+            <Home setIsHost={setIsHost} roomId={roomId} setRoomId={setRoomId} />
           }
         />
         <Route
@@ -74,7 +70,12 @@ const App = () => {
         <Route
           path="/result"
           element={
-            <Result isHost={isHost} gameData={gameData} result={result} />
+            <Result
+              isHost={isHost}
+              gameData={gameData}
+              roomId={roomId}
+              result={result}
+            />
           }
         />
         <Route path="*" element={<NotFound />} />
