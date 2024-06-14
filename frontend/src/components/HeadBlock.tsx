@@ -4,7 +4,7 @@ const HeadBlock = ({ title }: { title: string }) => {
   return (
     <Helmet>
       {/* title */}
-      <title>{title ?? "ito(イト) | 価値観共有ゲーム"}</title>
+      <title>{title ?? "ito(イト) | 意思疎通ゲーム"}</title>
 
       {/* meta */}
       <meta charSet="UTF-8" />
@@ -23,7 +23,7 @@ const HeadBlock = ({ title }: { title: string }) => {
       <meta property="og:site_name" content="ito(イト)" />
       <meta property="og:url" content="https://www.ito-game.com/" />
       <meta property="og:type" content="website" />
-      <meta property="og:title" content="ito(イト) | 価値観共有ゲーム" />
+      <meta property="og:title" content="ito(イト) | 意思疎通ゲーム" />
       <meta
         property="og:description"
         content="大人気パーティーゲームがブラウザ版アプリとして遊べるようになりました。ルールは1つ、数字を口に出したらアウト！テーマに沿ってその数字の大きさを表現し合い、配られた1~100のカードの並び順を協力して当ててクリアを目指します。"

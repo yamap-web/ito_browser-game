@@ -3,7 +3,7 @@ const Header = () => {
     <header className="navbar flex justify-between bg-gradient-to-r from-primary to-secondary">
       <div className="ml-4">
         <span className="text-3xl text-white font-bold">ito</span>
-        <span className="pl-4 text-white">価値観共有ゲーム</span>
+        <span className="pl-4 text-white">意思疎通ゲーム</span>
       </div>
       <label
         htmlFor="ruleModal"

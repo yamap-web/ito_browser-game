@@ -15,7 +15,7 @@ interface HomeProps {
 const Home = ({ setIsHost, roomId, setRoomId }: HomeProps) => {
   return (
     <>
-      <HeadBlock title="ito(イト) | 価値観共有ゲーム" />
+      <HeadBlock title="ito(イト) | 意思疎通ゲーム" />
       <div className="flex flex-col flex-grow items-center justify-center">
         <h1 className="text-9xl font-bold tracking-wide mb-8">
           <svg
@@ -32,7 +32,7 @@ const Home = ({ setIsHost, roomId, setRoomId }: HomeProps) => {
           </svg>
         </h1>
         <p className="py-3 text-sm">
-          言葉で当てる 1~100！価値観共有ゲーム - イト -
+          言葉で当てる 1~100！意思疎通ゲーム - イト -
         </p>
         <EntryRoomForm
           setIsHost={setIsHost}
