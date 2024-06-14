@@ -224,7 +224,7 @@ const InputThemeForm = ({
           className="btn btn-primary mt-2 lg:mt-0 lg:ml-4"
           onClick={handleStartBtnClick}
         >
-          Game Start!
+          ゲーム開始！
         </button>
       </div>
     );

@@ -87,10 +87,24 @@ const AnswerForm = ({ roomId }: { roomId: string }) => {
         onChange={onChangeAnswer}
       />
       <button
-        className="btn btn-primary mt-2 lg:mt-0 lg:ml-4"
+        className="btn btn-primary mt-2 lg:mt-0 lg:ml-3"
         onClick={onClickSendAnswer}
       >
-        Answer!
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="size-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="m4.5 12.75 6 6 9-13.5"
+          />
+        </svg>
+        
       </button>
     </div>
   );
@@ -120,7 +134,7 @@ const ResultLink = ({
           className="btn btn-secondary"
           onClick={() => onResultShow()}
         >
-          Show Result!
+          並び替えを確定して結果発表！
         </label>
       </>
     );

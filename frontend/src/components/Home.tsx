@@ -87,6 +87,7 @@ const EntryRoomForm = ({
           placeholder="ユーザーネーム"
           onChange={handleInputNameChange}
           name="userName"
+          autoFocus
         />
       </div>
       <div className="mt-6">
