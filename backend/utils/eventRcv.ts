@@ -26,7 +26,7 @@ const eventRcv = (socket: Socket) => {
     }
 
     // Clientデータから削除
-    clientAccess.deleteClient(socket.id);
+    clientAccess.deleteClient(roomId);
   });
   //#endregion
 
@@ -273,7 +273,7 @@ const eventRcv = (socket: Socket) => {
     access.deleteRoom(REQ_CLOSEROOM.roomId);
 
     // Clientデータから削除
-    clientAccess.deleteClient(socket.id);
+    clientAccess.deleteClient(REQ_CLOSEROOM.roomId);
   });
   //#endregion
 };
