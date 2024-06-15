@@ -176,6 +176,20 @@ class REQ_CLOSEROOM implements EventClass {
   }
   //#endregion
 }
+
+class REQ_NEXTGAME implements EventClass {
+  public roomId: string = "";
+
+  constructor(roomId: string = "") {
+    this.roomId = roomId;
+  }
+
+  parseEventParameter(parameter: string): REQ_NEXTGAME {
+    const { roomId } = JSON.parse(parameter);
+
+    return new REQ_NEXTGAME(roomId);
+  }
+}
 //#endregion
 
 //#region SocketEventクラス
@@ -194,6 +208,7 @@ class SocketEvent {
   public static RES_START = "RES_START";
   public static RES_RESULT = "RES_RESULT";
   public static RES_CLOSEROOM = "RES_CLOSEROOM";
+  public static RES_NEXTGAME = "RES_NEXTGAME";
   //#endregion
 
   //#region 受信イベントクラスのインスタンス生成
@@ -204,6 +219,7 @@ class SocketEvent {
   static UPDATE_ANSWER = new UPDATE_ANSWER();
   static UPDATE_GAMEDATA = new UPDATE_GAMEDATA();
   static REQ_CLOSEROOM = new REQ_CLOSEROOM();
+  static REQ_NEXTGAME = new REQ_NEXTGAME();
   //#endregion
 }
 //#endregion

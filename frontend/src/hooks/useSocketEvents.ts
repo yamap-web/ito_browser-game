@@ -62,8 +62,13 @@ export const useSocketEvents = () => {
       navigate("/result");
     });
 
-    socket.on(SocketEvents.RES_CLOSEROOM, () => {
+    socket.on(SocketEvents.RES_CLOSEROOM.EventName, () => {
       navigate("/");
+    });
+
+    socket.on(SocketEvents.RES_NEXTGAME.EventName, () => {
+      // 状態管理のリセット（どこまで）
+      navigate("/standby");
     });
   }, []);
 
