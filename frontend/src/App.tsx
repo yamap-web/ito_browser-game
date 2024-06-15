@@ -36,11 +36,11 @@ const App = () => {
 
   // カスタムフックuseAudioから必要なデータを取得
   const audioUrl: string = "./cocktail_recipe.mp3";
-  const playToggle = useAudio(audioUrl);
+  const [playing, playToggle] = useAudio(audioUrl);
 
   return (
     <div className="flex flex-col h-screen static">
-      <Header playToggle={playToggle} />
+      <Header playing={playing} playToggle={playToggle} />
       <ErrorAlert errorMsg={errorMsg} setErrorMsg={setErrorMsg} />
       <Routes>
         <Route
