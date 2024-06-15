@@ -45,19 +45,30 @@ const DisplayIdCard = ({
   isHost: boolean;
   roomId: string;
 }) => {
-  const onClickCopy = () => navigator.clipboard.writeText(roomId);
+  const [isClicked, setIsClicked] = useState(false);
+  const onClickCopy = () => {
+    navigator.clipboard.writeText(roomId);
+    setIsClicked(true);
+  };
 
   if (isHost) {
     return (
       <div className="flex justify-center mb-4">
         <div className="card bg-primary/30 flex items-center w-full max-w-sm lg:max-w-md rounded-2xl shadow-md mt-2">
           <div className="card-body p-4">
-            <div className="lg:text-xl">
+            <div className="flex items-end lg:text-xl">
               ルームID：
               <span className="mx-2 text-3xl lg:text-5xl font-bold">
                 {roomId}
               </span>
-              <div className="tooltip tooltip-secondary" data-tip="copy">
+              <div
+                className={
+                  isClicked
+                    ? "tooltip tooltip-open tooltip-right tooltip-secondary"
+                    : "tooltip tooltip-right tooltip-secondary"
+                }
+                data-tip={isClicked ? "コピーしました" : "コピーする"}
+              >
                 <button
                   className="text-primary hover:text-primary/50"
                   onClick={() => onClickCopy()}
