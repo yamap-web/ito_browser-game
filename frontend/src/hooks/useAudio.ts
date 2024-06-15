@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-export const useAudio = (url: string): () => void => {
+export const useAudio = (url: string): [boolean, () => void] => {
   const [audio] = useState(new Audio(url));
   const [playing, setPlaying] = useState(false);
 
@@ -23,5 +23,5 @@ export const useAudio = (url: string): () => void => {
   audio.loop = true;
   audio.volume = 0.03;
 
-  return playToggle;
+  return [playing, playToggle];
 };
