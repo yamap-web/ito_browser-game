@@ -10,14 +10,17 @@ abstract class EventClass {
 class RES_CREATEROOM implements EventClass {
   public EventName: string = "RES_CREATEROOM";
   public roomId: string = "";
+  public errorMsg: string = "";
 
-  constructor(roomId: string = "") {
+  constructor(roomId: string = "", errorMsg: string = "") {
     this.roomId = roomId;
+    this.errorMsg = errorMsg;
   }
 
   parseEventParameter(parameter: string): RES_CREATEROOM {
-    const roomId: string = parameter;
-    return new RES_CREATEROOM(roomId);
+    const { roomId, errorMsg } = JSON.parse(parameter);
+
+    return new RES_CREATEROOM(roomId, errorMsg);
   }
 }
 

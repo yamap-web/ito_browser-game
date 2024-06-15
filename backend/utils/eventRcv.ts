@@ -41,6 +41,21 @@ const eventRcv = (socket: Socket) => {
     // 受信パラメータ取得(userName)
     const REQ_CREATEROOM = SocketEvent.REQ_CREATEROOM.parseEventParameter(data);
 
+    // ユーザー名チェック（未入力の場合、エラー）
+    if (REQ_CREATEROOM.userName === "") {
+      const errParameter = {
+        roomId: "",
+        errorMsg: "ユーザーネームが未入力です。",
+      };
+      sendEvent(
+        socket.id,
+        SocketEvent.RES_CREATEROOM,
+        JSON.stringify(errParameter)
+      );
+
+      return;
+    }
+
     // ルームID取得
     const roomId = createRoomId();
 
@@ -57,7 +72,11 @@ const eventRcv = (socket: Socket) => {
     sendEvent(socket.id, SocketEvent.NOTIFY_GAMEDATA, JSON.stringify(gameData));
 
     // イベント[RES_CREATEROOM]送信
-    sendEvent(socket.id, SocketEvent.RES_CREATEROOM, roomId);
+    const parameter = {
+      roomId,
+      errorMsg: "",
+    };
+    sendEvent(socket.id, SocketEvent.RES_CREATEROOM, JSON.stringify(parameter));
   });
   //#endregion
 

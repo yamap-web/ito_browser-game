@@ -16,8 +16,16 @@ export const useSocketEvents = () => {
 
   useEffect(() => {
     socket.on(SocketEvents.RES_CREATEROOM.EventName, (data) => {
-      setRoomId(data);
-      navigate("/standby");
+      const RES_CREATEROOM =
+        SocketEvents.RES_CREATEROOM.parseEventParameter(data);
+
+      if (RES_CREATEROOM.errorMsg == "") {
+        setErrorMsg("");
+        setRoomId(RES_CREATEROOM.roomId);
+        navigate("/standby");
+      } else {
+        setErrorMsg(RES_CREATEROOM.errorMsg);
+      }
     });
 
     socket.on(SocketEvents.NOTIFY_GAMEDATA.EventName, (data) => {
@@ -67,7 +75,6 @@ export const useSocketEvents = () => {
     });
 
     socket.on(SocketEvents.RES_NEXTGAME.EventName, () => {
-      // 状態管理のリセット（どこまで）
       navigate("/standby");
     });
   }, []);

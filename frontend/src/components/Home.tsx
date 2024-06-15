@@ -69,7 +69,8 @@ const EntryRoomForm = ({
   const handleEntryBtnClick = (isHost: boolean) => {
     if (isHost) {
       setIsHost(true);
-      socket.emit(SocketEvent.REQ_CREATEROOM, userName);
+      const parameter = { userName };
+      socket.emit(SocketEvent.REQ_CREATEROOM, JSON.stringify(parameter));
     } else {
       setIsHost(false);
       const parameter = { userName, roomId };

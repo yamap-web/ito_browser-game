@@ -22,8 +22,7 @@ class REQ_CREATEROOM implements EventClass {
 
   //#region パラメータ解析メソッド
   parseEventParameter(parameter: string): REQ_CREATEROOM {
-    // const { userName } = JSON.parse(parameter);
-    const userName = parameter;
+    const { userName } = JSON.parse(parameter);
 
     return new REQ_CREATEROOM(userName);
   }
@@ -178,17 +177,23 @@ class REQ_CLOSEROOM implements EventClass {
 }
 
 class REQ_NEXTGAME implements EventClass {
+  //#region イベントパラメータ
   public roomId: string = "";
+  //#endregion
 
+  //#region コンストラクタ
   constructor(roomId: string = "") {
     this.roomId = roomId;
   }
+  //#endregion
 
+  //#region パラメータ解析メソッド
   parseEventParameter(parameter: string): REQ_NEXTGAME {
     const { roomId } = JSON.parse(parameter);
 
     return new REQ_NEXTGAME(roomId);
   }
+  //#endregion
 }
 //#endregion
 
