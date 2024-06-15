@@ -45,13 +45,8 @@ class REQ_JOIN implements EventClass {
   //#endregion
 
   //#region パラメータ解析メソッド
-  parseEventParameter(parameter: string): REQ_JOIN | null {
+  parseEventParameter(parameter: string): REQ_JOIN {
     const { userName, roomId } = JSON.parse(parameter);
-
-    // roomIdチェック
-    if (roomId === "") {
-      return null;
-    }
 
     return new REQ_JOIN(userName, roomId);
   }

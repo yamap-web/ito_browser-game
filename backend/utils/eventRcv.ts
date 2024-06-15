@@ -41,7 +41,7 @@ const eventRcv = (socket: Socket) => {
     // 受信パラメータ取得(userName)
     const REQ_CREATEROOM = SocketEvent.REQ_CREATEROOM.parseEventParameter(data);
 
-    // ユーザー名チェック（未入力の場合、エラー）
+    // パラメータチェック
     if (REQ_CREATEROOM.userName === "") {
       const errParameter = {
         roomId: "",
@@ -91,10 +91,27 @@ const eventRcv = (socket: Socket) => {
     // 受信パラメータ取得(userName, roomId)
     const REQ_JOIN = SocketEvent.REQ_JOIN.parseEventParameter(data);
 
-    if (REQ_JOIN === null) {
-      const errorMsg = "ルームIDが入力されていません。";
-      sendEvent(socket.id, SocketEvent.RES_JOIN, errorMsg);
-
+    // パラメータチェック
+    if (REQ_JOIN.roomId == "" && REQ_JOIN.userName == "") {
+      sendEvent(
+        socket.id,
+        SocketEvent.RES_JOIN,
+        "ルームID・ユーザーネームが入力されていません。"
+      );
+      return;
+    } else if (REQ_JOIN.roomId == "") {
+      sendEvent(
+        socket.id,
+        SocketEvent.RES_JOIN,
+        "ルームIDが入力されていません。"
+      );
+      return;
+    } else if (REQ_JOIN.userName == "") {
+      sendEvent(
+        socket.id,
+        SocketEvent.RES_JOIN,
+        "ユーザーネームが入力されていません。"
+      );
       return;
     }
 
