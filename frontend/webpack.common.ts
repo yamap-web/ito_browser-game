@@ -67,6 +67,7 @@ const common: Configuration = {
         { from: "robots.txt", to: "robots.txt" },
         { from: "./src/favicon.ico", to: "favicon.ico" },
         { from: "./src/ogp.webp", to: "ogp.webp" },
+        { from: "./src/cocktail_recipe.mp3", to: "cocktail_recipe.mp3" },
       ],
     }),
   ],

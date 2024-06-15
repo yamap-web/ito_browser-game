@@ -2,6 +2,7 @@ import "./css/style.css";
 
 import { useState, useEffect } from "react";
 import { useSocketEvents } from "./hooks/useSocketEvents";
+import { useAudio } from "./hooks/useAudio";
 import { Routes, Route } from "react-router-dom";
 import { socket } from "./utils/socket";
 
@@ -20,6 +21,7 @@ const App = () => {
     socket.connect();
   }, []);
 
+  // カスタムフックuseSocketEventsから必要なデータを取得
   const {
     gameData,
     setGameData,
@@ -32,9 +34,13 @@ const App = () => {
     result,
   } = useSocketEvents();
 
+  // カスタムフックuseAudioから必要なデータを取得
+  const audioUrl: string = "./cocktail_recipe.mp3";
+  const playToggle = useAudio(audioUrl);
+
   return (
     <div className="flex flex-col h-screen static">
-      <Header />
+      <Header playToggle={playToggle} />
       <ErrorAlert errorMsg={errorMsg} setErrorMsg={setErrorMsg} />
       <Routes>
         <Route
