@@ -8,11 +8,19 @@ class ClientDataAccessModel {
   }
 
   /** Clientの削除 */
-  public deleteClient(socketId: string) {
-    for (let i = 0; i < clients.length; i++) {
-      if (clients[i].socketId == socketId) {
-        clients.splice(i, 1);
-      }
+  public deleteClient(roomId: string) {
+    // roomIdと一致しないデータの抽出
+    const newClientData = clients.filter((client) => client.roomId != roomId);
+
+    // Clientデータの初期化
+    const length = clients.length;
+    for (let i = 0; i < length; i++) {
+      clients.pop();
+    }
+
+    // Clientデータの再構築
+    for (let i = 0; i < newClientData.length; i++) {
+      clients.push(newClientData[i]);
     }
   }
 
