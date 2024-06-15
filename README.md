@@ -1,6 +1,6 @@
 # Browser Game "ito"
 
-数字禁止！言葉で当てる 1~100！価値観共有ゲーム「ito (イト)」
+数字禁止！言葉で当てる 1~100！意思疎通ゲーム「ito (イト)」
 
 ## 目次
 
@@ -28,7 +28,7 @@
 
 ### Backend
 
-<img src="https://img.shields.io/badge/-TypeScript-333333.svg?logo=typescript&style=for-the-badge&logoColor"> <img src="https://img.shields.io/badge/-Express-333333.svg?logo=express&style=for-the-badge&logoColor"> <img src="https://img.shields.io/badge/-Socket.IO-333333.svg?logo=socketdotio&style=for-the-badge&logoColor">
+<img src="https://img.shields.io/badge/-TypeScript-333333.svg?logo=typescript&style=for-the-badge&logoColor"> <img src="https://img.shields.io/badge/-Socket.IO-333333.svg?logo=socketdotio&style=for-the-badge&logoColor">
 
 ### Style
 

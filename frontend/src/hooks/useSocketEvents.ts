@@ -61,6 +61,10 @@ export const useSocketEvents = () => {
       setResult(RES_RESULT.result);
       navigate("/result");
     });
+
+    socket.on(SocketEvents.RES_CLOSEROOM, () => {
+      navigate("/");
+    });
   }, []);
 
   return {
