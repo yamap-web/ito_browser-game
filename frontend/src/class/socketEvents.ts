@@ -114,6 +114,36 @@ class RES_RESULT implements EventClass {
   }
 }
 
+class RES_CLOSEROOM implements EventClass {
+  public EventName: string = "RES_CLOSEROOM";
+  public errorMsg: string = "";
+
+  constructor(errorMsg: string = "") {
+    this.errorMsg = errorMsg;
+  }
+
+  parseEventParameter(parameter: string): RES_CLOSEROOM {
+    const errorMsg = parameter;
+
+    return new RES_CLOSEROOM(errorMsg);
+  }
+}
+
+class RES_NEXTGAME implements EventClass {
+  public EventName: string = "RES_NEXTGAME";
+  public errorMsg: string = "";
+
+  constructor(errorMsg: string = "") {
+    this.errorMsg = errorMsg;
+  }
+
+  parseEventParameter(parameter: string): EventClass {
+    const errorMsg = parameter;
+
+    return new RES_NEXTGAME(errorMsg);
+  }
+}
+
 // SocketEventクラス
 class SocketEvent {
   // 送信イベント
@@ -126,9 +156,6 @@ class SocketEvent {
   public static REQ_CLOSEROOM = "REQ_CLOSEROOM";
   public static REQ_NEXTGAME = "REQ_NEXTGAME";
 
-  // 受信イベント
-  public static RES_CLOSEROOM = "RES_CLOSEROOM";
-
   // 受信イベントのクラスインスタンス生成
   static RES_CREATEROOM = new RES_CREATEROOM();
   static NOTIFY_GAMEDATA = new NOTIFY_GAMEDATA();
@@ -137,6 +164,8 @@ class SocketEvent {
   static NOTIFY_NUMBER = new NOTIFY_NUMBER();
   static RES_START = new RES_START();
   static RES_RESULT = new RES_RESULT();
+  static RES_CLOSEROOM = new RES_CLOSEROOM();
+  static RES_NEXTGAME = new RES_NEXTGAME();
 }
 
 export default SocketEvent;

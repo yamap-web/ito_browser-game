@@ -276,6 +276,32 @@ const eventRcv = (socket: Socket) => {
     clientAccess.deleteClient(REQ_CLOSEROOM.roomId);
   });
   //#endregion
+
+  //#region イベント[REQ_NEXTGAME]受信
+  socket.on(SocketEvent.REQ_NEXTGAME.constructor.name, (data) => {
+    outputEventLog(
+      LogLevel.INFO,
+      socket.id,
+      SocketEvent.REQ_NEXTGAME.constructor.name
+    );
+
+    // 受信パラメータ取得
+    const REQ_NEXTGAME = SocketEvent.REQ_NEXTGAME.parseEventParameter(data);
+
+    // GameData取得
+    const gameData = access.getAllGameData(REQ_NEXTGAME.roomId);
+
+    // イベント[NOTIFY_GAMEDATA]送信
+    broadcast(
+      REQ_NEXTGAME.roomId,
+      SocketEvent.NOTIFY_GAMEDATA,
+      JSON.stringify(gameData)
+    );
+
+    // イベント[RES_NEXTGAME]送信
+    broadcast(REQ_NEXTGAME.roomId, SocketEvent.RES_NEXTGAME);
+  });
+  //#endregion
 };
 
 export default eventRcv;
