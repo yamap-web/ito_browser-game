@@ -14,8 +14,6 @@ interface GameProps {
   roomId: string;
   theme: string;
   number: number;
-  resultFlg: boolean;
-  result: boolean;
 }
 
 const Game = ({
@@ -25,8 +23,6 @@ const Game = ({
   roomId,
   theme,
   number,
-  resultFlg,
-  result,
 }: GameProps) => {
   return (
     <>
@@ -40,12 +36,7 @@ const Game = ({
           setGameData={setGameData}
           roomId={roomId}
         />
-        <DisplayResultSection
-          isHost={isHost}
-          gameData={gameData}
-          roomId={roomId}
-        />
-        <ResultModal resultFlg={resultFlg} result={result} />
+        <ResultLink isHost={isHost} gameData={gameData} roomId={roomId} />
       </div>
     </>
   );
@@ -83,11 +74,7 @@ const AnswerForm = ({ roomId }: { roomId: string }) => {
   };
 
   const onClickSendAnswer = () => {
-    const data = {
-      roomId,
-      answer,
-    };
-
+    const data = { roomId, answer };
     socket.emit(SocketEvent.UPDATE_ANSWER, JSON.stringify(data));
   };
 
@@ -100,16 +87,30 @@ const AnswerForm = ({ roomId }: { roomId: string }) => {
         onChange={onChangeAnswer}
       />
       <button
-        className="btn btn-primary mt-2 lg:mt-0 lg:ml-4"
+        className="btn btn-primary mt-2 lg:mt-0 lg:ml-3"
         onClick={onClickSendAnswer}
       >
-        Answer!
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="size-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="m4.5 12.75 6 6 9-13.5"
+          />
+        </svg>
+        
       </button>
     </div>
   );
 };
 
-const DisplayResultSection = ({
+const ResultLink = ({
   isHost,
   gameData,
   roomId,
@@ -119,55 +120,25 @@ const DisplayResultSection = ({
   roomId: string;
 }) => {
   const onResultShow = () => {
-    const data = {
-      roomId,
-      gameData,
-    };
+    const data = { roomId, gameData };
     socket.emit(SocketEvent.REQ_RESULT, JSON.stringify(data));
   };
 
   if (!isHost) {
     return null;
-  }
-  return (
-    <>
-      <label
-        htmlFor="result-modal"
-        className="btn btn-secondary"
-        onClick={() => onResultShow()}
-      >
-        Show Result!
-      </label>
-    </>
-  );
-};
-
-const ResultModal = ({
-  resultFlg,
-  result,
-}: {
-  resultFlg: boolean;
-  result: boolean;
-}) => {
-  if (resultFlg) {
+  } else {
     return (
       <>
-        <input
-          type="checkbox"
-          id="result-modal"
-          className="modal-toggle"
-          checked
-        />
-        <div role="dialog" className="modal" aria-label="最終結果発表モーダル">
-          <div className="modal-box bg-gradient-to-r from-primary to-secondary">
-            <h2 className="text-white text-center font-bold text-5xl">
-              {result ? "GAME CLEAR!!!" : "GAME OVER"}
-            </h2>
-          </div>
-        </div>
+        <label
+          htmlFor="result-modal"
+          className="btn btn-secondary"
+          onClick={() => onResultShow()}
+        >
+          並び替えを確定して結果発表！
+        </label>
       </>
     );
-  } else return null;
+  }
 };
 
 export default Game;

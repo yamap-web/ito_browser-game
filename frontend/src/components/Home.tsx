@@ -7,13 +7,12 @@ import HeadBlock from "./HeadBlock";
 import Footer from "./Footer";
 
 interface HomeProps {
-  isHost: boolean;
   setIsHost: Dispatch<SetStateAction<boolean>>;
   roomId: string;
   setRoomId: Dispatch<SetStateAction<string>>;
 }
 
-const Home = ({ isHost, setIsHost, roomId, setRoomId }: HomeProps) => {
+const Home = ({ setIsHost, roomId, setRoomId }: HomeProps) => {
   return (
     <>
       <HeadBlock title="ito(イト) | 価値観共有ゲーム" />
@@ -35,8 +34,11 @@ const Home = ({ isHost, setIsHost, roomId, setRoomId }: HomeProps) => {
         <p className="py-3 text-sm">
           言葉で当てる 1~100！価値観共有ゲーム - イト -
         </p>
-        <EntryRoomForm setIsHost={setIsHost} setRoomId={setRoomId} />
-        <InputNameModal isHost={isHost} setIsHost={setIsHost} roomId={roomId} />
+        <EntryRoomForm
+          setIsHost={setIsHost}
+          roomId={roomId}
+          setRoomId={setRoomId}
+        />
       </div>
       <Footer />
     </>
@@ -45,123 +47,78 @@ const Home = ({ isHost, setIsHost, roomId, setRoomId }: HomeProps) => {
 
 const EntryRoomForm = ({
   setIsHost,
+  roomId,
   setRoomId,
 }: {
   setIsHost: Dispatch<SetStateAction<boolean>>;
+  roomId: string;
   setRoomId: Dispatch<SetStateAction<string>>;
 }) => {
-  const handleJoinBtnClick = () => {
-    setIsHost(false);
-  };
-
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setRoomId(value);
-  };
-
-  return (
-    <div className="mt-10">
-      <div className="grid">
-        <div>
-          <input
-            type="text"
-            className="input"
-            placeholder="Room ID (ex. 1234)"
-            onChange={handleInputChange}
-          />
-          <label
-            htmlFor="input-name-modal"
-            className="btn btn-secondary ml-4"
-            onClick={() => handleJoinBtnClick()}
-          >
-            Join Room!
-          </label>
-        </div>
-      </div>
-      <div className="divider">OR</div>
-      <div className="grid">
-        <label htmlFor="input-name-modal" className="btn btn-primary">
-          Create New Room!
-        </label>
-      </div>
-    </div>
-  );
-};
-
-const InputNameModal = ({
-  isHost,
-  setIsHost,
-  roomId,
-}: {
-  isHost: boolean;
-  setIsHost: Dispatch<SetStateAction<boolean>>;
-  roomId: string;
-}) => {
   const [userName, setUserName] = useState("");
-  const [validationMsg, setValidationMsg] = useState("");
 
-  const handleCloseBtnClick = () => {
-    setValidationMsg("");
-    setIsHost(true);
-  };
-
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setUserName(value);
   };
 
-  const handleEntryBtnClick = () => {
-    if (userName === "") {
-      setValidationMsg("ユーザーネームを入力してください。");
-      return;
-    }
+  const handleInputIdChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setRoomId(value);
+  };
 
+  const handleEntryBtnClick = (isHost: boolean) => {
     if (isHost) {
+      setIsHost(true);
       socket.emit(SocketEvent.REQ_CREATEROOM, userName);
     } else {
+      setIsHost(false);
       const parameter = { userName, roomId };
       socket.emit(SocketEvent.REQ_JOIN, JSON.stringify(parameter));
     }
   };
 
   return (
-    <>
-      <input type="checkbox" id="input-name-modal" className="modal-toggle" />
-      <div role="dialog" className="modal" aria-label="ユーザーネーム登録フォーム">
-        <div className="modal-box">
-          <label
-            htmlFor="input-name-modal"
-            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-            onClick={() => handleCloseBtnClick()}
-          >
-            ✕
-          </label>
-          <h2 className="font-bold text-lg">ユーザーネームを登録</h2>
-          <input
-            type="text"
-            className="input input-bordered mt-4 w-full"
-            placeholder="User Name"
-            onChange={handleInputChange}
-            name="userName"
-          />
-          <div className="modal-action mt-4 flex items-center justify-between">
-            <p className="text-sm text-error">{validationMsg}</p>
-            {isHost ? (
-              <button className="btn btn-primary" onClick={handleEntryBtnClick}>
-                登録する
-              </button>
-            ) : (
-              <button
-                className="btn btn-secondary"
-                onClick={handleEntryBtnClick}
-              >
-                登録する
-              </button>
-            )}
+    <div className="max-w-xs">
+      <div className="w-full mt-8">
+        <h2 className="font-bold mb-2">STEP 1</h2>
+        <input
+          type="text"
+          className="input input-bordered w-full"
+          placeholder="ユーザーネーム"
+          onChange={handleInputNameChange}
+          name="userName"
+          autoFocus
+        />
+      </div>
+      <div className="mt-6">
+        <h2 className="font-bold mb-2">STEP 2</h2>
+        <div className="grid">
+          <div>
+            <input
+              type="text"
+              className="input input-bordered"
+              placeholder="ルームID (ex. 1234)"
+              onChange={handleInputIdChange}
+            />
+            <button
+              className="btn btn-secondary ml-3"
+              onClick={() => handleEntryBtnClick(false)}
+            >
+              参加する！
+            </button>
           </div>
         </div>
+        <div className="divider">OR</div>
+        <div className="grid">
+          <button
+            className="btn btn-primary"
+            onClick={() => handleEntryBtnClick(true)}
+          >
+            新しいルームを作成する！
+          </button>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

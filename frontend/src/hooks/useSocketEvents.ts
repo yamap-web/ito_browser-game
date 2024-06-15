@@ -10,7 +10,6 @@ export const useSocketEvents = () => {
   const [theme, setTheme] = useState<string>("");
   const [number, setNumber] = useState<number>(0);
   const [errorMsg, setErrorMsg] = useState<string>("");
-  const [resultFlg, setResultFlg] = useState<boolean>(false);
   const [result, setResult] = useState<boolean>(false);
 
   const navigate = useNavigate();
@@ -59,7 +58,6 @@ export const useSocketEvents = () => {
 
     socket.on(SocketEvents.RES_RESULT.EventName, (data) => {
       const RES_RESULT = SocketEvents.RES_RESULT.parseEventParameter(data);
-      setResultFlg(true);
       setResult(RES_RESULT.result);
       navigate("/result");
     });
@@ -74,7 +72,6 @@ export const useSocketEvents = () => {
     theme,
     errorMsg,
     setErrorMsg,
-    resultFlg,
     result,
   };
 };
