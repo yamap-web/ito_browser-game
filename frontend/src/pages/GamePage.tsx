@@ -1,6 +1,6 @@
 import type { Dispatch, SetStateAction } from "react";
 
-import { GameData } from "../interfaces/interface";
+import { GameData } from "@/interfaces/interface";
 
 import HeadBlock from "@/features/common/HeadBlock";
 import {
