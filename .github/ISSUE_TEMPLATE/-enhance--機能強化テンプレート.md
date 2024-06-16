@@ -1,5 +1,5 @@
 ---
-name: "[enhancement] 機能強化テンプレート"
+name: "[enhancement] 改良テンプレート"
 about: issueを作成する際のテンプレートです。
 title: "[enhancement] "
 labels: enhancement
