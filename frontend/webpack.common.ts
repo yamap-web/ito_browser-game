@@ -1,12 +1,12 @@
+// 型インポート
 import type { RuleSetRule, ResolveOptions, Configuration } from "webpack";
+
+// モジュールインポート
 import { DefinePlugin } from "webpack";
-import HtmlWebpackPlugin from "html-webpack-plugin";
-import CopyPlugin from "copy-webpack-plugin";
-import "webpack-dev-server";
 import * as path from "path";
 import { config } from "dotenv";
-const env = config().parsed;
 
+// rulesオプション
 const rules: RuleSetRule[] = [
   {
     test: [/.ts$/, /.tsx$/],
@@ -38,6 +38,7 @@ const rules: RuleSetRule[] = [
   },
 ];
 
+// resolveオプション
 const resolve: ResolveOptions = {
   modules: [__dirname + "/node_modules"],
   extensions: [".ts", ".tsx", ".js"],
@@ -46,31 +47,19 @@ const resolve: ResolveOptions = {
   },
 };
 
+// 開発,本番環境に共通した設定
 const common: Configuration = {
   entry: "/src/main.tsx",
-  output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
-  },
   module: { rules },
   resolve,
   plugins: [
-    env !== undefined
+    config().parsed !== undefined
       ? new DefinePlugin({
           "process.env": JSON.stringify(process.env),
         })
       : new DefinePlugin({
           "process.env.SERVER_URL": JSON.stringify(process.env.SERVER_URL),
         }),
-    new HtmlWebpackPlugin({
-      template: __dirname + "/src/index.html",
-    }),
-    new CopyPlugin({
-      patterns: [
-        { from: "./src/assets", to: "." },
-        { from: "public", to: "." },
-      ],
-    }),
   ],
 };
 

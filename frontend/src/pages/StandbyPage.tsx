@@ -8,7 +8,7 @@ import {
   PlayerTable,
   DescAccordion,
   InputThemeForm,
-} from "@/features/start";
+} from "@/features/bigin";
 
 interface StandbyProps {
   isHost: boolean;
