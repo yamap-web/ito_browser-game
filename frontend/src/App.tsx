@@ -1,20 +1,27 @@
-import "./styles/index.css";
-
+// External packages
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
-import { useSocketEvents } from "@/hooks/useSocketEvent";
+// Custom hooks
+import { useSocketEvent } from "@/hooks/useSocketEvent";
 import { useAudio } from "@/hooks/useAudio";
+
+// Utils
 import { socket } from "@/utils/socket";
 
+// Common components
 import Header from "@/features/common/Header";
 import ErrorAlert from "@/features/common/ErrorAlert";
 
+// Page components
 import Home from "@/pages/HomePage";
 import Standby from "@/pages/StandbyPage";
 import Game from "@/pages/GamePage";
 import Result from "@/pages/ResultPage";
 import NotFound from "@/pages/404Page";
+
+// Styles
+import "./styles/index.css";
 
 const App = () => {
   const [isHost, setIsHost] = useState<boolean>(true);
@@ -23,7 +30,7 @@ const App = () => {
     socket.connect();
   }, []);
 
-  // カスタムフックuseSocketEventsから必要なデータを取得
+  // カスタムフックuseSocketEventから必要なデータを取得
   const {
     gameData,
     setGameData,
@@ -34,7 +41,7 @@ const App = () => {
     errorMsg,
     setErrorMsg,
     result,
-  } = useSocketEvents();
+  } = useSocketEvent();
 
   // カスタムフックuseAudioから必要なデータを取得
   const audioUrl: string = "./cocktail_recipe.mp3";

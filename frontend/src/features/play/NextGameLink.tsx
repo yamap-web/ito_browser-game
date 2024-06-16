@@ -1,13 +1,15 @@
+// Utils
 import { socket } from "@/utils/socket";
+
+// Class
 import SocketEvent from "@/class/socketEvents";
 
-const NextGameLink = ({
-  isHost,
-  roomId,
-}: {
+interface NextGameLinkProps {
   isHost: boolean;
   roomId: string;
-}) => {
+}
+
+const NextGameLink = ({ isHost, roomId }: NextGameLinkProps) => {
   // もう一戦ボタンを押したときの処理
   const handleNextClick = () => {
     const parameter = { roomId };

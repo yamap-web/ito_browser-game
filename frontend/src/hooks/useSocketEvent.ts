@@ -1,11 +1,18 @@
+// External packages
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+// Utils
 import { socket } from "@/utils/socket";
+
+// Interface
 import { GameData } from "@/interfaces/interface";
+
+// Class
 import SocketEvents from "@/class/socketEvents";
 
-export const useSocketEvents = () => {
+// Web Socketイベントの受信を行うカスタムフック
+export const useSocketEvent = () => {
   const [gameData, setGameData] = useState<GameData[]>([]);
   const [roomId, setRoomId] = useState<string>("");
   const [theme, setTheme] = useState<string>("");

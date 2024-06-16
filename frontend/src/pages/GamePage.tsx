@@ -1,8 +1,13 @@
+// Types
 import type { Dispatch, SetStateAction } from "react";
 
+// Interfaces
 import { GameData } from "@/interfaces/interface";
 
+// Common components
 import HeadBlock from "@/features/common/HeadBlock";
+
+// Feature components
 import {
   ThemeCard,
   NumberCard,

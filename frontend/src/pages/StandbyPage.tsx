@@ -1,14 +1,19 @@
+// Types
 import type { Dispatch, SetStateAction } from "react";
 
+// Interfaces
 import { GameData } from "@/interfaces/interface";
 
+// Common components
 import HeadBlock from "@/features/common/HeadBlock";
+
+// Feature components
 import {
   IdCard,
   PlayerTable,
   DescAccordion,
   InputThemeForm,
-} from "@/features/bigin";
+} from "@/features/begin";
 
 interface StandbyProps {
   isHost: boolean;

@@ -1,5 +1,7 @@
+// External packages
 import { Link } from "react-router-dom";
 
+// Common components
 import HeadBlock from "@/features/common/HeadBlock";
 import Footer from "@/features/common/Footer";
 

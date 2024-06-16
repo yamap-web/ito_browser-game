@@ -1,9 +1,17 @@
+// Types
 import type { Dispatch, SetStateAction } from "react";
+
+// External packages
 import { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
+// Interfaces
 import { GameData } from "@/interfaces/interface";
+
+// Utils
 import { socket } from "@/utils/socket";
+
+// Class
 import SocketEvent from "@/class/socketEvents";
 
 interface SortAnswerBoardProps {

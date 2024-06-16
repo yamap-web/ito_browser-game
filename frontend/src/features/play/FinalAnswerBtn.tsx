@@ -1,5 +1,10 @@
+// interfaces
 import { GameData } from "@/interfaces/interface";
+
+// Utils
 import { socket } from "@/utils/socket";
+
+// Class
 import SocketEvent from "@/class/socketEvents";
 
 interface FinalAnswerBtnProps {

@@ -1,3 +1,4 @@
+// External packages
 import { useState } from "react";
 
 const IdCard = ({ isHost, roomId }: { isHost: boolean; roomId: string }) => {

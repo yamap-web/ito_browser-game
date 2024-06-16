@@ -1,12 +1,11 @@
-const Header = ({
-  playing,
-  playToggle,
-}: {
+interface HeaderProps {
   playing: boolean;
   playToggle: () => void;
-}) => {
+}
+
+const Header = ({ playing, playToggle }: HeaderProps) => {
   const audioSwapText = playing ? "音楽を停止" : "音楽を再生";
-  
+
   return (
     <header className="navbar flex justify-between bg-gradient-to-r from-primary to-secondary">
       <div className="ml-4">

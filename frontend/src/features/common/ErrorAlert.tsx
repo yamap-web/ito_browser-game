@@ -1,12 +1,12 @@
+// Types
 import type { Dispatch, SetStateAction } from "react";
 
-const ErrorAlert = ({
-  errorMsg,
-  setErrorMsg,
-}: {
+interface ErrorAlertProps {
   errorMsg: string;
   setErrorMsg: Dispatch<SetStateAction<string>>;
-}) => {
+}
+
+const ErrorAlert = ({ errorMsg, setErrorMsg }: ErrorAlertProps) => {
   if (errorMsg === "") {
     return null;
   } else {

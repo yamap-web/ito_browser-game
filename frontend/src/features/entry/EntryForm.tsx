@@ -1,7 +1,13 @@
+// Types
 import type { Dispatch, SetStateAction, ChangeEvent } from "react";
+
+// External packages
 import { useState } from "react";
 
+// Utils
 import { socket } from "@/utils/socket";
+
+// Class
 import SocketEvent from "@/class/socketEvents";
 
 interface EntryFormProps {

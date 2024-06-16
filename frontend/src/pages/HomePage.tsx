@@ -1,7 +1,11 @@
+// Types
 import type { Dispatch, SetStateAction } from "react";
 
+// Common components
 import HeadBlock from "@/features/common/HeadBlock";
 import Footer from "@/features/common/Footer";
+
+// Feature components
 import { EntryForm } from "@/features/entry";
 
 interface HomeProps {

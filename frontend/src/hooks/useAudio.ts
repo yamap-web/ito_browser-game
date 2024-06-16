@@ -1,6 +1,7 @@
-// 音楽再生機能を提供するカスタムフック
+// External packages
 import { useState, useEffect } from "react";
 
+// 音楽再生機能を提供するカスタムフック
 export const useAudio = (url: string): [boolean, () => void] => {
   const [audio] = useState<HTMLAudioElement>(new Audio(url));
   const [playing, setPlaying] = useState<boolean>(false);
