@@ -1,8 +1,8 @@
 ---
-name: "[enhance] 機能強化テンプレート"
+name: "[enhancement] 機能強化テンプレート"
 about: issueを作成する際のテンプレートです。
-title: "[enhance] "
-labels: enhance
+title: "[enhancement] "
+labels: enhancement
 assignees: ''
 
 ---
