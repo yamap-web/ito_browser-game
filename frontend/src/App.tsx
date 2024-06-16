@@ -1,18 +1,20 @@
-import "./css/style.css";
+import "./styles/index.css";
 
 import { useState, useEffect } from "react";
-import { useSocketEvents } from "./hooks/useSocketEvents";
-import { useAudio } from "./hooks/useAudio";
 import { Routes, Route } from "react-router-dom";
-import { socket } from "./utils/socket";
 
-import Header from "./components/Header";
-import ErrorAlert from "./components/ErrorAlert";
-import Home from "./components/Home";
-import Standby from "./components/Standby";
-import Game from "./components/Game";
-import Result from "./components/Result";
-import NotFound from "./components/NotFound";
+import { useSocketEvents } from "@/hooks/useSocketEvent";
+import { useAudio } from "@/hooks/useAudio";
+import { socket } from "@/utils/socket";
+
+import Header from "@/features/common/Header";
+import ErrorAlert from "@/features/common/ErrorAlert";
+
+import Home from "@/pages/HomePage";
+import Standby from "@/pages/StandbyPage";
+import Game from "@/pages/GamePage";
+import Result from "@/pages/ResultPage";
+import NotFound from "@/pages/404Page";
 
 const App = () => {
   const [isHost, setIsHost] = useState<boolean>(true);

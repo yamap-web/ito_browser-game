@@ -1,10 +1,8 @@
-import type { Dispatch, SetStateAction, ChangeEvent } from "react";
-import { useState } from "react";
-import { socket } from "../utils/socket";
-import SocketEvent from "../class/socketEvents";
+import type { Dispatch, SetStateAction } from "react";
 
-import HeadBlock from "./HeadBlock";
-import Footer from "./Footer";
+import HeadBlock from "@/features/common/HeadBlock";
+import Footer from "@/features/common/Footer";
+import { EntryForm } from "@/features/entry";
 
 interface HomeProps {
   setIsHost: Dispatch<SetStateAction<boolean>>;
@@ -34,7 +32,7 @@ const Home = ({ setIsHost, roomId, setRoomId }: HomeProps) => {
         <p className="py-3 text-sm">
           言葉で当てる 1~100！意思疎通ゲーム - イト -
         </p>
-        <EntryRoomForm
+        <EntryForm
           setIsHost={setIsHost}
           roomId={roomId}
           setRoomId={setRoomId}
@@ -42,84 +40,6 @@ const Home = ({ setIsHost, roomId, setRoomId }: HomeProps) => {
       </div>
       <Footer />
     </>
-  );
-};
-
-const EntryRoomForm = ({
-  setIsHost,
-  roomId,
-  setRoomId,
-}: {
-  setIsHost: Dispatch<SetStateAction<boolean>>;
-  roomId: string;
-  setRoomId: Dispatch<SetStateAction<string>>;
-}) => {
-  const [userName, setUserName] = useState("");
-
-  const handleInputNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setUserName(value);
-  };
-
-  const handleInputIdChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setRoomId(value);
-  };
-
-  const handleEntryBtnClick = (isHost: boolean) => {
-    if (isHost) {
-      setIsHost(true);
-      const parameter = { userName };
-      socket.emit(SocketEvent.REQ_CREATEROOM, JSON.stringify(parameter));
-    } else {
-      setIsHost(false);
-      const parameter = { userName, roomId };
-      socket.emit(SocketEvent.REQ_JOIN, JSON.stringify(parameter));
-    }
-  };
-
-  return (
-    <div className="max-w-xs">
-      <div className="w-full mt-8">
-        <h2 className="font-bold mb-2">STEP 1</h2>
-        <input
-          type="text"
-          className="input input-bordered w-full"
-          placeholder="ユーザーネーム"
-          onChange={handleInputNameChange}
-          name="userName"
-          autoFocus
-        />
-      </div>
-      <div className="mt-6">
-        <h2 className="font-bold mb-2">STEP 2</h2>
-        <div className="grid">
-          <div>
-            <input
-              type="text"
-              className="input input-bordered"
-              placeholder="ルームID (ex. 1234)"
-              onChange={handleInputIdChange}
-            />
-            <button
-              className="btn btn-secondary ml-3"
-              onClick={() => handleEntryBtnClick(false)}
-            >
-              参加する！
-            </button>
-          </div>
-        </div>
-        <div className="divider">OR</div>
-        <div className="grid">
-          <button
-            className="btn btn-primary"
-            onClick={() => handleEntryBtnClick(true)}
-          >
-            新しいルームを作成する！
-          </button>
-        </div>
-      </div>
-    </div>
   );
 };
 

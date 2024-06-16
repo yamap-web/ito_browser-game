@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
-import HeadBlock from "./HeadBlock";
-import Footer from "./Footer";
+import HeadBlock from "@/features/common/HeadBlock";
+import Footer from "@/features/common/Footer";
 
 const NotFound = () => {
   return (
