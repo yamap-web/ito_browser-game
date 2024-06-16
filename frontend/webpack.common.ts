@@ -41,6 +41,9 @@ const rules: RuleSetRule[] = [
 const resolve: ResolveOptions = {
   modules: [__dirname + "/node_modules"],
   extensions: [".ts", ".tsx", ".js"],
+  alias: {
+    "@": path.resolve(__dirname, "src"),
+  },
 };
 
 const common: Configuration = {
@@ -64,10 +67,8 @@ const common: Configuration = {
     }),
     new CopyPlugin({
       patterns: [
-        { from: "robots.txt", to: "robots.txt" },
-        { from: "./src/favicon.ico", to: "favicon.ico" },
-        { from: "./src/ogp.webp", to: "ogp.webp" },
-        { from: "./src/cocktail_recipe.mp3", to: "cocktail_recipe.mp3" },
+        { from: "./src/assets", to: "." },
+        { from: "public", to: "." },
       ],
     }),
   ],

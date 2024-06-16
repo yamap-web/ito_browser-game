@@ -1,10 +1,9 @@
 // 音楽再生機能を提供するカスタムフック
-
 import { useState, useEffect } from "react";
 
 export const useAudio = (url: string): [boolean, () => void] => {
-  const [audio] = useState(new Audio(url));
-  const [playing, setPlaying] = useState(false);
+  const [audio] = useState<HTMLAudioElement>(new Audio(url));
+  const [playing, setPlaying] = useState<boolean>(false);
 
   const playToggle = () => setPlaying(!playing);
 

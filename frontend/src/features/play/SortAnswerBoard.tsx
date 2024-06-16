@@ -1,20 +1,25 @@
 import type { Dispatch, SetStateAction } from "react";
 import { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { GameData } from "../interfaces/interface";
-import { socket } from "../utils/socket";
-import SocketEvent from "../class/socketEvents";
 
-const DisplayAnswersSection = ({
-  gameData,
-  setGameData,
-  roomId,
-}: {
+import { GameData } from "@/interfaces/interface";
+import { socket } from "@/utils/socket";
+import SocketEvent from "@/class/socketEvents";
+
+interface SortAnswerBoardProps {
   gameData: GameData[];
   setGameData: Dispatch<SetStateAction<GameData[]>>;
   roomId: string;
-}) => {
-  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 1024);
+}
+
+const SortAnswerBoard = ({
+  gameData,
+  setGameData,
+  roomId,
+}: SortAnswerBoardProps) => {
+  const [isLargeScreen, setIsLargeScreen] = useState<boolean>(
+    window.innerWidth > 1024
+  );
 
   useEffect(() => {
     const handleResize = () => {
@@ -106,4 +111,4 @@ const AnswerCard = ({ member }: { member: GameData }) => {
   );
 };
 
-export default DisplayAnswersSection;
+export default SortAnswerBoard;

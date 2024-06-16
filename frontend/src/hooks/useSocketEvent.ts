@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { socket } from "../utils/socket";
-import { GameData } from "../interfaces/interface";
-import SocketEvents from "../class/socketEvents";
+
+import { socket } from "@/utils/socket";
+import { GameData } from "@/interfaces/interface";
+import SocketEvents from "@/class/socketEvents";
 
 export const useSocketEvents = () => {
   const [gameData, setGameData] = useState<GameData[]>([]);
