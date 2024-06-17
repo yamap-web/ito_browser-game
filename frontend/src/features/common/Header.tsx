@@ -1,10 +1,11 @@
-interface HeaderProps {
-  playing: boolean;
-  playToggle: () => void;
-}
+// Custom hooks
+import { useAudio, Audio } from "@/hooks/useAudio";
 
-const Header = ({ playing, playToggle }: HeaderProps) => {
-  const audioSwapText = playing ? "音楽を停止" : "音楽を再生";
+const Header = () => {
+  // カスタムフックuseAudioから必要なデータを取得
+  const audio: Audio = useAudio("./cocktail_recipe.mp3");
+
+  const audioSwapText = audio.playing ? "音楽を停止" : "音楽を再生";
 
   return (
     <header className="navbar flex justify-between bg-gradient-to-r from-primary to-secondary">
@@ -18,7 +19,7 @@ const Header = ({ playing, playToggle }: HeaderProps) => {
           data-tip={audioSwapText}
         >
           <label className="swap" aria-label="音楽再生の切り替え">
-            <input type="checkbox" onClick={playToggle} />
+            <input type="checkbox" onClick={audio.toggle} />
             <svg
               className="swap-on fill-current text-white"
               xmlns="http://www.w3.org/2000/svg"

@@ -4,7 +4,6 @@ import { Routes, Route } from "react-router-dom";
 
 // Custom hooks
 import { useSocketEvent } from "@/hooks/useSocketEvent";
-import { useAudio } from "@/hooks/useAudio";
 
 // Utils
 import { socket } from "@/utils/socket";
@@ -43,13 +42,10 @@ const App = () => {
     result,
   } = useSocketEvent();
 
-  // カスタムフックuseAudioから必要なデータを取得
-  const audioUrl: string = "./cocktail_recipe.mp3";
-  const [playing, playToggle] = useAudio(audioUrl);
 
   return (
     <div className="flex flex-col h-screen static">
-      <Header playing={playing} playToggle={playToggle} />
+      <Header />
       <ErrorAlert errorMsg={errorMsg} setErrorMsg={setErrorMsg} />
       <Routes>
         <Route
