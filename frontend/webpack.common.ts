@@ -50,6 +50,10 @@ const resolve: ResolveOptions = {
 // 開発,本番環境に共通した設定
 const common: Configuration = {
   entry: "/src/main.tsx",
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js",
+  },
   module: { rules },
   resolve,
   plugins: [
