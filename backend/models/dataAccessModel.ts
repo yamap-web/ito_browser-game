@@ -113,6 +113,16 @@ class DataAccessModel {
       }
     }
   }
+
+  /** 再戦時のAnswerクリア処理 */
+  public clearAllAnswer(roomId: string): void {
+    const room = this.findRoom(roomId);
+    if (room) {
+      room.gameData.forEach((member) => {
+        member.setAnswer("");
+      });
+    }
+  }
 }
 
 export default DataAccessModel;
