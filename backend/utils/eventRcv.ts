@@ -281,6 +281,7 @@ const eventRcv = (socket: Socket) => {
 
     // 更新後のgameData取得
     const currentGameData = access.getAllGameData(UPDATE_GAMEDATA.roomId);
+    console.log(currentGameData);
 
     // イベント[NOTIFY_GAMEDATA]送信
     broadcast(
@@ -323,6 +324,9 @@ const eventRcv = (socket: Socket) => {
 
     // 受信パラメータ取得
     const REQ_NEXTGAME = SocketEvent.REQ_NEXTGAME.parseEventParameter(data);
+
+    // 参加者のAnswerをクリア
+    access.clearAllAnswer(REQ_NEXTGAME.roomId);
 
     // GameData取得
     const gameData = access.getAllGameData(REQ_NEXTGAME.roomId);
