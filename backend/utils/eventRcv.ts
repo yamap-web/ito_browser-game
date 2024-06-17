@@ -56,6 +56,9 @@ const eventRcv = (socket: Socket) => {
       return;
     }
 
+    // ユーザーネームを5文字までに編集
+    REQ_CREATEROOM.userName = checkUserNameLength(REQ_CREATEROOM.userName);
+
     // ルームID取得
     const roomId = createRoomId();
 
@@ -114,6 +117,9 @@ const eventRcv = (socket: Socket) => {
       );
       return;
     }
+
+    // ユーザーネームを5文字までに編集
+    REQ_JOIN.userName = checkUserNameLength(REQ_JOIN.userName);
 
     // ルームの存在確認
     const room = access.findRoom(REQ_JOIN.roomId);
@@ -345,3 +351,13 @@ const eventRcv = (socket: Socket) => {
 };
 
 export default eventRcv;
+
+/** 共通ロジック */
+// ユーザーネーム長さ制限チェック
+const checkUserNameLength = (userName: string): string => {
+  if (userName.length > 5) {
+    return userName.substring(0, 5);
+  } else {
+    return userName;
+  }
+};
