@@ -15,7 +15,7 @@ const Header = () => {
         >
           <label
             htmlFor="ruleModal"
-            className="btn btn-link"
+            className="btn btn-link pr-1"
             aria-label="ゲームルールの表示切り替え"
           >
             <RuleIcon />

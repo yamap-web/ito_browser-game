@@ -70,58 +70,76 @@ const SortAnswerBoard = ({
 
   if (isHost) {
     return (
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable
-          droppableId="droppable"
-          direction={isLargeScreen ? "horizontal" : undefined}
-        >
-          {(provided) => (
-            <ul
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-              className="flex flex-col lg:flex-row items-center justify-center w-full my-6"
-            >
-              <li className="badge badge-outline border-2 font-bold">1</li>
-              {gameData.map((member, index) => (
-                <Draggable
-                  key={member.userName}
-                  draggableId={member.userName}
-                  index={index}
-                >
-                  {(provided) => (
-                    <li
-                      className="card bg-base-200 flex items-center rounded-2xl border border-slate-100 shadow-md w-full lg:w-fit mt-2 lg:mt-0 lg:ml-2"
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                    >
-                      <AnswerCard member={member} key={index} />
-                    </li>
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-              <li className="badge badge-outline border-2 font-bold mt-2 lg:mt-0 lg:ml-2">
-                100
-              </li>
-            </ul>
-          )}
-        </Droppable>
-      </DragDropContext>
+      <>
+        <div className="mt-4">
+          <p className="text-sm lg:text-base">
+            あなたがホストです！
+            <br className="lg:hidden" />
+            カードの並び替えを行ってください！
+          </p>
+        </div>
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable
+            droppableId="droppable"
+            direction={isLargeScreen ? "horizontal" : undefined}
+          >
+            {(provided) => (
+              <ul
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+                className="flex flex-col lg:flex-row items-center justify-center w-full my-6"
+              >
+                <li className="badge badge-outline border-2 font-bold">1</li>
+                {gameData.map((member, index) => (
+                  <Draggable
+                    key={member.userName}
+                    draggableId={member.userName}
+                    index={index}
+                  >
+                    {(provided) => (
+                      <li
+                        className="card bg-base-200 flex items-center rounded-2xl border border-slate-100 shadow-md w-full lg:w-fit mt-2 lg:mt-0 lg:ml-2"
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                      >
+                        <AnswerCard member={member} key={index} />
+                      </li>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+                <li className="badge badge-outline border-2 font-bold mt-2 lg:mt-0 lg:ml-2">
+                  100
+                </li>
+              </ul>
+            )}
+          </Droppable>
+        </DragDropContext>
+      </>
     );
   } else {
     return (
-      <ul className="flex flex-col lg:flex-row items-center justify-center w-full my-6">
-        <li className="badge badge-outline border-2 font-bold">1</li>
-        {gameData.map((member, index) => (
-          <li className="card bg-base-200 flex items-center rounded-2xl border border-slate-100 shadow-md w-full lg:w-fit mt-2 lg:mt-0 lg:ml-2">
-            <AnswerCard member={member} key={index} />
+      <>
+        <div className="mt-4">
+          <p className="text-sm lg:text-base">
+            ホストがカードを並び替えます。
+            <br className="lg:hidden" />
+            協力して順番を見極めましょう！
+          </p>
+        </div>
+        <ul className="flex flex-col lg:flex-row items-center justify-center w-full my-6">
+          <li className="badge badge-outline border-2 font-bold">1</li>
+          {gameData.map((member, index) => (
+            <li className="card bg-base-200 flex items-center rounded-2xl border border-slate-100 shadow-md w-full lg:w-fit mt-2 lg:mt-0 lg:ml-2">
+              <AnswerCard member={member} key={index} />
+            </li>
+          ))}
+          <li className="badge badge-outline border-2 font-bold mt-2 lg:mt-0 lg:ml-2">
+            100
           </li>
-        ))}
-        <li className="badge badge-outline border-2 font-bold mt-2 lg:mt-0 lg:ml-2">
-          100
-        </li>
-      </ul>
+        </ul>
+      </>
     );
   }
 };
