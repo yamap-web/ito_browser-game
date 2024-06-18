@@ -15,12 +15,14 @@ import { socket } from "@/utils/socket";
 import SocketEvent from "@/class/socketEvents";
 
 interface SortAnswerBoardProps {
+  isHost: boolean;
   gameData: GameData[];
   setGameData: Dispatch<SetStateAction<GameData[]>>;
   roomId: string;
 }
 
 const SortAnswerBoard = ({
+  isHost,
   gameData,
   setGameData,
   roomId,
@@ -66,8 +68,8 @@ const SortAnswerBoard = ({
   // orderIndex順にソート
   gameData.sort((a, b) => a.orderIndex - b.orderIndex);
 
-  return (
-    <>
+  if (isHost) {
+    return (
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable
           droppableId="droppable"
@@ -106,8 +108,22 @@ const SortAnswerBoard = ({
           )}
         </Droppable>
       </DragDropContext>
-    </>
-  );
+    );
+  } else {
+    return (
+      <ul className="flex flex-col lg:flex-row items-center justify-center w-full my-6">
+        <li className="badge badge-outline border-2 font-bold">1</li>
+        {gameData.map((member, index) => (
+          <li className="card bg-base-200 flex items-center rounded-2xl border border-slate-100 shadow-md w-full lg:w-fit mt-2 lg:mt-0 lg:ml-2">
+            <AnswerCard member={member} key={index} />
+          </li>
+        ))}
+        <li className="badge badge-outline border-2 font-bold mt-2 lg:mt-0 lg:ml-2">
+          100
+        </li>
+      </ul>
+    );
+  }
 };
 
 const AnswerCard = ({ member }: { member: GameData }) => {
