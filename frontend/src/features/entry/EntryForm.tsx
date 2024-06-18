@@ -45,46 +45,39 @@ const EntryForm = ({ setIsHost, roomId, setRoomId }: EntryFormProps) => {
   };
 
   return (
-    <div className="max-w-xs">
-      <div className="w-full mt-8">
-        <h2 className="font-bold mb-2">STEP 1</h2>
+    <div className="grid grid-rows-6 max-w-xs mt-4">
+      <h2 className="my-auto pt-2 font-bold">STEP 1</h2>
+      <input
+        type="text"
+        className="input input-bordered"
+        placeholder="ユーザーネーム"
+        onChange={handleInputNameChange}
+        name="userName"
+        autoFocus
+      />
+      <h2 className="my-auto pt-2 font-bold">STEP 2</h2>
+      <div className="grid grid-cols-5 gap-2">
         <input
           type="text"
-          className="input input-bordered w-full"
-          placeholder="ユーザーネーム"
-          onChange={handleInputNameChange}
-          name="userName"
-          autoFocus
+          className="col-span-3 input input-bordered"
+          placeholder="ルームID (ex. 1234)"
+          onChange={handleInputIdChange}
         />
+
+        <button
+          className="col-span-2 btn btn-secondary"
+          onClick={() => handleEntryBtnClick(false)}
+        >
+          参加する！
+        </button>
       </div>
-      <div className="mt-6">
-        <h2 className="font-bold mb-2">STEP 2</h2>
-        <div className="grid">
-          <div>
-            <input
-              type="text"
-              className="input input-bordered"
-              placeholder="ルームID (ex. 1234)"
-              onChange={handleInputIdChange}
-            />
-            <button
-              className="btn btn-secondary ml-3"
-              onClick={() => handleEntryBtnClick(false)}
-            >
-              参加する！
-            </button>
-          </div>
-        </div>
-        <div className="divider">OR</div>
-        <div className="grid">
-          <button
-            className="btn btn-primary"
-            onClick={() => handleEntryBtnClick(true)}
-          >
-            新しいルームを作成する！
-          </button>
-        </div>
-      </div>
+      <div className="divider">OR</div>
+      <button
+        className="btn btn-primary"
+        onClick={() => handleEntryBtnClick(true)}
+      >
+        新しいルームを作成する！
+      </button>
     </div>
   );
 };
