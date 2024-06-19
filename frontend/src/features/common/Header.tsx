@@ -4,13 +4,13 @@ const Header = () => {
   return (
     <header className="navbar flex justify-between bg-gradient-to-r from-primary to-secondary">
       <div className="ml-4">
-        <span className="text-3xl text-white font-bold">ito</span>
+        <span className="text-3xl font-bold text-white">ito</span>
         <span className="pl-4 text-white">意思疎通ゲーム</span>
       </div>
       <div className="mr-2">
         <AudioSwap />
         <div
-          className="flex tooltip tooltip-bottom tooltip-primary"
+          className="tooltip tooltip-bottom tooltip-primary flex"
           data-tip="ルール"
         >
           <label
@@ -57,7 +57,7 @@ const RuleModal = () => {
       />
       <div className="modal" role="dialog" aria-label="ゲームルールの説明">
         <div className="modal-box">
-          <h3 className="text-lg font-bold mb-4">ルールの説明</h3>
+          <h3 className="mb-4 text-lg font-bold">ルールの説明</h3>
           <ul>
             <li className="pt-3">
               <p>1. お題を決定（ex. 面積の広い国）</p>

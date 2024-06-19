@@ -36,7 +36,7 @@ const Game = ({
   return (
     <>
       <HeadBlock title="ito | Playing Game!" />
-      <div className="flex flex-col flex-grow items-center justify-center container mx-auto px-4">
+      <div className="container mx-auto flex flex-grow flex-col items-center justify-center px-4">
         <ThemeCard theme={theme} />
         <NumberCard number={number} />
         <AnswerForm roomId={roomId} />

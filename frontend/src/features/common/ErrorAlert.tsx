@@ -11,11 +11,11 @@ const ErrorAlert = ({ errorMsg, setErrorMsg }: ErrorAlertProps) => {
     return null;
   } else {
     return (
-      <div className="fixed z-50 left-1/2 -translate-x-1/2 w-full max-w-max p-4">
+      <div className="fixed left-1/2 z-50 w-full max-w-max -translate-x-1/2 p-4">
         <div role="alert" className="alert alert-warning shadow-md">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="stroke-current shrink-0 h-6 w-6"
+            className="h-6 w-6 shrink-0 stroke-current"
             fill="none"
             viewBox="0 0 24 24"
           >
@@ -28,7 +28,7 @@ const ErrorAlert = ({ errorMsg, setErrorMsg }: ErrorAlertProps) => {
           </svg>
           <span>{errorMsg}</span>
           <button
-            className="btn btn-sm btn-ghost"
+            className="btn btn-ghost btn-sm"
             onClick={() => setErrorMsg("")}
           >
             ✕

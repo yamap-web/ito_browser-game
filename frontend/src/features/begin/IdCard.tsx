@@ -12,18 +12,18 @@ const IdCard = ({ isHost, roomId }: { isHost: boolean; roomId: string }) => {
 
   if (isHost) {
     return (
-      <div className="flex justify-center mb-4">
-        <div className="card bg-primary/30 flex items-center w-full max-w-sm lg:max-w-md rounded-2xl shadow-md mt-2">
+      <div className="mb-4 flex justify-center">
+        <div className="card mt-2 flex w-full max-w-sm items-center rounded-2xl bg-primary/30 shadow-md lg:max-w-md">
           <div className="card-body p-4">
             <div className="flex items-end lg:text-xl">
               ルームID：
-              <span className="mx-2 text-3xl lg:text-5xl font-bold">
+              <span className="mx-2 text-3xl font-bold lg:text-5xl">
                 {roomId}
               </span>
               <div
                 className={
                   isClicked
-                    ? "tooltip tooltip-open tooltip-right tooltip-secondary"
+                    ? "tooltip tooltip-right tooltip-open tooltip-secondary"
                     : "tooltip tooltip-right tooltip-secondary"
                 }
                 data-tip={isClicked ? "コピーしました" : "コピーする"}
@@ -49,7 +49,7 @@ const IdCard = ({ isHost, roomId }: { isHost: boolean; roomId: string }) => {
                 </button>
               </div>
             </div>
-            <p className="text-center text-sm lg:text-md">参加者に伝えよう！</p>
+            <p className="lg:text-md text-center text-sm">参加者に伝えよう！</p>
           </div>
         </div>
       </div>

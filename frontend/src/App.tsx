@@ -42,9 +42,8 @@ const App = () => {
     result,
   } = useSocketEvent();
 
-
   return (
-    <div className="flex flex-col h-screen static">
+    <div className="static flex h-screen flex-col">
       <Header />
       <ErrorAlert errorMsg={errorMsg} setErrorMsg={setErrorMsg} />
       <Routes>

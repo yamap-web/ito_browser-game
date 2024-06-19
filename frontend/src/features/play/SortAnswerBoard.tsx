@@ -87,7 +87,7 @@ const SortAnswerBoard = ({
               <ul
                 {...provided.droppableProps}
                 ref={provided.innerRef}
-                className="flex flex-col lg:flex-row items-center justify-center w-full my-6"
+                className="my-6 flex w-full flex-col items-center justify-center lg:flex-row"
               >
                 <li className="badge badge-outline border-2 font-bold">1</li>
                 {gameData.map((member, index) => (
@@ -98,7 +98,7 @@ const SortAnswerBoard = ({
                   >
                     {(provided) => (
                       <li
-                        className="card bg-base-200 flex items-center rounded-2xl border border-slate-100 shadow-md w-full lg:w-fit mt-2 lg:mt-0 lg:ml-2"
+                        className="card mt-2 flex w-full items-center rounded-2xl border border-slate-100 bg-base-200 shadow-md lg:ml-2 lg:mt-0 lg:w-fit"
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
@@ -109,7 +109,7 @@ const SortAnswerBoard = ({
                   </Draggable>
                 ))}
                 {provided.placeholder}
-                <li className="badge badge-outline border-2 font-bold mt-2 lg:mt-0 lg:ml-2">
+                <li className="badge badge-outline mt-2 border-2 font-bold lg:ml-2 lg:mt-0">
                   100
                 </li>
               </ul>
@@ -128,14 +128,14 @@ const SortAnswerBoard = ({
             協力して順番を見極めましょう！
           </p>
         </div>
-        <ul className="flex flex-col lg:flex-row items-center justify-center w-full my-6">
+        <ul className="my-6 flex w-full flex-col items-center justify-center lg:flex-row">
           <li className="badge badge-outline border-2 font-bold">1</li>
           {gameData.map((member, index) => (
-            <li className="card bg-base-200 flex items-center rounded-2xl border border-slate-100 shadow-md w-full lg:w-fit mt-2 lg:mt-0 lg:ml-2">
+            <li className="card mt-2 flex w-full items-center rounded-2xl border border-slate-100 bg-base-200 shadow-md lg:ml-2 lg:mt-0 lg:w-fit">
               <AnswerCard member={member} key={index} />
             </li>
           ))}
-          <li className="badge badge-outline border-2 font-bold mt-2 lg:mt-0 lg:ml-2">
+          <li className="badge badge-outline mt-2 border-2 font-bold lg:ml-2 lg:mt-0">
             100
           </li>
         </ul>

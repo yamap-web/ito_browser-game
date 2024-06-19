@@ -1,26 +1,26 @@
 // interfaces
-import { GameData } from "@/interfaces/interface";
+import { GameData } from '@/interfaces/interface'
 
 // Utils
-import { socket } from "@/utils/socket";
+import { socket } from '@/utils/socket'
 
 // Class
-import SocketEvent from "@/class/socketEvents";
+import SocketEvent from '@/class/socketEvents'
 
 interface FinalAnswerBtnProps {
-  isHost: boolean;
-  gameData: GameData[];
-  roomId: string;
+  isHost: boolean
+  gameData: GameData[]
+  roomId: string
 }
 
 const FinalAnswerBtn = ({ isHost, gameData, roomId }: FinalAnswerBtnProps) => {
   const onResultShow = () => {
-    const data = { roomId, gameData };
-    socket.emit(SocketEvent.REQ_RESULT, JSON.stringify(data));
-  };
+    const data = { roomId, gameData }
+    socket.emit(SocketEvent.REQ_RESULT, JSON.stringify(data))
+  }
 
   if (!isHost) {
-    return null;
+    return null
   } else {
     return (
       <>
@@ -32,8 +32,8 @@ const FinalAnswerBtn = ({ isHost, gameData, roomId }: FinalAnswerBtnProps) => {
           並び替えを確定して結果発表！
         </label>
       </>
-    );
+    )
   }
-};
+}
 
-export default FinalAnswerBtn;
+export default FinalAnswerBtn

@@ -45,7 +45,7 @@ const EntryForm = ({ setIsHost, roomId, setRoomId }: EntryFormProps) => {
   };
 
   return (
-    <div className="grid grid-rows-6 max-w-xs mt-4">
+    <div className="mt-4 grid max-w-xs grid-rows-6">
       <h2 className="my-auto pt-2 font-bold">STEP 1</h2>
       <input
         type="text"
@@ -59,13 +59,13 @@ const EntryForm = ({ setIsHost, roomId, setRoomId }: EntryFormProps) => {
       <div className="grid grid-cols-5 gap-2">
         <input
           type="text"
-          className="col-span-3 input input-bordered"
+          className="input input-bordered col-span-3"
           placeholder="ルームID (ex. 1234)"
           onChange={handleInputIdChange}
         />
 
         <button
-          className="col-span-2 btn btn-secondary"
+          className="btn btn-secondary col-span-2"
           onClick={() => handleEntryBtnClick(false)}
         >
           参加する！
