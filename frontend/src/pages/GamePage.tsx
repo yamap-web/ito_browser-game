@@ -41,6 +41,7 @@ const Game = ({
         <NumberCard number={number} />
         <AnswerForm roomId={roomId} />
         <SortAnswerBoard
+          isHost={isHost}
           gameData={gameData}
           setGameData={setGameData}
           roomId={roomId}
