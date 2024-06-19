@@ -1,4 +1,4 @@
-import type { Socket } from "socket.io";
+import { Socket } from "socket.io";
 import dataAccess from "../models/dataAccessModel";
 import ClientDataAccessModel from "../models/clientDataAccessModel";
 import {
@@ -20,6 +20,9 @@ const eventRcv = (socket: Socket) => {
     outputEventLog(LogLevel.INFO, socket.id, SocketEvent.DISCONNECT);
 
     const roomId = clientAccess.getRoomId(socket.id);
+
+    // イベント[RES_CLOSEROOM]送信
+    broadcast(roomId, SocketEvent.RES_CLOSEROOM);
 
     if (roomId) {
       access.deleteRoom(roomId);
