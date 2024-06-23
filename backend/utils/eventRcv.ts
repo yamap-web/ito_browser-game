@@ -30,6 +30,9 @@ const eventRcv = (socket: Socket) => {
 
     // Clientデータから削除
     clientAccess.deleteClient(roomId);
+
+    // イベントリスナー削除
+    socket.removeAllListeners();
   });
   //#endregion
 
