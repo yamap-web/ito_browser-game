@@ -9,7 +9,7 @@ const AudioSwap = () => {
 
   return (
     <div
-      className="flex tooltip tooltip-bottom tooltip-primary"
+      className="tooltip tooltip-bottom tooltip-primary flex"
       data-tip={audioSwapText}
     >
       <label className="swap" aria-label="音楽再生の切り替え">

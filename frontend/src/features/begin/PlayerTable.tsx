@@ -5,7 +5,7 @@ const PlayerTable = ({ gameData }: { gameData: GameData[] }) => {
   const maxValue: number = 10;
 
   return (
-    <div className="max-w-sm w-full">
+    <div className="w-full max-w-sm">
       <PlayerStat gameData={gameData} maxValue={maxValue} />
       <PlayerList gameData={gameData} maxValue={maxValue} />
     </div>
@@ -36,7 +36,7 @@ const PlayerList = ({
 }) => {
   return (
     <>
-      <div className="overflow-x-auto border-2 border-zinc-100 rounded-3xl shadow-md">
+      <div className="overflow-x-auto rounded-3xl border-2 border-zinc-100 shadow-md">
         <table className="table">
           <thead>
             <tr>

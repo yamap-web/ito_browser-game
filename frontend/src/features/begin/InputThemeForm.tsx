@@ -41,16 +41,16 @@ const InputThemeForm = ({
 
   if (isHost) {
     return (
-      <div className="flex flex-col lg:flex-row max-w-3xl w-full my-4">
+      <div className="my-4 flex w-full max-w-3xl flex-col lg:flex-row">
         <input
           type="text"
-          className="input input-bordered input-primary border-4 border-primary w-full"
+          className="input input-bordered input-primary w-full border-4 border-primary"
           placeholder="お題を入力"
           onChange={handleInputChange}
           name="theme"
         />
         <button
-          className="btn btn-primary mt-2 lg:mt-0 lg:ml-4"
+          className="btn btn-primary mt-2 lg:ml-4 lg:mt-0"
           onClick={handleStartBtnClick}
         >
           ゲーム開始！
@@ -60,11 +60,11 @@ const InputThemeForm = ({
   } else {
     return (
       <div
-        className="flex items-center justify-center my-6"
+        className="my-6 flex items-center justify-center"
         aria-label="待機中"
       >
-        <div className="animate-spin h-10 w-10 border-4 border-secondary rounded-full border-t-transparent"></div>
-        <p className="text-secondary pl-4">ゲームの開始を待っています</p>
+        <div className="h-10 w-10 animate-spin rounded-full border-4 border-secondary border-t-transparent"></div>
+        <p className="pl-4 text-secondary">ゲームの開始を待っています</p>
       </div>
     );
   }

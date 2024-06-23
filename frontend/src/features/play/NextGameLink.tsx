@@ -1,32 +1,32 @@
 // Utils
-import { socket } from "@/utils/socket";
+import { socket } from '@/utils/socket'
 
 // Class
-import SocketEvent from "@/class/socketEvents";
+import SocketEvent from '@/class/socketEvents'
 
 interface NextGameLinkProps {
-  isHost: boolean;
-  roomId: string;
+  isHost: boolean
+  roomId: string
 }
 
 const NextGameLink = ({ isHost, roomId }: NextGameLinkProps) => {
   // もう一戦ボタンを押したときの処理
   const handleNextClick = () => {
-    const parameter = { roomId };
-    socket.emit(SocketEvent.REQ_NEXTGAME, JSON.stringify(parameter));
-  };
+    const parameter = { roomId }
+    socket.emit(SocketEvent.REQ_NEXTGAME, JSON.stringify(parameter))
+  }
 
   // ゲームを終了ボタンを押したときの処理
   const handleQuitClick = () => {
-    const parameter = { roomId };
-    socket.emit(SocketEvent.REQ_CLOSEROOM, JSON.stringify(parameter));
-  };
+    const parameter = { roomId }
+    socket.emit(SocketEvent.REQ_CLOSEROOM, JSON.stringify(parameter))
+  }
 
   if (!isHost) {
-    return null;
+    return null
   } else {
     return (
-      <div className="flex gap-2 mt-4">
+      <div className="mt-4 flex gap-2">
         <button
           className="btn btn-outline btn-primary"
           onClick={handleNextClick}
@@ -54,8 +54,8 @@ const NextGameLink = ({ isHost, roomId }: NextGameLinkProps) => {
           ゲームを終了する
         </button>
       </div>
-    );
+    )
   }
-};
+}
 
-export default NextGameLink;
+export default NextGameLink

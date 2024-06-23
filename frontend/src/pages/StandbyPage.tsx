@@ -26,11 +26,11 @@ const Standby = ({ isHost, gameData, roomId, setErrorMsg }: StandbyProps) => {
   return (
     <>
       <HeadBlock title="ito | On Standby Now..." />
-      <div className="flex flex-col justify-center flex-grow container mx-auto mt-10 lg:mt-0 px-4">
+      <div className="container mx-auto mt-10 flex flex-grow flex-col justify-center px-4 lg:mt-0">
         <IdCard isHost={isHost} roomId={roomId} />
-        <div className="flex flex-col lg:flex-row items-center justify-center mb-10">
+        <div className="mb-10 flex flex-col items-center justify-center lg:flex-row">
           <PlayerTable gameData={gameData} />
-          <div className="max-w-2xl w-full mt-4 lg:mt-0 lg:ml-6">
+          <div className="mt-4 w-full max-w-2xl lg:ml-6 lg:mt-0">
             <DescAccordion />
             <InputThemeForm
               isHost={isHost}

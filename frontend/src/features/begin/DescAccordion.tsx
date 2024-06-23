@@ -1,9 +1,9 @@
 const DescAccordion = () => {
   return (
     <>
-      <div className="collapse collapse-plus rounded-xl border border-slate-100 shadow-md ">
+      <div className="collapse collapse-plus rounded-xl border border-slate-100 shadow-md">
         <input type="radio" name="my-accordion-3" defaultChecked />
-        <h2 className="text-xl font-bold collapse-title">ルール</h2>
+        <h2 className="collapse-title text-xl font-bold">ルール</h2>
         <div className="collapse-content">
           <ul>
             <li className="pt-3">
@@ -24,9 +24,9 @@ const DescAccordion = () => {
           </ul>
         </div>
       </div>
-      <div className="collapse collapse-plus rounded-xl border border-slate-100 shadow-md mt-1">
+      <div className="collapse collapse-plus mt-1 rounded-xl border border-slate-100 shadow-md">
         <input type="radio" name="my-accordion-3" />
-        <h2 className="text-xl font-bold collapse-title">お題の例</h2>
+        <h2 className="collapse-title text-xl font-bold">お題の例</h2>
         <div className="collapse-content">
           <ul>
             <li className="pt-3">

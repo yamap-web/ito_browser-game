@@ -18,7 +18,7 @@ const Result = ({ isHost, gameData, roomId, result }: ResultProps) => {
   return (
     <>
       <HeadBlock title={result ? "ito | CLEAR!!!" : "ito | GAME OVER"} />
-      <div className="flex flex-col flex-grow items-center justify-center container mx-auto mt-8 px-4">
+      <div className="container mx-auto mt-8 flex flex-grow flex-col items-center justify-center px-4">
         <FinalResultCard result={result} />
         <NextGameLink isHost={isHost} roomId={roomId} />
         <ResultTable gameData={gameData} />

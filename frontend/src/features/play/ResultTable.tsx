@@ -3,12 +3,12 @@ import { GameData } from "@/interfaces/interface";
 
 const ResultTable = ({ gameData }: { gameData: GameData[] }) => {
   return (
-    <div className="w-full lg:w-fit lg:min-w-[770px] overflow-x-auto border-2 border-zinc-100 rounded-3xl shadow-md mt-4">
+    <div className="mt-4 w-full overflow-x-auto rounded-3xl border-2 border-zinc-100 shadow-md lg:w-fit lg:min-w-[770px]">
       <table className="table">
         <thead>
           <tr className="bg-slate-200">
             <th>
-              <span className="text-slate-500 text-lg badge badge-outline border-2 font-bold">
+              <span className="badge badge-outline border-2 text-lg font-bold text-slate-500">
                 1
               </span>
             </th>
@@ -20,7 +20,7 @@ const ResultTable = ({ gameData }: { gameData: GameData[] }) => {
           {[...gameData].map((_, index) => {
             return (
               <tr key={"record_" + index}>
-                <th className="text-xl lg:text-3xl font-bold">
+                <th className="text-xl font-bold lg:text-3xl">
                   {gameData[index].number}
                 </th>
                 <td>{gameData[index].userName}</td>
@@ -30,7 +30,7 @@ const ResultTable = ({ gameData }: { gameData: GameData[] }) => {
           })}
           <tr className="bg-slate-200">
             <th>
-              <span className="text-slate-500 text-lg badge badge-outline border-2 font-bold">
+              <span className="badge badge-outline border-2 text-lg font-bold text-slate-500">
                 100
               </span>
             </th>
