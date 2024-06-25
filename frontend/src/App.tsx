@@ -1,25 +1,16 @@
-// External packages
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
-// Custom hooks
+import ErrorAlert from "@/features/common/ErrorAlert";
+import Header from "@/features/common/Header";
 import { useSocketEvent } from "@/hooks/useSocketEvent";
-
-// Utils
+import NotFound from "@/pages/404Page";
+import Game from "@/pages/GamePage";
+import Home from "@/pages/HomePage";
+import Result from "@/pages/ResultPage";
+import Standby from "@/pages/StandbyPage";
 import { socket } from "@/utils/socket";
 
-// Common components
-import Header from "@/features/common/Header";
-import ErrorAlert from "@/features/common/ErrorAlert";
-
-// Page components
-import Home from "@/pages/HomePage";
-import Standby from "@/pages/StandbyPage";
-import Game from "@/pages/GamePage";
-import Result from "@/pages/ResultPage";
-import NotFound from "@/pages/404Page";
-
-// Styles
 import "./styles/index.css";
 
 const App = () => {
@@ -48,47 +39,47 @@ const App = () => {
       <ErrorAlert errorMsg={errorMsg} setErrorMsg={setErrorMsg} />
       <Routes>
         <Route
-          path="/"
           element={
-            <Home setIsHost={setIsHost} roomId={roomId} setRoomId={setRoomId} />
+            <Home roomId={roomId} setIsHost={setIsHost} setRoomId={setRoomId} />
           }
+          path="/"
         />
         <Route
-          path="/standby"
           element={
             <Standby
-              isHost={isHost}
               gameData={gameData}
+              isHost={isHost}
               roomId={roomId}
               setErrorMsg={setErrorMsg}
             />
           }
+          path="/standby"
         />
         <Route
-          path="/play"
           element={
             <Game
-              isHost={isHost}
               gameData={gameData}
-              setGameData={setGameData}
-              roomId={roomId}
-              theme={theme}
+              isHost={isHost}
               number={number}
+              roomId={roomId}
+              setGameData={setGameData}
+              theme={theme}
             />
           }
+          path="/play"
         />
         <Route
-          path="/result"
           element={
             <Result
-              isHost={isHost}
               gameData={gameData}
-              roomId={roomId}
+              isHost={isHost}
               result={result}
+              roomId={roomId}
             />
           }
+          path="/result"
         />
-        <Route path="*" element={<NotFound />} />
+        <Route element={<NotFound />} path="*" />
       </Routes>
     </div>
   );

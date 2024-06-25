@@ -1,5 +1,5 @@
-import { clients } from "../data/data";
 import ClientData from "../class/ClientData";
+import { clients } from "../data/data";
 
 class ClientDataAccessModel {
   /** Clientの追加 */

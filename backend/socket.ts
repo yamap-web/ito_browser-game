@@ -1,5 +1,5 @@
-import { Server } from "socket.io";
 import { config } from "dotenv";
+import { Server } from "socket.io";
 config();
 
 export const io = new Server({

@@ -1,13 +1,6 @@
-// Types
 import type { Dispatch, SetStateAction } from "react";
 
-// Interfaces
-import { GameData } from "@/interfaces/interface";
-
-// Common components
 import HeadBlock from "@/features/common/HeadBlock";
-
-// Feature components
 import {
   ThemeCard,
   NumberCard,
@@ -15,6 +8,7 @@ import {
   SortAnswerBoard,
   FinalAnswerBtn,
 } from "@/features/play";
+import { GameData } from "@/interfaces/interface";
 
 interface GameProps {
   isHost: boolean;
@@ -41,12 +35,12 @@ const Game = ({
         <NumberCard number={number} />
         <AnswerForm roomId={roomId} />
         <SortAnswerBoard
-          isHost={isHost}
           gameData={gameData}
-          setGameData={setGameData}
+          isHost={isHost}
           roomId={roomId}
+          setGameData={setGameData}
         />
-        <FinalAnswerBtn isHost={isHost} gameData={gameData} roomId={roomId} />
+        <FinalAnswerBtn gameData={gameData} isHost={isHost} roomId={roomId} />
       </div>
     </>
   );

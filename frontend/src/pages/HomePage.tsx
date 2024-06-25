@@ -1,11 +1,7 @@
-// Types
 import type { Dispatch, SetStateAction } from "react";
 
-// Common components
-import HeadBlock from "@/features/common/HeadBlock";
 import Footer from "@/features/common/Footer";
-
-// Feature components
+import HeadBlock from "@/features/common/HeadBlock";
 import { EntryForm } from "@/features/entry";
 
 interface HomeProps {
@@ -21,10 +17,10 @@ const Home = ({ setIsHost, roomId, setRoomId }: HomeProps) => {
       <div className="flex flex-grow flex-col items-center justify-center">
         <h1 className="mb-8 text-9xl font-bold tracking-wide">
           <svg
-            width="124"
+            fill="none"
             height="87"
             viewBox="0 0 124 87"
-            fill="none"
+            width="124"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
@@ -37,8 +33,8 @@ const Home = ({ setIsHost, roomId, setRoomId }: HomeProps) => {
           言葉で当てる 1~100！意思疎通ゲーム - イト -
         </p>
         <EntryForm
-          setIsHost={setIsHost}
           roomId={roomId}
+          setIsHost={setIsHost}
           setRoomId={setRoomId}
         />
       </div>

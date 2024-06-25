@@ -1,14 +1,9 @@
-// Types
 import type { Dispatch, SetStateAction, ChangeEvent } from "react";
 
-// External packages
 import { useState } from "react";
 
-// Utils
-import { socket } from "@/utils/socket";
-
-// Class
 import SocketEvent from "@/class/socketEvents";
+import { socket } from "@/utils/socket";
 
 interface EntryFormProps {
   setIsHost: Dispatch<SetStateAction<boolean>>;
@@ -48,19 +43,19 @@ const EntryForm = ({ setIsHost, roomId, setRoomId }: EntryFormProps) => {
     <div className="mt-4 grid max-w-xs grid-rows-6">
       <h2 className="my-auto pt-2 font-bold">STEP 1</h2>
       <input
-        type="text"
-        className="input input-bordered"
-        placeholder="ユーザーネーム"
-        onChange={handleInputNameChange}
-        name="userName"
         autoFocus
+        className="input input-bordered"
+        name="userName"
+        placeholder="ユーザーネーム"
+        type="text"
+        onChange={handleInputNameChange}
       />
       <h2 className="my-auto pt-2 font-bold">STEP 2</h2>
       <div className="grid grid-cols-5 gap-2">
         <input
-          type="text"
           className="input input-bordered col-span-3"
           placeholder="ルームID (ex. 1234)"
+          type="text"
           onChange={handleInputIdChange}
         />
 

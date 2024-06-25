@@ -1,18 +1,16 @@
-// Types
 import type { Dispatch, SetStateAction } from "react";
 
-// External packages
 import { useState, useEffect } from "react";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import {
+  DragDropContext,
+  Droppable,
+  Draggable,
+  DropResult,
+} from "react-beautiful-dnd";
 
-// Interfaces
-import { GameData } from "@/interfaces/interface";
-
-// Utils
-import { socket } from "@/utils/socket";
-
-// Class
 import SocketEvent from "@/class/socketEvents";
+import { GameData } from "@/interfaces/interface";
+import { socket } from "@/utils/socket";
 
 interface SortAnswerBoardProps {
   isHost: boolean;
@@ -47,7 +45,7 @@ const SortAnswerBoard = ({
     list.splice(endIndex, 0, removed[0]);
   };
 
-  const onDragEnd = (result: any) => {
+  const onDragEnd = (result: DropResult) => {
     if (!result.destination) return;
     reorder(gameData, result.source.index, result.destination.index);
 
@@ -80,21 +78,21 @@ const SortAnswerBoard = ({
         </div>
         <DragDropContext onDragEnd={onDragEnd}>
           <Droppable
-            droppableId="droppable"
             direction={isLargeScreen ? "horizontal" : undefined}
+            droppableId="droppable"
           >
             {(provided) => (
               <ul
                 {...provided.droppableProps}
-                ref={provided.innerRef}
                 className="my-6 flex w-full flex-col items-center justify-center lg:flex-row"
+                ref={provided.innerRef}
               >
                 <li className="badge badge-outline border-2 font-bold">1</li>
                 {gameData.map((member, index) => (
                   <Draggable
-                    key={member.userName}
                     draggableId={member.userName}
                     index={index}
+                    key={member.userName}
                   >
                     {(provided) => (
                       <li
@@ -103,7 +101,7 @@ const SortAnswerBoard = ({
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                       >
-                        <AnswerCard member={member} key={index} />
+                        <AnswerCard key={index} member={member} />
                       </li>
                     )}
                   </Draggable>
@@ -131,8 +129,11 @@ const SortAnswerBoard = ({
         <ul className="my-6 flex w-full flex-col items-center justify-center lg:flex-row">
           <li className="badge badge-outline border-2 font-bold">1</li>
           {gameData.map((member, index) => (
-            <li className="card mt-2 flex w-full items-center rounded-2xl border border-slate-100 bg-base-200 shadow-md lg:ml-2 lg:mt-0 lg:w-fit">
-              <AnswerCard member={member} key={index} />
+            <li
+              className="card mt-2 flex w-full items-center rounded-2xl border border-slate-100 bg-base-200 shadow-md lg:ml-2 lg:mt-0 lg:w-fit"
+              key={index}
+            >
+              <AnswerCard member={member} />
             </li>
           ))}
           <li className="badge badge-outline mt-2 border-2 font-bold lg:ml-2 lg:mt-0">

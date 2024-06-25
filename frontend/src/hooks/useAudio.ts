@@ -1,7 +1,5 @@
-// External packages
 import { useState, useEffect, useRef, useCallback } from "react";
 
-// 型定義情報
 export interface Audio {
   playing: boolean;
   toggle: () => void;

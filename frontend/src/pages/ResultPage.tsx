@@ -1,11 +1,6 @@
-// Interfaces
-import { GameData } from "@/interfaces/interface";
-
-// Common components
 import HeadBlock from "@/features/common/HeadBlock";
-
-// Feature components
 import { FinalResultCard, NextGameLink, ResultTable } from "@/features/play";
+import { GameData } from "@/interfaces/interface";
 
 interface ResultProps {
   isHost: boolean;

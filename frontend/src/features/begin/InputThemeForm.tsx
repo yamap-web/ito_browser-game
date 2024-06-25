@@ -1,14 +1,9 @@
-// Types
 import type { ChangeEvent, Dispatch, SetStateAction } from "react";
 
-// External packages
 import { useState } from "react";
 
-// Utils
-import { socket } from "@/utils/socket";
-
-// Class
 import SocketEvent from "@/class/socketEvents";
+import { socket } from "@/utils/socket";
 
 interface InputThemeFormProps {
   isHost: boolean;
@@ -43,11 +38,11 @@ const InputThemeForm = ({
     return (
       <div className="my-4 flex w-full max-w-3xl flex-col lg:flex-row">
         <input
-          type="text"
           className="input input-bordered input-primary w-full border-4 border-primary"
-          placeholder="お題を入力"
-          onChange={handleInputChange}
           name="theme"
+          placeholder="お題を入力"
+          type="text"
+          onChange={handleInputChange}
         />
         <button
           className="btn btn-primary mt-2 lg:ml-4 lg:mt-0"
@@ -60,8 +55,8 @@ const InputThemeForm = ({
   } else {
     return (
       <div
-        className="my-6 flex items-center justify-center"
         aria-label="待機中"
+        className="my-6 flex items-center justify-center"
       >
         <div className="h-10 w-10 animate-spin rounded-full border-4 border-secondary border-t-transparent"></div>
         <p className="pl-4 text-secondary">ゲームの開始を待っています</p>
