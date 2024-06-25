@@ -1,10 +1,10 @@
-import DataAccessModel from "../models/dataAccessModel";
 import { GameData } from "../interfaces/interface";
+import DataAccessModel from "../models/dataAccessModel";
 
 const access = new DataAccessModel();
 
 export const getNumbers = (num: number, min: number = 1, max: number = 100) => {
-  let numbers: number[] = [];
+  const numbers: number[] = [];
   for (let i = min; i <= max; i++) {
     numbers.push(i);
   }
@@ -19,7 +19,7 @@ export const getNumbers = (num: number, min: number = 1, max: number = 100) => {
     return array;
   };
 
-  let shuffledNumbers = shuffle(numbers);
+  const shuffledNumbers = shuffle(numbers);
 
   return shuffledNumbers.slice(0, num);
 };

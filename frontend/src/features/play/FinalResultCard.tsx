@@ -4,16 +4,16 @@ const FinalResultCard = ({ result }: { result: boolean }) => {
       <div className="card-body">
         <span className="text-white">The Final Result is...</span>
         <h2 className="text-center text-5xl font-bold text-white">
-          {result ? 'CLEAR!!!' : 'GAME OVER'}
+          {result ? "CLEAR!!!" : "GAME OVER"}
         </h2>
         <p className="text-center font-bold text-white">
           {result
-            ? '絆の強さが証明されましたね！'
-            : 'もっともっと仲良くなれますね！'}
+            ? "絆の強さが証明されましたね！"
+            : "もっともっと仲良くなれますね！"}
         </p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default FinalResultCard
+export default FinalResultCard;

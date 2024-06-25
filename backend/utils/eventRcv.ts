@@ -1,15 +1,16 @@
 import { Socket } from "socket.io";
-import dataAccess from "../models/dataAccessModel";
-import ClientDataAccessModel from "../models/clientDataAccessModel";
+
+import { LogLevel } from "../class/LogClass";
+import SocketEvent from "../class/SocketEvent";
 import {
   createRoomId,
   getNumbers,
   judgement,
 } from "../controllers/eventController";
+import ClientDataAccessModel from "../models/clientDataAccessModel";
+import dataAccess from "../models/dataAccessModel";
 import { sendEvent, broadcast } from "../utils/eventSend";
-import SocketEvent from "../class/SocketEvent";
 import { outputEventLog } from "../utils/outputLog";
-import { LogLevel } from "../class/LogClass";
 
 const eventRcv = (socket: Socket) => {
   const access = new dataAccess();

@@ -1,9 +1,10 @@
-import type { Socket } from "socket.io";
+import { LogLevel } from "./class/LogClass";
+import SocketEvent from "./class/SocketEvent";
 import { io } from "./socket";
 import eventRcv from "./utils/eventRcv";
-import SocketEvent from "./class/SocketEvent";
 import { outputEventLog } from "./utils/outputLog";
-import { LogLevel } from "./class/LogClass";
+
+import type { Socket } from "socket.io";
 
 const port = 3000;
 

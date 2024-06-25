@@ -1,4 +1,3 @@
-// Interfaces
 import { GameData } from "@/interfaces/interface";
 
 const PlayerTable = ({ gameData }: { gameData: GameData[] }) => {

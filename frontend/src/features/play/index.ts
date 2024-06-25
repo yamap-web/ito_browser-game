@@ -1,12 +1,11 @@
-import ThemeCard from './ThemeCard'
-import NumberCard from './NumberCard'
-import AnswerForm from './AnswerForm'
-import SortAnswerBoard from './SortAnswerBoard'
-import FinalAnswerBtn from './FinalAnswerBtn'
-
-import FinalResultCard from './FinalResultCard'
-import NextGameLink from './NextGameLink'
-import ResultTable from './ResultTable'
+import AnswerForm from "./AnswerForm";
+import FinalAnswerBtn from "./FinalAnswerBtn";
+import FinalResultCard from "./FinalResultCard";
+import NextGameLink from "./NextGameLink";
+import NumberCard from "./NumberCard";
+import ResultTable from "./ResultTable";
+import SortAnswerBoard from "./SortAnswerBoard";
+import ThemeCard from "./ThemeCard";
 
 // ゲームをプレイするための機能を提供するコンポーネントをまとめてエクスポート
 export {
@@ -18,4 +17,4 @@ export {
   FinalResultCard,
   NextGameLink,
   ResultTable,
-}
+};

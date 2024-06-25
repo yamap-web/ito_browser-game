@@ -1,4 +1,3 @@
-// External packages
 import { Helmet } from "react-helmet-async";
 
 const HeadBlock = ({ title }: { title: string }) => {

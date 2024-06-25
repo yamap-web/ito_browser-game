@@ -1,4 +1,3 @@
-// Interfaces
 import { GameData } from "@/interfaces/interface";
 
 const ResultTable = ({ gameData }: { gameData: GameData[] }) => {
@@ -13,7 +12,7 @@ const ResultTable = ({ gameData }: { gameData: GameData[] }) => {
               </span>
             </th>
             <th>Name</th>
-            <th>Player's answer</th>
+            <th>Player&rsquo;s answer</th>
           </tr>
         </thead>
         <tbody>
