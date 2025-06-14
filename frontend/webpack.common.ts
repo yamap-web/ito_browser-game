@@ -1,10 +1,9 @@
-// 型インポート
-import type { RuleSetRule, ResolveOptions, Configuration } from "webpack";
-
-// モジュールインポート
-import { DefinePlugin } from "webpack";
 import * as path from "path";
+
 import { config } from "dotenv";
+import { DefinePlugin } from "webpack";
+
+import type { RuleSetRule, ResolveOptions, Configuration } from "webpack";
 
 // rulesオプション
 const rules: RuleSetRule[] = [

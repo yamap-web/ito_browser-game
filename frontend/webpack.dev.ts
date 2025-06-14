@@ -1,12 +1,9 @@
-// 型インポート
-import type { Configuration } from "webpack";
-
-// モジュールインポート
 import "webpack-dev-server";
 import { merge } from "webpack-merge";
 
-// 設定ファイルインポート
 import common from "./webpack.common";
+
+import type { Configuration } from "webpack";
 
 // 開発環境での設定
 const dev: Configuration = merge(common, {
