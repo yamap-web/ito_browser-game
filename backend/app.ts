@@ -11,7 +11,12 @@ import { outputEventLog } from "./utils/outputLog";
 
 import type { Socket } from "socket.io";
 
-express().use(cors());
+express().use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+  })
+);
 const port = 3000;
 
 // HTTPサーバーを作成

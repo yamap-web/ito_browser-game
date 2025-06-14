@@ -6,5 +6,6 @@ export const io = new Server({
   cors: {
     origin: process.env.CLIENT_URL,
     methods: ["GET", "POST"],
+    credentials: true,
   },
 });
