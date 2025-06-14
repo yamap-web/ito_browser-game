@@ -1,5 +1,8 @@
 import { createServer } from "http";
 
+import cors from "cors";
+import express from "express";
+
 import { LogLevel } from "./class/LogClass";
 import SocketEvent from "./class/SocketEvent";
 import { io } from "./socket";
@@ -8,6 +11,7 @@ import { outputEventLog } from "./utils/outputLog";
 
 import type { Socket } from "socket.io";
 
+express().use(cors());
 const port = 3000;
 
 // HTTPサーバーを作成
